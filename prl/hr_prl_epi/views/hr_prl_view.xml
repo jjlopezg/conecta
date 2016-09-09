@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+<openerp>
+    <data>
+
+        <record id="hr_language_view_form" model="ir.ui.view">
+            <field name="name">hr.language.view.form</field>
+            <field name="model">hr.language</field>
+            <field name="arch" type="xml">
+                <form string="Idioma">
+                    <sheet>
+                    	<label for="name" string="Idioma" class="oe_edit_only"/>
+                    	<h2>
+		                    <field name="name"/>
+                    	</h2>
+                         <group>
+                            <label for="read" string="Nivel"/>
+                            <div>
+                                Leido: <field name="is_read" class="oe_inline" style="vertical-align: middle;"/>
+                                Escrito: <field name="is_write" class="oe_inline" style="vertical-align: middle;"/>
+                                Hablado: <field name="is_speak" class="oe_inline" style="vertical-align: middle;"/>
+                            </div>
+                        </group>
+                        <group string="Anotaciones">
+                            <field name="notes" placeholder="Texto..." nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="hr_language_view_tree" model="ir.ui.view">
+            <field name="name">hr.language.tree</field>
+            <field name="model">hr.language</field>
+            <field name="arch" type="xml">
+                <tree string="Idiomas">
+                    <field name="name"/>
+                    <field name="is_read"/>
+                    <field name="is_write"/>
+                    <field name="is_speak"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_language_view_search" model="ir.ui.view">
+	        <field name="name">hr.language.view.tree.search</field>
+	        <field name="model">hr.language</field>
+	        <field name="arch" type="xml">
+            	<search>
+                	<field name="name"/>
+            	</search>
+        	</field>
+    	</record>
+
+	    <record id="action_hr_language" model="ir.actions.act_window">
+		    <field name="name">Idiomas</field>
+	  	    <field name="res_model">hr.language</field>
+	  	    <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+    	    <field name="view_id" ref="hr_language_view_tree"/>
+    	    <field name="search_view_id" ref="hr_language_view_search"/>
+            <field name="help" type="html">
+                  <p class="oe_view_nocontent_create">
+                     Click to add a new.
+                  </p>
+                </field>
+    	</record>
+
+    </data>
+</openerp>

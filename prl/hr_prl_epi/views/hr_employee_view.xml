@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+<openerp>
+    <data>
+
+        <record id="hr_employee_view_form_inherit_school" model="ir.ui.view">
+            <field name="name">hr.employee.view.form.inherit.school</field>
+            <field name="model">hr.employee</field>
+            <field name="priority" eval="16"/>    
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <data>
+                     <xpath expr='//notebook' position="inside">
+                        <page name="school" string="Formacion">
+                            <group name="hr_school" string="Nivel Formativo">
+                                <field name="school_id" string="Formacion" attrs="{'required': True}" widget="selection"/>
+                            </group>
+                            <group name="hr_academy" string="Titulacion Academica">
+                                <field name="academy_ids" nolabel="1">
+                                    <tree string="Academicos">
+                    	                <field name="code"/>
+                    	                <field name="name"/>
+    		    	                </tree>
+                                </field>
+                            </group>
+                            <group name="hr_lang" string="Idiomas">
+                                <field name="language_ids" nolabel="1"/>
+                            </group>
+                        </page>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</openerp>
