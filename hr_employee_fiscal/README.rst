@@ -2,12 +2,7 @@
     :alt: License: AGPL-3
 
 Datos Fiscales
-=====================
-
-
-  .. figure:: static/description/fiscal.jpg
-     :scale: 50 %
-
+==============
 
 
 Instalación

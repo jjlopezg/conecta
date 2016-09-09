@@ -4,10 +4,6 @@
 Declaración Electronica de Trabajadores Accidentados
 ====================================================
 
-  .. figure:: static/description/delta.png
-     :scale: 30 %
-
-
 Menus de acceso a las tablas se crean en: Empleados->Maestro->Configuracion
 
 Las tablas han sido obtenidas el la Web de `Delt@ <http://www.delta.mtin.es/Delta2Web/info/documentacion.html>`_
@@ -16,10 +12,6 @@ Las tablas han sido obtenidas el la Web de `Delt@ <http://www.delta.mtin.es/Delt
 Instalación
 ===========
 
-Para instalar este modulo necesitas:
-
-* hr (Odoo addons)
-* hr_employee (Odoo addons)
 
 Contribuidores
 --------------

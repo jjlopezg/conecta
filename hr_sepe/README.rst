@@ -6,11 +6,6 @@
 ================================
 
 
-  .. figure:: static/description/contrata.png
-     :scale: 50 %
-
-
-
 Instalación
 ===========
 

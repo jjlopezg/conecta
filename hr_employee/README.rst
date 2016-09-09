@@ -2,21 +2,12 @@
     :alt: License: AGPL-3
 
 Empleados
-=====================
-
-
-  .. figure:: static/description/employee.png
-     :scale: 50 %
-
+=========
 
 
 Instalación
 ===========
 
-Para instalar este modulo necesitas:
-
-* hr (Odoo addons)
-* hr_employee (Odoo addons)
 
 Contribuidores
 --------------

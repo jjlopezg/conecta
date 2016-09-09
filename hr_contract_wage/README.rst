@@ -3,20 +3,10 @@
    :alt: License: AGPL-3
 
 
-================================
-
-
-  .. figure:: static/description/wage.png
-     :scale: 50 %
-
-
 
 Instalación
 ===========
 
-Para instalar este modulo necesitas:
-
-* hr (Odoo addons)
 
 
 Contribuidores

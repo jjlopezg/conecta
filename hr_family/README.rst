@@ -3,12 +3,8 @@
    :alt: License: AGPL-3
 
 Familia del empleado:
-=================================================================
+=====================
 * Informacion sobre los miembros familiares
-
-
-  .. figure:: static/description/family.jpg
-     :scale: 50 %
 
 
 Instalación

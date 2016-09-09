@@ -2,21 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-
-================================
-
-
-  .. figure:: static/description/tipo.png
-     :scale: 50 %
-
-
-
 Instalación
 ===========
 
-Para instalar este modulo necesitas:
-
-* hr (Odoo addons)
 
 
 Contribuidores

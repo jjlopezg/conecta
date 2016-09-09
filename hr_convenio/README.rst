@@ -3,20 +3,8 @@
    :alt: License: AGPL-3
 
 
-================================
-
-
-  .. figure:: static/description/convenio.png
-     :scale: 50 %
-
-
-
 Instalación
 ===========
-
-Para instalar este modulo necesitas:
-
-* hr (Odoo addons)
 
 
 Contribuidores

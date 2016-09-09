@@ -6,11 +6,6 @@
 ================================
 
 
-  .. figure:: static/description/red.jpg
-     :scale: 50 %
-
-
-
 Instalación
 ===========
 

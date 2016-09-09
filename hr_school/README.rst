@@ -3,12 +3,9 @@
    :alt: License: AGPL-3
 
 Titulacion del empleado
-================================
+=======================
 * Academico
 * Idiomas
-
-  .. figure:: static/description/school.png
-     :scale: 50 %
 
 
 Instalación
