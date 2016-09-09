@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+<openerp>
+<data>
+
+	<record id="view_hr_sepe_form" model="ir.ui.view">
+    	<field name="name">view.hr.sepe.form</field>
+    	<field name="model">hr.sepe</field>
+    	<field name="arch" type="xml">
+		    <form string="SEPE">
+        	    <sheet>
+                    <group>
+                        <group>
+                            <label for="contract_id" string="Contrato"/>
+                            <h3>
+                                <field name="contract_id" widget="selection" attrs="{'readonly': True}"/>
+                            </h3>
+                             <label for="date_start" string="Fecha Comunicacion"/>
+    	                        <div>
+    	                            <field name="date_start" class="oe_inline" style="vertical-align: middle;" default_focus="1" attrs="{'readonly': [('state','!=', 'draft')]}"/> -
+    	                            <!--<field name="date_end" class="oe_inline" modifiers="{}" style="vertical-align: middle;"/>-->
+    	                        </div>
+                            <field name="type" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="user_create"/>
+                            <field name="user_last"/>
+                            <field name="state" widget="selection"/>
+                        </group>
+                    </group>
+                    <group string="Respuesta">
+                        <group>
+                            <field name="name" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                            <field name="date_init" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                            <field name="date_send" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                            <field name="user_auth" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+
+                        </group>
+                        <group>
+                            <field name="basic_copy" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                            <field name="leybonif" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                            <field name="leyfomento" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                            <field name="leyreduccion" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                            <field name="leydeduccion" attrs="{'readonly': [('state','!=', 'draft')]}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field colspan="4" name="terror_ids" nolabel="1" edit="False">
+                            <tree  string="Error" editable="bottom" create="false" delete="false">
+                                <field name="code"/>
+                                <field name="description"/>
+                            </tree>
+                        </field>
+                    </group>
+            </sheet>
+        </form>
+        </field>
+	</record>
+
+
+
+    <record id="view_hr_sepe_tree" model="ir.ui.view">
+            <field name="name">view.hr.sepe.tree</field>
+            <field name="model">hr.sepe</field>
+           <!-- <field name="domain">[('state','in',['draft'])]</field>-->
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="state"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="type"/>
+                    <field name="contract_id"/>
+                    <field name="date_send"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+	<record id="action_hr_sepe_tree" model="ir.actions.act_window">
+	    <field name="name">SEPE</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">hr.sepe</field>
+	    <field name="view_type">form</field>
+	    <field name="view_mode">tree,form</field>
+	    <field name="view_id" ref="view_hr_sepe_tree"/>
+	</record>
+
+
+      <menuitem id="hr_menu_relations_sepe"
+                name="Contrat@"
+                action="action_hr_sepe_tree"
+                parent="hr.hr_menu_relations"
+                sequence="10"
+                groups="base.group_hr_user"/>
+
+</data>
+</openerp>

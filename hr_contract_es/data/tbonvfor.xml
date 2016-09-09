@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record model="hr.contract.tbonvfor" id="tbonvfor_11">
+          <field name="code">11</field>
+          <field name="description">ESTUDIOS PRIMARIOS INCOMPLETOS</field>
+        </record>
+
+        <record model="hr.contract.tbonvfor" id="tbonvfor_12">
+          <field name="code">12</field>
+          <field name="description">ESTUDIOS PRIMARIOS COMPLETOS</field>
+        </record>
+
+        <record model="hr.contract.tbonvfor" id="tbonvfor_21">
+          <field name="code">21</field>
+          <field name="description">PROGRAMAS PARA LA FORMACIÓN E INSERCIÓN LABORAL QUE NO PRECISAN DE UNA TITULACIÓN ACADÉMICA DE LA 1ª ETAPA DE SECUNDARIA PARA SU REALIZACIÓN (MÁS DE 300 HORAS)</field>
+        </record>
+
+        <record model="hr.contract.tbonvfor" id="tbonvfor_22">
+          <field name="code">22</field>
+          <field name="description">PRIMERA ETAPA DE EDUCACIÓN SECUNDARIA SIN TÍTULO DE GRADUADO ESCOLAR O EQUIVALENTE</field>
+        </record>
+
+        <record model="hr.contract.tbonvfor" id="tbonvfor_23">
+          <field name="code">23</field>
+          <field name="description">PRIMERA ETAPA DE EDUCACIÓN SECUNDARIA CON TÍTULO DE GRADUADO ESCOLAR O EQUIVALENTE</field>
+        </record>
+
+        <record model="hr.contract.tbonvfor" id="tbonvfor_31">
+          <field name="code">31</field>
+          <field name="description">PROGRAMAS PARA LA FORMACIÓN E INSERCIÓN LABORAL QUE PRECISAN DE UNA TITULACIÓN DE ESTUDIOS SECUNDARIOS DE PRIMERA ETAPA PARA SU REALIZACIÓN (MÁS DE 300 HORAS)</field>
+        </record>
+
+        <record model="hr.contract.tbonvfor" id="tbonvfor_32">
+          <field name="code">32</field>
+          <field name="description">ENSEÑANZAS DE BACHILLERATO</field>
+        </record>
+
+        <record model="hr.contract.tbonvfor" id="tbonvfor_33">
+          <field name="code">33</field>
+          <field name="description">ENSEÑANZAS DE GRADO MEDIO DE FORMACIÓN PROFESIONAL ESPECÍFICA, ARTES PLÁSTICAS, DISEÑO Y DEPORTIVAS</field>
+        </record>
+
+        <record model="hr.contract.tbonvfor" id="tbonvfor_34">
+          <field name="code">34</field>
+          <field name="description">ENSEÑANZAS DE GRADO MEDIO DE MÚSICA Y DANZA</field>
+        </record>
+
+<!--
+"educa_11","11",""
+"educa_12","12",""
+"educa_21","21",""
+"educa_22","22",""
+"educa_23","23",""
+"educa_31","31",""
+"educa_32","32",""
+"educa_33","33",""
+"educa_34","34",""
+"educa_41","41","ENSEÑANZAS PARA LA FORMACIÓN E INSERCIÓN LABORAL QUE PRECISAN DE UNA TITULACIÓN DE ESTUDIOS SECUNDARIOS DE 2ª ETAPA PARA SU REALIZACIÓN (MÁS DE 300 HORAS)"
+"educa_51","51","ENSEÑANZAS DE GRADO SUPERIOR DE FORMACIÓN PROFESIONAL ESPECÍFICA Y EQUIVALENTE, ARTES PLÁSTICAS, DISEÑO Y DEPORTIVAS"
+"educa_52","52","TÍTULOS PROPIOS DE LAS UNIVERSIDADES Y OTRAS ENSEÑANZAS QUE PRECISAN DEL TÍTULO DE BACHILLER (2 Y MÁS AÑOS)"
+"educa_53","53","ENSEÑANZAS PARA LA FORMACIÓN E INSERCIÓN LABORAL QUE PRECISAN DE UNA FORMACIÓN PROFESIONAL DE GRADO SUPERIOR PARA SU REALIZACIÓN (MÁS DE 300 HORAS)"
+"educa_54","54","ENSEÑANZAS UNIVERSITARIAS DE PRIMER CICLO Y EQUIVALENTES O PERSONAS QUE HAN APROBADO 3 CURSOS COMPLETOS DE UNA LICENCIATURA O CRÉDITOS EQUIVALENTES (DIPLOMADOS)"
+"educa_55","55","ENSEÑANZAS UNIVERSITARIAS DE SEGUNDO CICLO Y EQUIVALENTES (LICENCIADOS)"
+"educa_56","56","ESTUDIOS OFICIALES DE ESPECIALIZACIÓN PROFESIONAL"
+"educa_57","57","PROGRAMAS DE POSTGRADO IMPARTIDOS POR LAS UNIVERSIDADES U OTRAS INSTITUCIONES"
+"educa_58","58","PROGRAMAS DE FORMACIÓN E INSERCIÓN LABORAL QUE PRECISAN DE UNA TITULACIÓN UNIVERSITARIA PARA SU REALIZACIÓN"
+"educa_59","59","ENSEÑANZAS UNIVERSITARIAS DE GRADO"
+"educa_60","60","ENSEÑANZAS UNIVERSITARIAS DE MÁSTER"
+"educa_61","61","DOCTORADO UNIVERSITARIO"
+"educa_80","80","SIN ESTUDIOS"
+
+-->
+    </data>
+</openerp>

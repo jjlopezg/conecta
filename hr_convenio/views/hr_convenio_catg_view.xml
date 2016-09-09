@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+ 
+<openerp>
+<data>
+
+<record id="hr_convenio_catg_form" model="ir.ui.view">
+    <field name="name">hr.convenio.catg.form</field>
+    <field name="model">hr.convenio.catg</field>
+    <field name="priority" eval="1"/>
+    <field name="arch" type="xml">
+        <form string="Categoria" >
+             <sheet>
+	 			<div class="oe_title">
+                    <h1>
+            			<field name="name"/>
+                    </h1>
+				</div>
+		        <group>
+		        	<group>
+						<field name="code" default_focus="1"/>
+						<field name="description"/>
+					</group>
+		    	</group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+	<record id="hr_convenio_catg_tree" model="ir.ui.view">
+	    <field name="name">hr.convenio.catg.tree</field>
+	    <field name="model">hr.convenio.catg</field>
+    	<field name="arch" type="xml">
+	        <tree string="Categoria" >
+            	<field name="code"/>
+	            <field name="description"/>
+        	</tree>
+    	</field>
+	</record>
+
+	<record id="hr_convenio_catg_search" model="ir.ui.view">
+	    <field name="name">hr.convenio.catg.search</field>
+	    <field name="model">hr.convenio.catg</field>
+	    <field name="arch" type="xml">
+	        <search>
+	        	<field name="code"/>
+            	<field name="name"/>
+        	</search>
+    	</field>
+	</record>
+
+
+	<record id="action_hr_convenio_catg" model="ir.actions.act_window">
+	    <field name="name">Categorias</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">hr.convenio.catg</field>
+	    <field name="view_type">form</field>
+	    <field name="view_mode">tree,form</field>
+	    <field name="view_id" ref="hr_convenio_catg_tree"/>
+	    <field name="search_view_id" ref="hr_convenio_catg_search"/>
+	</record>
+
+	<menuitem id="menu_human_resources_configuration_catg"
+	    name="Categorias"
+	    parent="hr.menu_human_resources_configuration"
+	    action="action_hr_convenio_catg"
+	    sequence="15"/>
+
+
+<record id="hr_convenio_catg_cov_form" model="ir.ui.view">
+    <field name="name">hr.convenio.catg.cov.form</field>
+    <field name="model">hr.convenio.catg.cov</field>
+    <field name="priority" eval="1"/>
+    <field name="arch" type="xml">
+        <form string="Categoria" >
+             <sheet>
+
+                 <div class="oe_title">
+                    <label for="convenio_id" class="oe_edit_only"/>
+                     <h1>
+                         <field name="convenio_id" widget="selection"/>
+                     </h1>
+                 </div>
+
+                 <group>
+                     <group>
+                         <field name="categoria_id" default_focus="1"/>
+                         <field name="grp_id"/>
+                         <field name="cno_id"/>
+                         <field name="cno_modif_id"/>
+                     </group>
+                     <group></group>
+                 </group>
+                 <notebook>
+
+                 </notebook>
+
+            </sheet>
+        </form>
+    </field>
+</record>
+
+	<record id="hr_convenio_catg_cov_tree" model="ir.ui.view">
+	    <field name="name">hr.convenio.catg.cov.tree</field>
+	    <field name="model">hr.convenio.catg.cov</field>
+    	<field name="arch" type="xml">
+	        <tree string="Categoria" >
+                <field name="convenio_id"/>
+            	<field name="categoria_id"/>
+				<field name="grp_id"/>
+        	</tree>
+    	</field>
+	</record>
+
+	<record id="hr_convenio_catg_cov_search" model="ir.ui.view">
+	    <field name="name">hr.convenio.catg.cov.search</field>
+	    <field name="model">hr.convenio.catg.cov</field>
+	    <field name="arch" type="xml">
+	        <search>
+                <field name="convenio_id"/>
+            	<field name="categoria_id"/>
+                <field name="grp_id"/>
+        	</search>
+    	</field>
+	</record>
+
+	<!-- menus -->
+
+	<record id="action_hr_convenio_catg_cov" model="ir.actions.act_window">
+	    <field name="name">Categorias Convenio</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">hr.convenio.catg.cov</field>
+	    <field name="view_type">form</field>
+	    <field name="view_mode">tree,form</field>
+	    <field name="view_id" ref="hr_convenio_catg_cov_tree"/>
+	    <field name="search_view_id" ref="hr_convenio_catg_cov_search"/>
+	</record>
+
+	<menuitem id="menu_human_resources_configuration_catg_cov"
+	    name="Categorias Convenio"
+	    parent="hr.menu_human_resources_configuration"
+	    action="action_hr_convenio_catg_cov"
+	    sequence="15"/>
+</data>
+</openerp>

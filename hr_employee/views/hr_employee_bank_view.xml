@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+
+<openerp>
+	<data>
+
+        <record id="hr_employee_bank_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.bank.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="priority" eval="17"/>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Rel.Bancaria">
+                        <field name="account_ids" domain="[('employee_id', '=', active_id)]" />
+                    </page>
+                </xpath>
+
+                <xpath expr="//field[@name='bank_account_id']" position="replace">
+                     <field name="bank_account_id" widget="selection" domain="[('employee_id', '=', active_id)]" attrs="{'required': False, 'readonly': False}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="hr_employee_bank_view_form" model="ir.ui.view">
+            <field name="name">hr.employee.bank.form</field>
+            <field name="model">hr.employee.bank</field>
+            <field name="arch" type="xml">
+                <form string="Cuenta bancaria">
+                	<sheet>
+                        <group>
+                            <group>
+    	                        <label for="date_start" string="Fecha validez"/>
+    	                        <div>
+    	                            <field name="date_start" class="oe_inline" style="vertical-align: middle;" default_focus="1"/>
+    	                        </div>
+                                <field name="employee_id" widget="selection" attrs="{'readonly': True}"/>
+    	                    </group>
+    	                    <group>
+    	                        <field name="user_create"/>
+    	                        <field name="user_last"/>
+    	                    </group>
+    				   </group>
+
+                        <group>
+                    	    <group>
+                                <field name="acc_type"  attrs="{'readonly': False}"/>
+                                <field name="bank_id" />
+                                <field name="acc_number"/>
+                                <field name="acc_payment"/>
+                        	</group>
+                            <group>
+                                <field name="currency_id" groups="base.group_multi_currency" options="{'no_create': True}"/>
+                                <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        
+     	<record id='hr_employee_bank_tree' model='ir.ui.view' >
+			<field name='name'>hr.employee.bank.tree.</field>
+	  		<field name='model'>hr.employee.bank</field>
+	  		<field name='type'>tree</field>
+	  		<field name='arch' type='xml'>
+		    	<tree string="Cuenta bancaria">
+                    <field name="date_start"/>
+                	<field name="acc_number"/>
+                    <field name="bank_id"/>
+		    	</tree>
+			</field>
+		</record>
+	
+		<record id="hr_employee_bank_search" model="ir.ui.view">
+		    <field name="name">hr.employee.bank.search</field>
+		    <field name="model">hr.employee.bank</field>
+		    <field name="priority" eval="1"/>
+		    <field name="arch" type="xml">
+	        	<search>
+		            <field name="employee_id"/>
+					<field name="acc_number"/>
+                    <field name="date_start"/>
+        		</search>
+    		</field>
+		</record>
+
+		<record id="action_hr_employee_bank" model="ir.actions.act_window">
+			<field name="name">Cuentas Bancarias Empleados</field>
+		  	<field name="res_model">hr.employee.bank</field>
+		  	<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="hr_employee_bank_tree"/>
+			<field name="search_view_id" ref="hr_employee_bank_search"/>
+        	<field name="help" type="html">
+	              <p class="oe_view_nocontent_create">
+	                 Click to add a new.
+	              </p>
+            </field>
+		</record>
+
+
+		<menuitem
+                id="menu_hr_employee_bank"
+                name="Cuentas Bancarias"
+                action="action_hr_employee_bank"
+                parent="hr.menu_human_resources_configuration"/>
+
+	</data>
+</openerp>

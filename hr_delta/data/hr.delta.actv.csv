@@ -1,0 +1,6 @@
+"id","code","description"
+"act_00","00","Ninguna informacion"
+"act_01","10","Operaciones con maquinas – sin especificar"
+"act_02","11","Arrancar la maquina, parar la maquina"
+"act_03","12","Alimentar la maquina, vaciar la maquina"
+

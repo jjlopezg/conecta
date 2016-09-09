@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <report id="hr_red_afi.report_afi"
+            name="hr_red_afi.template_afi"
+            string="Comunicacion AFI"
+            report_type="qweb-xml"
+            menu="False"
+            model="hr.red.create.afi"/>
+
+
+    <template id="template_afi">
+        <t t-set="afis" t-value="docs"/>
+        <t t-set="count" t-value="0"/>
+        <t t-set="count_emp" t-value="0"/>
+        <t t-foreach="afis" t-as="afi">
+            <t t-set="sid" t-value="str(afi.id)"/>
+            <t t-call="hr_red_afi.afi_eti"/><t t-set="count" t-value="count+1"/>
+
+            <t t-foreach="afi.company_ids" t-as="company_id">
+
+                <t t-foreach="afi.afi_ids" t-as="id">
+                    <t t-if="company_id == id.company_id">
+
+                    <t t-call="hr_red_afi.afi_emp"/><t t-set="count" t-value="count+1"/><t t-set="count_emp" t-value="count_emp+1"/>
+                    <t t-call="hr_red_afi.afi_rzs"/><t t-set="count" t-value="count+1"/>
+
+
+                        <t t-call="hr_red_afi.afi_tra"/><t t-set="count" t-value="count+1"/>
+                        <t t-call="hr_red_afi.afi_ayn"/><t t-set="count" t-value="count+1"/>
+                        <t t-call="hr_red_afi.afi_fab"/><t t-set="count" t-value="count+1"/>
+                        <t t-if="id.position_id.code == '54'"><t t-call="hr_red_afi.afi_fct"/><t t-set="count" t-value="count+1"/></t>
+
+                        <t t-esc="afi.do_real(id)"/>
+                    </t>
+
+               </t>
+            </t>
+            <t t-set="count" t-value="count+1"/><t t-call="hr_red_afi.afi_etf"/>
+        </t>
+    </template>
+
+    <template id="afi_eti">
+        [<t t-esc="''.join('ETI')
+        +''.join('AFI6')
+        +''.join('3')
+        +''.join('WS74')
+        +''.join('0')
+        +''.join(afi.password.zfill(8))
+        +''.ljust(3,' ')
+        +''.ljust(5,' ')
+        +''.join(time.strftime('%Y%m%d', time.strptime(afi.date, '%Y-%m-%d')))
+        +''.join(str(afi.time).replace('.', '').zfill(4))
+        +''.join(afi.filename.upper().ljust(8,' '))
+        +''.join('AFI')
+        +''.join('N')
+        +''.join(afi.test)
+        +''.join('00')
+        +''.join('00')
+        +''.join('0')
+        +''.join('00000')
+        +''.join('0000')
+        +''.ljust(1,' ')
+        +''.ljust(1,' ')"/>],
+    </template>
+
+    <template id="afi_emp">
+        [<t t-esc="''.join('EMP')
+        +''.join(company_id.regimen_id.code)
+        +''.join(company_id.ccc_prov)
+        +''.join(company_id.ccc_cod+company_id.ccc_dc)
+        +''.join(company_id.vat_type)
+        +''.join(company_id.country_id.code_numeric)
+        +''.join(company_id.vat.zfill(14))
+        +''.ljust(2,' ')
+        +''.join(company_id.regimen_id.code)
+        +''.join(company_id.ccc_prov)
+        +''.join(company_id.ccc_cod+company_id.ccc_dc)
+        +''.ljust(13,' ')
+        +''.ljust(3,' ')
+        +''.ljust(1,' ')"/>],
+    </template>
+
+    <template id="afi_rzs">
+        [<t t-esc="''.join('RZS')
+        +''.join('0')
+        +''.join(company_id.emp_type)
+        +''.join(company_id.name.ljust(55,' '))
+        +''.join(afi.password.zfill(8))
+        +''.ljust(2,' ')"/>],
+    </template>
+
+    <template id="afi_tra">
+        [<t t-esc="
+        ''.join('TRA')
+        +''.join(id.contract_id.employee_id.ssnid)
+        +''.join(id.contract_id.employee_id.identification.tgss)
+        +''.join(id.contract_id.employee_id.country_id.code_numeric)
+        +''.join(id.contract_id.employee_id.identification_id.zfill(14))
+        +''.ljust(3,' ')
+        +''.ljust(25,' ')
+        +''.join(id.contract_id.employee_id.country_id.code_numeric)
+        +''.ljust(1,' ')
+        +''.ljust(5,' ')"/>],
+    </template>
+
+    <template id="afi_ayn">
+        [<t t-esc="''.join('AYN')
+        +''.join(id.contract_id.employee_id.name_id.lastname.ljust(20,' '))
+        +''.join(id.contract_id.employee_id.name_id.lastname2.ljust(20,' '))
+        +''.join(id.contract_id.employee_id.name_id.firstname.ljust(15,' '))
+        +''.ljust(12,' ')"/>],
+    </template>
+
+    <template id="afi_fab">
+        <t t-set="sexo" t-value="'2'" ></t>
+        <t t-if="id.contract_id.employee_id.gender=='male'"><t t-set="sexo" t-value="'1'" ></t></t>
+        [<t t-esc="''.join('FAB')
+        +''.join(id.move_id.code.ljust(3,' '))
+        +''.join(id.position_id.code)
+        +''.join(time.strftime('%Y%m%d', time.strptime(id.date_start, '%Y-%m-%d')))
+        +''.join(id.contract_id.catg_id.grp_id.code.rjust(2,'0'))
+        +''.ljust(2,'0')
+        +''.ljust(1,'0')
+        +''.join(id.contract_id.type_id.sepe.ljust(3,'0'))
+        +''.join(id.desem_id.code if id.desem_id.code else ' ')
+        +''.join(id.mujer_sub)
+        +''.join( str( int(id.contract_id.coef_tp) )[:3] if id.contract_id.coef_tp else '000')
+        +''.join(id.colec_id.code.rjust(3,'0') if id.colec_id.code else '000')
+        +''.join(id.ind_print)
+        +''.ljust(7,'0')
+        +''.join(time.strftime('%Y%m%d', time.strptime(id.contract_id.employee_id.birthday, '%Y-%m-%d')))
+        +''.join(sexo)
+        +''.ljust(1,' ')
+        +''.ljust(1,'0')
+        +''.ljust(3,'0')
+        +''.join(id.mujer_id.code if id.mujer_id.code else ' ')
+        +''.ljust(1,'N')
+        +''.ljust(1,'N')
+        +''.ljust(1,'N')
+        +''.ljust(1,' ')
+        +''.ljust(8,'0')
+        +''.ljust(1,'0')
+        +''.ljust(1,'N')
+        +''.ljust(1,'N')"/>],
+    </template>
+
+    <template id="afi_fct">
+        [<t t-esc="''.join('FCT')
+        +''.ljust(3,'0')
+        +''.ljust(3,'0')
+        +''.join(time.strftime('%Y%m%d', time.strptime(id.holiday_end, '%Y-%m-%d')))
+        +''.ljust(8,'0')
+        +''.ljust(8,'0')
+        +''.ljust(8,'0')
+        +''.ljust(8,'0')
+        +''.ljust(8,' ')
+        +''.ljust(8,' ')
+        +''.ljust(5,' ')"/>],
+    </template>
+
+    <template id="afi_etf">
+        [<t t-esc="''.join('ETF')
+        +''.join('AFI6')
+        +''.join('3')
+        +''.join('WS74')
+        +''.join('0')
+        +''.join(afi.password.zfill(8))
+        +''.ljust(8,' ')
+        +''.join(time.strftime('%Y%m%d', time.strptime(afi.date, '%Y-%m-%d')))
+        +''.join(str(afi.time).replace('.', '').zfill(4))
+        +''.join(afi.filename.upper().ljust(8,' '))
+        +''.join('AFI')
+        +''.join('N')
+        +''.join(afi.test)
+        +''.join(str(count_emp).rjust(5,'0'))
+        +''.join(str(count).rjust(8,'0'))
+        +''.ljust(3,' ')"/>]
+    </template>
+
+</data>
+</openerp>

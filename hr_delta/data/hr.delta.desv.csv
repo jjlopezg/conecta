@@ -1,0 +1,6 @@
+"id","code","description"
+"d_01","00","Ninguna informacion"
+"d_02","10","Desviación por problema electrico, explosion, fuego – sin especificar"
+"d_03","11","Problema electrico que da lugar a descarga electrica – sin contacto físico"
+"d_04","12","Problema electrico que da lugar a un contacto con un elemento anormalmente en tension"
+

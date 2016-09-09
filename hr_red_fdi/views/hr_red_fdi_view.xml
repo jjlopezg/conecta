@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+<openerp>
+<data>
+
+	<record id="hr_red_fdi_form" model="ir.ui.view">
+    	<field name="name">hr.red.fdi.form</field>
+    	<field name="model">hr.red.fdi</field>
+    	<field name="type">form</field>
+    	<field name="arch" type="xml">
+			<form string="Mensaje FDI">
+        		<sheet>
+	           		<group>
+	                    <group>
+	                        <label for="contract_id" string="Contrato"/>
+	                        <h3>
+	                            <field name="contract_id" attrs="{'readonly': True}"/>
+	                        </h3>
+                            <field name="company_id" widget="selection" attrs="{'readonly': True}"/>
+	                        <label for="date_start" string="Fecha Comunicacion"/>
+	                        <div>
+	                            <field name="date_start" class="oe_inline" style="vertical-align: middle;" default_focus="1"/> -
+	                            <!--<field name="date_end" class="oe_inline" modifiers="{}" style="vertical-align: middle;"/>-->
+	                        </div>
+							<field name="action"/>
+	                    </group>
+
+	                    <group>
+	                        <field name="user_create"/>
+	                        <field name="user_last"/>
+							<field name="state"/>
+	                    </group>
+
+						<group string="Datos Baja:">
+							<field name="type_id" widget="selection"/>
+							<field name="date_from" attrs="{'readonly': [('action','!=','PB')], 'required': [('action','=','PB')]}"/>
+							<field name="relapse" widget="radio" options="{'horizontal': true}"/>
+						</group>
+
+						<group string="Datos Alta:">
+							<field name="type_to_id" widget="selection" attrs="{'required': [('action','=','PA')]}"/>
+							<field name="date_to" attrs="{'required': [('action','=','PA')]}"/>
+                            <!--attrs="{'readonly': [('action','!=','4')], 'required': [('action','=','4')]}"-->
+						</group>
+
+						<group string="ODP:">
+							<field name="date_part" attrs="{'required': [('action','=','PC')]}"/>
+							<field name="part_number" attrs="{'required': [('action','=','PC')]}"/>
+                            <field name="days_to"/>
+						</group>
+
+						<group string="DIT:">
+							<field name="date_at_ep"/>
+							<field name="colg_number"/>
+							<field name="state_id" options="{'no_open': True,'no_create': True}"/>
+							<field name="cias_number"/>
+							<field name="days_from"/>
+							<field name="days_365"/>
+						</group>
+						<group string="DEC:">
+                            <field name="base" colspan="2" widget="monetary" attrs="{'required': [('action','=','PB')]}"/>
+                            <field name="old_year" colspan="2" widget="monetary"/>
+                            <field name="dc" colspan="2" attrs="{'required': [('base','!=', False)]}"/>
+<!--                            <field name="old_year_otther"/>-->
+						</group>
+						<group string="ODI:">
+
+						</group>
+					</group>
+
+					<group string="Status">
+                        <field name="status_ids" nolabel="1">
+                            <tree>
+                                <field name="date"/>
+                                <field name="state"/>
+                                <field name="code"/>
+                                <field name="description"/>
+                            </tree>
+                        </field>
+					</group>
+
+				</sheet>
+			</form>
+        </field>
+	</record> 	
+
+	<record id="hr_red_fdi_tree" model="ir.ui.view">
+	    <field name="name">hr.red.fdi.tree</field>
+	    <field name="model">hr.red.fdi</field>
+	    <field name="arch" type="xml">
+        	<tree string="Mensajes FDI">
+                <field name='date_start'/>
+                <field name='action'/>
+                <field name='type_id'/>
+                <field name='date_from'/>
+                <field name='date_to'/>
+                <field name='date_part'/>
+                <field name='part_number'/>
+                <field name='state'/>
+	        </tree>
+	    </field>
+	</record>
+
+	<record id="action_hr_red_fdi_tree" model="ir.actions.act_window">
+	    <field name="name">Mensaje FDI</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">hr.red.fdi</field>
+	    <field name="view_type">form</field>
+	    <field name="view_mode">tree,form</field>
+	    <field name="view_id" ref="hr_red_fdi_tree"/>
+	</record>
+
+         
+	<!-- Contingencias -->
+		
+	<record id="hr_red_fdi_type_form" model="ir.ui.view">
+            <field name="name">hr.red.fdi.type.view.form</field>
+            <field name="model">hr.red.fdi.type</field>
+            <field name="arch" type="xml">
+                <form string="Contingencia">
+                	<sheet>
+                    	<label for="code" string="Code" class="oe_edit_only"/>
+                    	<h1>
+		                    <field name="code" style="width: 20%%"/>
+                    	</h1>
+                    	<label for="description" string="Descripcion" class="oe_edit_only"/>
+	                    <h2>
+	                    	<field name="description"/>
+                    	</h2>
+                	</sheet>
+                </form>
+            </field>
+        </record>		
+
+	<record id="hr_red_fdi_type_tree" model="ir.ui.view">
+	    <field name="name">hr.red.fdi.type.view.tree</field>
+	    <field name="model">hr.red.fdi.type</field>
+	    <field name="arch" type="xml">
+        	<tree string="Contingencia">
+	            <field name="code"/>
+        		<field name="description"/>            
+            	<field name="active"/>            
+	        </tree>
+	    </field>
+	</record>         
+         
+	<record id="action_hr_red_fdi_type_tree" model="ir.actions.act_window">
+	    <field name="name">Tipos</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">hr.red.fdi.type</field>
+	    <field name="view_type">form</field>	    
+	    <field name="view_mode">tree,form</field>
+	    <field name="view_id" ref="hr_red_fdi_type_tree"/>
+	</record>    
+		
+	<!-- Motivos -->
+
+	<record id="hr_red_fdi_type_to_form" model="ir.ui.view">
+            <field name="name">hr.red.fdi.type.to.form</field>
+            <field name="model">hr.red.fdi.type.to</field>
+            <field name="arch" type="xml">
+                <form string="Motivos alta">
+                	<sheet>
+                    	<label for="code" string="Code" class="oe_edit_only"/>
+                    	<h1>
+		                    <field name="code" style="width: 20%%"/>
+                    	</h1>
+                    	<label for="description" string="Descripcion" class="oe_edit_only"/>
+	                    <h2>
+	                    	<field name="description"/>
+                    	</h2>
+                	</sheet>
+                </form>
+            </field>
+        </record>
+
+	<record id="hr_red_fdi_type_to_tree" model="ir.ui.view">
+	    <field name="name">hr.red.fdi.type.to.tree</field>
+	    <field name="model">hr.red.fdi.type.to</field>
+	    <field name="arch" type="xml">
+        	<tree string="Motivos alta">
+	            <field name="code"/>
+        		<field name="description"/>
+            	<field name="active"/>
+	        </tree>
+	    </field>
+	</record>
+
+	<record id="action_hr_red_fdi_type_to" model="ir.actions.act_window">
+	    <field name="name">Motivos</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">hr.red.fdi.type.to</field>
+	    <field name="view_type">form</field>
+	    <field name="view_mode">tree,form</field>
+	    <field name="view_id" ref="hr_red_fdi_type_to_tree"/>
+	</record>
+	
+
+	<menuitem id="menu_human_resources_configuration_red_fdi"
+	    	name="Mensajes FDI"
+			action="action_hr_red_fdi_tree"
+		    parent="menu_human_resources_configuration_red"
+			groups="base.group_hr_manager"/>/>
+
+    <menuitem id="menu_human_resources_configuration_red_fdi_type"
+		    name="Tipos"
+			action="action_hr_red_fdi_type_tree"
+	    	parent="menu_human_resources_configuration_red_fdi"
+	    	groups="base.group_hr_manager"/>
+
+    <menuitem id="menu_human_resources_configuration_red_fdi_type_to"
+		    name="Motivos"
+			action="action_hr_red_fdi_type_to"
+	    	parent="menu_human_resources_configuration_red_fdi"
+	    	groups="base.group_hr_manager"/>
+
+</data>
+</openerp>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+ 
+<openerp>
+<data>
+
+    <record id="res_cno_form" model="ir.ui.view">
+        <field name="name">res.cno.form</field>
+        <field name="model">res.cno</field>
+        <field name="arch" type="xml">
+            <form string="Ocupacion">
+                 <sheet string="Codigo nacional del ocupacion">
+    	 			<div class="oe_title">
+                        <h1>
+                			<field name="name"/>
+                        </h1>
+    				</div>
+    		        <group>
+    		        	<group>
+    						<field name="code" default_focus="1"/>
+    						<field name="description"/>
+    					</group>
+    					<group>
+    						<field name="parent_id"/>
+    					</group>
+    		    	</group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_cno_list" model="ir.ui.view">
+        <field name="name">res.cno.list</field>
+        <field name="model">res.cno</field>
+        <field name="field_parent">child_ids</field>
+        <field name="arch" type="xml">
+            <tree string="Codigos nacional de ocupacion" editable="bottom">
+                <field name="code"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="res_cno_tree" model="ir.ui.view">
+        <field name="name">res.cno.tree</field>
+        <field name="model">res.cno</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <tree string="Codigos nacional de ocupacion" >
+                <field name="code"/>
+                <field name="description"/>
+    			<field name="parent_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="res_cno_search" model="ir.ui.view">
+        <field name="name">res.cno.search</field>
+        <field name="model">res.cno</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="code"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- menus -->
+    <record id="action_res_cno_list"
+        model="ir.actions.act_window">
+        <field name="name">Codigos ocupacion</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.cno</field>
+        <field name="view_type">tree</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('parent_id', '=', False)]</field>
+        <field name="view_id" ref="res_cno_list"/>
+        <field name="search_view_id" ref="res_cno_search"/>
+    </record>
+
+    <record id="action_res_cno_tree" model="ir.actions.act_window">
+        <field name="name">Codigos ocupacion</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.cno</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="res_cno_tree"/>
+        <field name="search_view_id" ref="res_cno_search"/>
+    </record>
+
+    <menuitem id="menu_res_cno"
+        name="Cod. ocupacion"
+        parent="hr.menu_human_resources_configuration"
+        action="action_res_cno_tree"
+        sequence="50"/>
+    
+    <menuitem id="menu_cnae_codes_tree"
+        name="Arbol ocupaciones"
+        parent="menu_res_cno"
+        action="action_res_cno_list"
+        groups="base.group_no_one"/>
+
+</data>
+</openerp>

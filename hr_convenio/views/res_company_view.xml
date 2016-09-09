@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+<openerp>
+<data>
+
+	<record id="res_company_convenio_form_inherit" model="ir.ui.view">
+	    <field name="name">res.company.convenio.form.inherit</field>
+	    <field name="model">res.company</field>
+	    <field name="type">form</field>
+        <field name="priority">17</field>
+	    <field name="inherit_id" ref="base.view_company_form"/>
+	    <field name="arch" type="xml">
+<!-- FIXME: no sale en el sitio deseado -->
+             <xpath  expr="//group[@name='account_grp']" position="inside">
+                <field name="convenio_id" widget="selection" options="{'no_open': True,'no_create': True}"/>
+             </xpath>
+
+		</field>
+	</record>
+
+</data>
+</openerp>

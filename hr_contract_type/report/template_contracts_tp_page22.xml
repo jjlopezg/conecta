@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="template_contracts_tp_page22">
+
+     <div class="page">
+
+         <div class="container">
+             <h4>CLÁUSULAS ADICIONALES</h4>
+         </div>
+     </div>
+
+ </template>
+
+
+</data>
+</openerp>

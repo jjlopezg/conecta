@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <report id="hr_sepe.report_FICHERO_CONTRATOS"
+            name="hr_sepe.template_contract"
+            string="Comunicacion Contratos"
+            report_type="qweb-xml"
+            model="hr.sepe.create"/>
+
+
+    <template id="contract_header">
+        &lt;CONTRATOS xmlns:xsi="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.inem.es/CONTRATA/EsquemaContratos50.xsd"&gt;
+        <t t-raw="0"/>
+        &lt;/CONTRATOS&gt;
+    </template>
+
+    <template id="contrato_100">
+        <CONTRATO_100>
+            <t t-call="hr_sepe.template_contract_datos_empresa"/>
+            <t t-call="hr_sepe.template_contract_datos_trabajador"/>
+            <t t-call="hr_sepe.template_contract_datos_generales_contrato"/>
+
+            <t t-call="hr_sepe.template_contract_datos_copia_basica"/>
+            <t t-call="hr_sepe.template_contract_datos_usolibre_empresa"/>
+        </CONTRATO_100>
+    </template>
+
+    <template id="contrato_200">
+        <CONTRATO_200>
+            <t t-call="hr_sepe.template_contract_datos_empresa"/>
+            <t t-call="hr_sepe.template_contract_datos_trabajador"/>
+            <t t-call="hr_sepe.template_contract_datos_generales_contrato"/>
+
+            <t t-call="hr_sepe.template_contract_datos_copia_basica"/>
+            <t t-call="hr_sepe.template_contract_datos_usolibre_empresa"/>
+        </CONTRATO_200>
+    </template>
+
+
+    <template id="contrato_401">
+        <CONTRATO_401>
+            <t t-call="hr_sepe.template_contract_datos_empresa"/>
+            <t t-call="hr_sepe.template_contract_datos_trabajador"/>
+            <t t-call="hr_sepe.template_contract_datos_generales_contrato"/>
+
+            <t t-call="hr_sepe.template_contract_datos_copia_basica"/>
+            <t t-call="hr_sepe.template_contract_datos_usolibre_empresa"/>
+        </CONTRATO_401>
+    </template>
+
+    <template id="contrato_402">
+        <CONTRATO_402>
+            <t t-call="hr_sepe.template_contract_datos_empresa"/>
+            <t t-call="hr_sepe.template_contract_datos_trabajador"/>
+            <t t-call="hr_sepe.template_contract_datos_generales_contrato"/>
+
+            <t t-call="hr_sepe.template_contract_datos_copia_basica"/>
+            <t t-call="hr_sepe.template_contract_datos_usolibre_empresa"/>
+        </CONTRATO_402>
+    </template>
+
+    <template id="contrato_501">
+        <CONTRATO_501>
+            <t t-call="hr_sepe.template_contract_datos_empresa"/>
+            <t t-call="hr_sepe.template_contract_datos_trabajador"/>
+            <t t-call="hr_sepe.template_contract_datos_generales_contrato"/>
+            <t t-call="hr_sepe.template_contract_datos_tiempo_parcial"/>
+
+            <t t-call="hr_sepe.template_contract_datos_copia_basica"/>
+            <t t-call="hr_sepe.template_contract_datos_usolibre_empresa"/>
+        </CONTRATO_501>
+    </template>
+
+    <template id="contrato_510">
+        <CONTRATO_510>
+            <t t-call="hr_sepe.template_contract_datos_empresa"/>
+            <t t-call="hr_sepe.template_contract_datos_trabajador"/>
+            <t t-call="hr_sepe.template_contract_datos_generales_contrato"/>
+            <t t-call="hr_sepe.template_contract_datos_tiempo_parcial"/>
+            <t t-call="hr_sepe.template_contract_datos_interinidad"/>-
+
+            <t t-call="hr_sepe.template_contract_datos_copia_basica"/>
+            <t t-call="hr_sepe.template_contract_datos_usolibre_empresa"/>
+        </CONTRATO_510>
+    </template>
+
+
+    <template id="template_contract">
+        <t t-call="hr_sepe.contract_header">
+            <t t-foreach="docs" t-as="o">
+                <t t-foreach="o.sepe_ids" t-as="sepe">
+                    <t t-set="sid" t-value="str(sepe.id)"/>
+                    <t t-set="contract" t-value="sepe.contract_id"/>
+                    <t t-set="type" t-value="contract.type_id"/>
+                    <t t-set="employee" t-value="sepe.contract_id.employee_id"/>
+                    <t t-set="company" t-value="sepe.contract_id.company_id"/>
+
+
+                    <t t-if="type.sepe == '100'"><t t-call="hr_sepe.contrato_100"/></t>
+                    <t t-if="type.sepe == '200'"><t t-call="hr_sepe.contrato_200"/></t>
+                    <t t-if="type.sepe == '401'"><t t-call="hr_sepe.contrato_401"/></t>
+                    <t t-if="type.sepe == '402'"><t t-call="hr_sepe.contrato_402"/></t>
+                    <t t-if="type.sepe == '501'"><t t-call="hr_sepe.contrato_501"/></t>
+                    <t t-if="type.sepe == '510'"><t t-call="hr_sepe.contrato_510"/></t>
+
+                    <t t-esc="o.do_real(sepe)"/>
+                </t>
+             </t>
+        </t>
+    </template>
+
+    <template id="template_contract_datos_empresa">
+        <DATOS_EMPRESA>
+            <CIF_NIF_EMPRESA>
+                <CIF_NIF t-esc="company.vat"/>
+            </CIF_NIF_EMPRESA>
+            <CODIGO_CUENTA_COTIZACION t-esc="company.regimen_id.code+company.ccc_prov+company.ccc_cod+company.ccc_dc"/>
+        </DATOS_EMPRESA>
+    </template>
+
+    <template id="template_contract_datos_trabajador">
+        <DATOS_TRABAJADOR>
+            <IDENTIFICADORPFISICA t-esc="employee.identification.code+employee.identification_id"/>
+            <NOMBRE_APELLIDOS>
+                <NOMBRE t-esc="employee.name_id.firstname"/>
+                <PRIMER_APELLIDO t-esc="employee.name_id.lastname"/>
+                <t t-if="employee.identification.code=='D'"><SEGUNDO_APELLIDO t-esc="employee.name_id.lastname2"/></t>
+            </NOMBRE_APELLIDOS>
+            <t t-if="employee.gender=='male'"><SEXO t-esc="1"/></t>
+            <t t-if="employee.gender=='female'"><SEXO t-esc="0"/></t>
+            <FECHA_NACIMIENTO t-esc="time.strftime('%Y%m%d',time.strptime(employee.birthday,'%Y-%m-%d'))"/>
+            <NACIONALIDAD t-esc="employee.country_id.code_numeric"/>
+            <MUNICIPIO_RESIDENCIA t-esc="employee.home_better_zip_id.code"/>
+            <PAIS_RESIDENCIA t-esc="employee.home_country_id.code_numeric"/>
+            <NUMERO_SEGURIDAD_SOCIAL t-esc="employee.ssnid"/>
+        </DATOS_TRABAJADOR>
+    </template>
+
+<!-- || type.sepe == '403' || type.sepe == '503' || type.sepe == '540' || type.sepe == '980' || type.sepe == '990'-->
+    <template id="template_contract_datos_generales_contrato">
+        <DATOS_GENERALES_CONTRATO>
+            <FECHA_INICIO t-esc="time.strftime('%Y%m%d',time.strptime(contract.date_start,'%Y-%m-%d'))"/>
+            <t t-if="contract.date_end != False">
+                <FECHA_TERMINO t-esc="time.strftime('%Y%m%d',time.strptime(contract.date_end,'%Y-%m-%d'))"/>
+            </t>
+            <NIVEL_FORMATIVO t-esc="contract.tbonvfor_id.code"/>
+            <CODIGO_OCUPACION t-esc="contract.catg_id.cno_id.code.ljust(8, ' ')"/>
+            <NACIONALIDAD_CT t-esc="company.country_id.code_numeric"/>
+            <MUNICIPIO_CT t-esc="str(company.better_zip_id.code)"/>
+        </DATOS_GENERALES_CONTRATO>
+    </template>
+
+    <template id="template_contract_datos_tiempo_parcial">
+        <DATOS_CONTRATO_TIEMPO_PARCIAL>
+            <TIPO_JORNADA t-esc="contract.jornada"/>
+            <HORAS_JORNADA t-esc="str(int(contract.time_work*100)).zfill(6)"/>
+        </DATOS_CONTRATO_TIEMPO_PARCIAL>
+    </template>
+
+    <template id="template_contract_datos_interinidad">
+        <DATOS_CONTRATO_INTERINIDAD>
+            <CAUSA_INTERINIDAD />
+        </DATOS_CONTRATO_INTERINIDAD>
+    </template>
+
+
+    <template id="template_contract_datos_copia_basica">
+        <DATOS_COMUNICA_COPIA_BASICA>
+            <TIPO_FIRMA t-esc="contract.terfircb_id.code"/>
+            <TEXTO_COPIABASICA t-esc="contract.terfircb_id.description"/>
+            <DOMIC_CENTRO_TRABAJO t-esc="company.street"/>
+        </DATOS_COMUNICA_COPIA_BASICA>
+    </template>
+
+    <template id="template_contract_datos_usolibre_empresa">
+        <DATOS_USOLIBRE_EMPRESA>
+            <USOLIBRE_EMPRESA t-esc="sid+';'+str(contract.id)+';'+str(time.strftime('%Y%m%d', time.strptime(contract.date_start, '%Y-%m-%d')))"/>
+        </DATOS_USOLIBRE_EMPRESA>
+    </template>
+
+</data>
+</openerp>

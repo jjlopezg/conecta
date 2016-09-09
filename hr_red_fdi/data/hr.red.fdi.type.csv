@@ -1,0 +1,7 @@
+"id","code","description","active"
+"fditype_1","1","Enfermedad Comun","1"
+"fditype_2","2","Accidente no Laboral","1"
+"fditype_3","3","Accidente Laboral","1"
+"fditype_4","4","Enfermedad Profesional","1"
+"fditype_5","5","Observacion Enfermedad Profesional","1"
+

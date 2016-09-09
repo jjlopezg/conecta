@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+<openerp>
+<data>
+
+	<record id="hr_red_afi_form" model="ir.ui.view">
+    	<field name="name">hr.red.afi.form</field>
+    	<field name="model">hr.red.afi</field>
+    	<field name="type">form</field>
+    	<field name="arch" type="xml">
+			<form string="Mensaje AFI">
+        		<sheet>
+	           		<group>
+	                    <group>
+	                        <label for="contract_id" string="Contrato"/>
+	                        <h3>
+	                            <field name="contract_id" widget="selection" attrs="{'readonly': True}"/>
+	                        </h3>
+	                        <label for="date_start" string="Fecha Comunicacion"/>
+	                        <div>
+	                            <field name="date_start" class="oe_inline" style="vertical-align: middle;" default_focus="1"/> -
+	                            <!--<field name="date_end" class="oe_inline" modifiers="{}" style="vertical-align: middle;"/>-->
+	                        </div>
+	                    </group>
+
+	                    <group>
+	                        <field name="user_create"/>
+	                        <field name="user_last"/>
+                            <field name="state"/>
+	                    </group>
+				   </group>
+
+					<group>
+						<group string="Proceso">
+							<field name="date_contract"/>
+							<field name="move_id" widget="selection"/>
+							<field name="position_id" widget="selection"/>
+                            <field name="ind_print" />
+						</group>
+
+						<group string="Otros">
+							<field name="mujer_sub" widget="radio" options="{'horizontal': true}"/>
+                            <field name='holiday_end'/>
+						</group>
+					</group>
+
+					<group>
+						<group string="FAB">
+                            <field name='desem_id' widget="selection"/>
+                            <field name='colec_id' widget="selection"/>
+                            <field name='mujer_id' widget="selection"/>
+						</group>
+
+						<group string="DAM">
+
+						</group>
+
+
+
+
+						<group string="Comunicacion">
+                            <field name="datetime_send"/>
+							<field name="error"/>
+							<field name="otros"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+        </field>
+	</record> 	
+
+	<record id="hr_red_afi_tree" model="ir.ui.view">
+	    <field name="name">hr.red.afi.tree</field>
+	    <field name="model">hr.red.afi</field>
+	    <field name="arch" type="xml">
+        	<tree string="AFI">
+                <field name="employee_id"/>
+                <field name="date_start"/>
+                <field name="date_contract"/>
+                <field name="move_id"/>
+                <field name="position_id"/>
+                <field name="state"/>
+                <field name="error"/>
+	        </tree>
+	    </field>
+	</record>
+
+	<record id="action_hr_red_afi_tree" model="ir.actions.act_window">
+	    <field name="name">Mensaje AFI</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">hr.red.afi</field>
+	    <field name="view_type">form</field>
+	    <field name="view_mode">tree,form</field>
+	    <field name="view_id" ref="hr_red_afi_tree"/>
+	</record>
+
+         
+	<!-- Acciones -->
+		
+	<record id="hr_red_afi_move_view_form" model="ir.ui.view">
+            <field name="name">hr.red.afi.move.view.form</field>
+            <field name="model">hr.red.afi.move</field>
+            <field name="arch" type="xml">
+                <form string="Tipo Movimientos Afi">
+                	<sheet>
+                    	<label for="code" string="Code" class="oe_edit_only"/>
+                    	<h1>
+		                    <field name="code" style="width: 20%%"/>
+                    	</h1>
+                    	<label for="description" string="Descripcion" class="oe_edit_only"/>
+	                    <h2>
+	                    	<field name="description"/>
+                    	</h2>
+                	</sheet>
+                </form>
+            </field>
+        </record>		
+
+	<record id="hr_red_afi_move_view_tree" model="ir.ui.view">
+	    <field name="name">hr.red.afi.move.view.tree</field>
+	    <field name="model">hr.red.afi.move</field>
+	    <field name="arch" type="xml">
+        	<tree string="Tipo Movimientos Afi">
+	            <field name="code"/>
+        		<field name="description"/>            
+            	<field name="active"/>            
+	        </tree>
+	    </field>
+	</record>         
+         
+	<record id="action_hr_red_afi_move_tree" model="ir.actions.act_window">
+	    <field name="name">Tipo Movimientos Afi</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">hr.red.afi.move</field>
+	    <field name="view_type">form</field>	    
+	    <field name="view_mode">tree,form</field>
+	    <field name="view_id" ref="hr_red_afi_move_view_tree"/>
+	</record>    
+		
+	<!-- Situaciones -->
+
+	<record id="hr_red_afi_position_view_form" model="ir.ui.view">
+            <field name="name">hr.red.afi.position.view.form</field>
+            <field name="model">hr.red.afi.position</field>
+            <field name="arch" type="xml">
+                <form string="Tipo Situaciones Afi">
+                	<sheet>
+                    	<label for="code" string="Code" class="oe_edit_only"/>
+                    	<h1>
+		                    <field name="code" style="width: 20%%"/>
+                    	</h1>
+                    	<label for="description" string="Descripcion" class="oe_edit_only"/>
+	                    <h2>
+	                    	<field name="description"/>
+                    	</h2>
+                        <group string="Anotaciones">
+                            <field name="note" nolabel="1"/>
+                        </group>
+                	</sheet>
+                </form>
+            </field>
+        </record>
+
+	<record id="hr_red_afi_position_view_tree" model="ir.ui.view">
+	    <field name="name">hr.red.afi.position.tree</field>
+	    <field name="model">hr.red.afi.position</field>
+	    <field name="arch" type="xml">
+        	<tree string="Tipo Situaciones Afi">
+	            <field name="code"/>
+        		<field name="description"/>
+            	<field name="active"/>
+	        </tree>
+	    </field>
+	</record>
+
+	<record id="action_hr_red_afi_position_tree" model="ir.actions.act_window">
+	    <field name="name">Tipo Situaciones Afi</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">hr.red.afi.position</field>
+	    <field name="view_type">form</field>
+	    <field name="view_mode">tree,form</field>
+	    <field name="view_id" ref="hr_red_afi_position_view_tree"/>
+	</record>
+	
+
+	<!-- Menus  -->
+
+	<menuitem id="menu_human_resources_configuration_red_afi"
+	    	name="Mensajes AFI"
+			action="action_hr_red_afi_tree"
+		    parent="menu_human_resources_configuration_red"
+			groups="base.group_hr_manager"/>/>
+
+    <menuitem id="menu_human_resources_configuration_red_afi_move"
+		    name="Movimientos"
+			action="action_hr_red_afi_move_tree"
+	    	parent="menu_human_resources_configuration_red_afi"
+	    	groups="base.group_hr_manager"/>
+
+	<menuitem id="menu_human_resources_configuration_red_afi_position"
+		    name="Situaciones"
+			action="action_hr_red_afi_position_tree"
+	    	parent="menu_human_resources_configuration_red_afi"
+	    	groups="base.group_hr_manager"/>
+
+</data>
+</openerp>

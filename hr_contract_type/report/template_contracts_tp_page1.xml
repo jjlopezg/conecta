@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <template id="template_contracts_tp_page1">
+        <div class="page">
+            <div class="container">
+
+                            <div class="row" style="display: inline;">
+                                <img style="float:left;" src="hr_contract_type/static/src/img/esp.png" />
+                                <img style="float:right;" src="hr_contract_type/static/src/img/ue.png"/>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-1" style="height: 80px;width: 100%;">
+                                    <h4><strong>CONTRATO DE TRABAJO TEMPORAL</strong></h4>
+                                </div>
+                            </div>
+                            <b>DATOS DE LA EMPRESA</b>
+                            <div class="row">
+                                <div class="col-xs-3 " style=";border: 1pt solid; height: 40px; width: 30%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>CIF/NIF/NIE</small></div>
+                                    <div class="blocks"><small class="text-uppercase">a28541639</small></div>
+                                </div>
+                            </div>
+
+                             <div class="row">
+                                <div class="col-xs-3 " style="border: 1pt solid;height: 40px; width: 60%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>D./DÑA</small></div>
+                                    <div class="blocks"><small class="text-uppercase"><t t-esc="employee.name"/></small></div>
+                                </div>
+                                <div class="col-xs-3 " style="border: 1pt solid;height: 40px; width: 20%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>NIF/NIE</small></div>
+                                    <div class="blocks"><small class="text-uppercase"><t t-esc="employee.ssnid"/></small></div>
+                                </div>
+                                <div class="col-xs-3" style="border: 1pt solid; height: 40px; width: 20%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>ENCONCEPTO(1)</small></div>
+                                    <div class="blocks"><small class="text-uppercase">APODERADO</small></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3 " style="border: 1pt solid;height: 40px; width: 60%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>NOMBRE O RAZON SOCIAL DE LA EMPRESA</small></div>
+                                    <div class="blocks"><small class="text-uppercase">FCC MEDIO AMBIENTE, S.A</small></div>
+                                </div>
+                                <div class="col-xs-3 " style="border: 1pt solid; height: 40px; width: 40%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>RAZON SOCIAL</small></div>
+                                    <div class="blocks"><small class="text-uppercase">C/ BALMES, 36</small></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3 " style="border: 1pt solid; height: 40px; width: 40%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>PAIS</small></div>
+                                    <div class="blocks"><small class="text-uppercase">ESPAÑA</small></div>
+                                </div>
+                                <div class="col-xs-3 " style="border: 1pt solid; height: 40px; width: 40%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>MUNICIPIO</small></div>
+                                    <div class="blocks"><small class="text-uppercase">BARCELONA</small></div>
+                                </div>
+                                <div class="col-xs-3" style="border: 1pt solid; height: 40px; width: 20%;">
+                                   <div class="blocks" style="font-weight: bold;"><small>C.POSTAL</small></div>
+                                    <div class="blocks"><small class="text-uppercase">23050</small></div>
+                                </div>
+                            </div>
+                            <b>DATOS CUENTA DE COTIZACION</b>
+                            <div class="row">
+                                <div class="col-xs-3" style="border: 1pt solid; height: 40px; width: 50%;">
+                                    <table>
+                                        <tr>
+                                            <th><div style="margin-top: 0px;"><small>REGIMEN</small></div></th>
+                                            <th><div style="margin-top: 0px;margin-left: 100px;"><small>COD.PROOV</small></div></th>
+                                            <th><div style="margin-top: 0px;margin-left: 50px;"><small>NUMERO</small></div></th>
+                                            <th><div style="margin-top: 0px;margin-left: 0px;"><small>DIG.CONTROL</small></div></th>
+                                        </tr>
+                                        <tr>
+                                            <th><div class="text-center" style="border: 1pt solid;margin-top: -1px;margin-left: 0px;"><small>0111</small></div></th>
+                                            <th><div class="text-center" style="border: 1pt solid;margin-top: -1px;margin-left: 100px;"><small>23</small></div></th>
+                                            <th><div class="text-center" style="border: 1pt solid;margin-top: -1px;margin-left: 0px;width: 140px;"><small>1234567</small></div></th>
+                                            <th><div class="text-center" style="border: 1pt solid;margin-top: -1px;margin-left: 0px;"><small>12</small></div></th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-xs-3" style="border: 1pt solid; height: 40px; width: 50%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>ACTIVIDAD ECONOMICA</small></div>
+                                    <div class="blocks"><small class="text-uppercase">23050</small></div>
+                                </div>
+                            </div>
+                            <b>DATOS DELCENTRO DE TRABAJO</b>
+                            <div class="row">
+                                <div class="col-xs-3 " style="border: 1pt solid;height: 40px; width: 50%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>PAIS</small></div>
+                                    <div class="blocks"><small class="text-uppercase">ESPAÑA</small></div>
+                                </div>
+                                <div class="col-xs-3 " style="border: 1pt solid; height: 40px; width: 50%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>MUNICIPIO</small></div>
+                                    <div class="blocks"><small class="text-uppercase">JAEN</small></div>
+                                </div>
+                            </div>
+                            <b>DATOS DEL/DE TRABAJADOR/A</b>
+                            <div class="row">
+                                <div class="col-xs-3 " style="border: 1pt solid;height: 40px; width: 60%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>D./DÑA</small></div>
+                                    <div class="blocks"><small class="text-uppercase"><t t-esc="employee.name"/></small></div>
+                                </div>
+                                <div class="col-xs-3 " style="border: 1pt solid;height: 40px; width: 20%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>NIF/NIE</small></div>
+                                    <div class="blocks"><small class="text-uppercase"><t t-esc="employee.ssnid"/></small></div>
+                                </div>
+                                <div class="col-xs-3" style="border: 1pt solid; height: 40px; width: 20%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>fECHA DE NACIMIENTO</small></div>
+                                    <div class="blocks"><small class="text-uppercase">22/01/1974</small></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3 " style="border: 1pt solid;height: 40px; width: 20%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>Nº AFILIACION S.S</small></div>
+                                    <div class="blocks"><small class="text-uppercase">FCC MEDIO AMBIENTE, S.A</small></div>
+                                </div>
+                                <div class="col-xs-3 " style="border: 1pt solid; height: 40px; width: 50%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>NIVEL FORMATIVO</small></div>
+                                    <div class="blocks"><small class="text-uppercase">ESTUDIOS PRIMARIOS INCOMPLETOS</small></div>
+                                </div>
+                                <div class="col-xs-3 " style="border: 1pt solid; height: 40px; width: 30%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>NACIONALIDAD</small></div>
+                                    <div class="blocks"><small class="text-uppercase">ESPAÑA</small></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3 " style="border: 1pt solid; height: 40px; width: 60%;">
+                                    <div class="blocks" style="font-weight: bold;"><small>MUNICIPIO DEL DOMICILIO</small></div>
+                                    <div class="blocks"><small class="text-uppercase">JAEN</small></div>
+                                </div>
+                                <div class="col-xs-3" style="border: 1pt solid; height: 40px; width: 40%;">
+                                   <div class="blocks" style="font-weight: bold;"><small>PAIS DEL DOMICILIO</small></div>
+                                    <div class="blocks"><small class="text-uppercase">ESPAÑA</small></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <spam style="position: absolute; left: 300px; top: 640px;"><t t-esc="employee.name"/></spam>
+                                <spam style="position: absolute; left: 100px; top: 660px;"><t t-esc="employee.name"/></spam>
+                                <spam style="position: absolute; left: 500px; top: 660px;"><t t-esc="employee.name"/></spam>
+                                <p> con la asistencia legal, en su caso, de D./Dña. .........................................
+                                    ................................................................................................................,
+                                    con N.I.F/N.I.E. ......................................................................, en calidad de (2) .......
+                                    ............................................................................................
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p class="text-center"><strong>DECLARAN</strong></p>
+                                <p> <small> Que reúnen los requisitos exigidos para la celebración del presente contrato y, en su consecuencia, acuerdan
+                                         formalizarlo con arreglo a las siguientes:</small>
+                                </p>
+                                <p class="text-center"><strong>CLÀUSULAS</strong></p>
+                            </div>
+                            <div class="row">
+                                <p><strong>PRIMERA:</strong> El/la trabajador/a prestará sus servicios como (3) .................
+                                ....................................................................., incluido en el grupo profesional de............
+                                ......................................................................................................................
+                                ......... para la realización de las funciones(4).....................................................de acuerdo con
+                                el sistema de clasificación profesional vigente en la emrpesa. En el centro de trabajo ubicado en (calle, nº y localidad)
+                                ......................................................................................................................
+                                .........
+                                </p>
+                            </div>
+
+
+                            <div class="row">
+                                <p>&#160;&#160;&#160;&#160;<input type="checkbox" value="" checked="checked"/><strong>A DISTANCIA,</strong> en el domi
+                                    cilio ubicado en ( calle, nº y localidad).........................................................................
+                                    .................................
+                                </p>
+                            </div>
+
+                            <div class="row">
+                                <p><strong>SEGUNDA:</strong> La jornada de trabajo será:(5)</p>
+                            </div>
+
+                            <div class="row">
+                                <p>&#160;&#160;&#160;&#160;<input type="checkbox" value="" checked="checked"/><strong>A tiempo completo:</strong> la jornada de trabajo será de
+                                    &#160;&#160;&#160;&#160;............................ horas semanales, prestadas de .................., a .........
+                                    &#160;&#160;&#160;&#160;....................., con los descansos establecidos legal o convencionalmente
+                                </p>
+                            </div>
+
+                            <div class="row">
+                                <p>&#160;&#160;&#160;&#160;<input type="checkbox" value="" checked="checked"/><strong>A tiempo parcial:</strong> la
+                                    jornada de trabajo ordinaria será de ......................, horas
+                                    <input type="checkbox" value="" checked="checked"/>al día,
+                                    <input type="checkbox" value="" checked="checked"/>a la semana,
+                                    <input type="checkbox" value="" checked="checked"/>al mes,
+                                    <input type="checkbox" value="" checked="checked"/>al año,siendo esta &#160;&#160;&#160;&#160;jornada inferior a (6)
+                                    ..................................................................................................................
+                                    .............................................................&#160;&#160;&#160;&#160;La distribución del tiempo de
+                                    trabajo será de ..................................................................................................
+                                    .......................................horas complementarias......................................................
+                                    ........................................................................................................................
+                                </p>
+                            </div>
+
+                            <div class="row">
+                                <p><strong>TERCERA:</strong> La duración del presente contrato se extenderá desde ....................................
+                                    ..........., hasta ..................................................... Se establece un período de prueba de (7)
+                                    ..............................................................................................Cuando el convenio
+                                    colectivo permita una duración mayor a la establecida legalmente, señálelo con una X:<input type="checkbox" value="" checked="checked"/>
+                                </p>
+                            </div>
+
+                            <div class="row" >
+                                <p><strong>CUARTA:</strong> El/la trabajador/a percibirá una retribución total de .............................euros brutos(8)
+                                .......................................que se distribuyen enlos siguientes conceptos salariales (9)...................
+                                ......................................................................................................................
+                                ....................
+                                </p>
+                            </div>
+
+            </div>
+        </div>
+
+
+    </template>
+
+
+</data>
+</openerp>

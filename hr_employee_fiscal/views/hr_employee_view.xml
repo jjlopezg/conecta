@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+
+<openerp>
+    <data>
+      
+        <record id="hr_employee_fiscal_view_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.fiscal.view.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook" position="inside">
+                         <page string="Datos Fiscales">
+                            <field name="fiscal_ids" nolabel="1" context="{'employee_id': active_id}"/>
+                         </page>
+                    </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

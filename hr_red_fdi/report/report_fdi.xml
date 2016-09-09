@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <report id="hr_red_fdi.report_fdi"
+            name="hr_red_fdi.template_fdi"
+            string="Comunicacion FDI"
+            report_type="qweb-xml"
+            menu="False"
+            model="hr.red.create.fdi"/>
+
+
+    <template id="template_fdi">
+        <t t-set="fdis" t-value="docs"/>
+        <t t-set="count_seg" t-value="0"/>
+        <t t-set="count_emp" t-value="0"/>
+        <t t-foreach="fdis" t-as="fdi">
+            <t t-set="sid" t-value="str(fdi.id)"/>
+            <t t-call="hr_red_fdi.fdi_eti"/><t t-set="count_seg" t-value="count_seg+1"/>
+
+            <t t-foreach="fdis.company_ids" t-as="company_id">
+                <t t-call="hr_red_fdi.fdi_emp"/><t t-set="count_seg" t-value="count_seg+1"/><t t-set="count_emp" t-value="count_emp+1"/>
+                <t t-foreach="fdi.fdi_ids" t-as="id">
+                    <t t-if="company_id == id.company_id">
+
+
+                        <t t-call="hr_red_fdi.fdi_tra"/><t t-set="count_seg" t-value="count_seg+1"/>
+                        <t t-call="hr_red_fdi.fdi_dit"/><t t-set="count_seg" t-value="count_seg+1"/>
+                        <t t-if="id.action == 'PB'">
+                            <t t-call="hr_red_fdi.fdi_dec"/><t t-set="count_seg" t-value="count_seg+1"/>
+                        </t>
+                        <t t-if="id.action == 'PC'">
+                            <t t-call="hr_red_fdi.fdi_odp"/><t t-set="count_seg" t-value="count_seg+1"/>
+                        </t>
+                    </t>
+                </t>
+            </t>
+            <t t-set="count_seg" t-value="count_seg+1"/><t t-call="hr_red_fdi.fdi_etf"/>
+        </t>
+    </template>
+
+    <template id="fdi_eti">
+        [<t t-esc="''.join('ETI')
+        +''.join('FDI3')
+        +''.join('0')
+        +''.join('WS75')
+        +''.join('0')
+        +''.join(fdi.password.zfill(8))
+        +''.ljust(3,' ')
+        +''.ljust(5,' ')
+        +''.join(time.strftime('%Y%m%d', time.strptime(fdi.date, '%Y-%m-%d')))
+        +''.join(str(fdi.time).replace('.', '').zfill(4))
+        +''.join(fdi.filename.ljust(8,' '))
+        +''.join('FDI')
+        +''.join('N')
+        +''.join('P')
+        +''.join('00')
+        +''.join('00')
+        +''.join('0')
+        +''.join('00000')
+        +''.join('0000')
+        +''.ljust(1,' ')
+        +''.ljust(1,' ')"/>],
+    </template>
+
+    <template id="fdi_emp">
+        [<t t-esc="''.join('EMP')
+        +''.join(company_id.regimen_id.code)
+        +''.join(company_id.ccc_prov)
+        +''.join(company_id.ccc_cod+company_id.ccc_dc)
+        +''.join(company_id.vat_type)
+        +''.join(company_id.country_id.code_numeric)
+        +''.join(company_id.vat.zfill(14))
+        +''.ljust(2,' ')
+        +''.join(company_id.regimen_id.code)
+        +''.join(company_id.ccc_prov)
+        +''.join(company_id.ccc_cod+company_id.ccc_dc)
+        +''.ljust(13,' ')
+        +''.ljust(3,' ')
+        +''.ljust(1,' ')"/>],
+    </template>
+
+     <template id="fdi_tra">
+        [<t t-esc="
+        ''.join('TRA')
+        +''.join(id.contract_id.employee_id.ssnid)
+        +''.join(id.contract_id.employee_id.identification.tgss)
+        +''.join(id.contract_id.employee_id.country_id.code_numeric)
+        +''.join(id.contract_id.employee_id.identification_id.zfill(14))
+        +''.ljust(3,' ')
+        +''.ljust(25,' ')
+        +''.join(id.contract_id.employee_id.country_id.code_numeric)
+        +''.ljust(1,' ')
+        +''.ljust(5,' ')"/>],
+    </template>
+
+    <template id="fdi_dit">
+        [<t t-esc="''.join('DIT')
+        +''.join(id.action.ljust(3,' '))
+        +''.join(id.type_to_id.code.rjust(2,'0') if id.type_to_id.code else '00')
+        +''.join(id.type_id.code)
+        +''.join(time.strftime('%Y%m%d', time.strptime(id.date_from, '%Y-%m-%d')) )
+        +''.join(time.strftime('%Y%m%d', time.strptime(id.date_to, '%Y-%m-%d')) if id.action=='PA' else '00000000')
+        +''.join(time.strftime('%Y%m%d', time.strptime(id.date_at_ep, '%Y-%m-%d')) if id.type_to_id.code==('3' or '4' or '5') else '00000000')
+        +''.join(id.state_id.code)
+        +''.join(id.colg_number)
+        +''.ljust(11,' ')
+        +''.join(id.days_to if id.days_to else '000')
+        +''.ljust(2,'0')
+        +''.ljust(7,'0')
+        +''.join(id.relapse if id.action != 'PC' else ' ')
+        +''.ljust(3,' ')"/>],
+    </template>
+
+    <template id="fdi_dec">
+        <t t-if="id.base != False">
+            <t t-set="base" t-value="int(id.base)"/>
+        </t>
+
+        [<t t-esc="''.join('DEC')
+        +''.join(str(int(id.base)).rjust(6,'0') if id.base else '000000')
+        +''.join(str((abs(id.base) - abs(int(id.base)))*100).split('.') if id.base else '00').rjust(2,'0')
+        +''.ljust(6,'0')
+        +''.ljust(2,'0')
+        +''.ljust(6,'0')
+        +''.ljust(2,'0')
+        +''.ljust(6,'0')
+        +''.ljust(2,'0')
+        +''.ljust(1,' ')
+        +''.join(id.dc.rjust(2,'0') if id.dc else '00')
+        +''.ljust(3,'0')
+        +''.ljust(29,' ')"/>],
+    </template>
+
+    <template id="fdi_odp">
+        [<t t-esc="''.join('ODP')
+        +''.join(time.strftime('%Y%m%d', time.strptime(id.date_part, '%Y-%m-%d')) )
+        +''.join(id.part_number.rjust(2,'0'))
+        +''.ljust(3,'0')
+        +''.ljust(8,'0')
+        +''.ljust(8,'0')
+        +''.ljust(1,' ')
+        +''.ljust(37,' ')"/>],
+    </template>
+
+    <template id="fdi_etf">
+        [<t t-esc="''.join('ETF')
+        +''.join('FDI3')
+        +''.join('0')
+        +''.join('WS75')
+        +''.join('0')
+        +''.join(fdi.password.zfill(8))
+        +''.ljust(8,' ')
+        +''.join(time.strftime('%Y%m%d', time.strptime(fdi.date, '%Y-%m-%d')))
+        +''.join(str(fdi.time).replace('.', '').zfill(4))
+        +''.join(fdi.filename.ljust(8,' '))
+        +''.join('FDI')
+        +''.join('N')
+        +''.join('P')
+        +''.join(str(count_emp).rjust(5,'0'))
+        +''.join(str(count_seg).rjust(8,'0'))
+        +''.ljust(3,' ')"/>]
+    </template>
+
+</data>
+</openerp>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+#-*- coding:utf-8 -*-
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+###########################################################################
+-->
+<openerp>
+<data>
+
+	<record id="hr_contract_view_form_inherit" model="ir.ui.view">
+            <field name="name">hr.contract.view.form.inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+
+            	 <xpath expr="//form/header" position="replace">
+                       <header>
+							<!-- <button name="create_xml_contract" type="object" string="XML" class="oe_highlight"/>
+ 							<button name="contract_unlinked" type="object" string="Desvincular"
+	                                groups="base.group_hr_user" states="draft,trial,active" class="oe_highlight"/>  -->
+                           <!--	<button name="contract_print" type="object" string="Imprimir"
+									groups="base.group_hr_user" states="draft,trial,active" />-->
+                           <field name="state" widget="statusbar"/>
+                       </header>
+                 </xpath>
+
+<!--
+					 <xpath expr="//form/sheet/div[@class='oe_title']"  position="inside">
+						 <group>
+						 	<group>
+								<field name="employee_id" string="ID/Empleado"/>
+							</group>
+							<group></group>
+						 </group>
+					 </xpath>
+
+
+				 <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="Contract Reference"/>
+                        </h1>
+                    </div>
+                    -->
+
+
+
+                <xpath expr="//field[@name='department_id']"  position="before">
+                    <field name="company_id" widget="selection" />
+ 				</xpath>
+
+                 <xpath expr="//field[@name='department_id']" position="replace">
+					<!--<field name="employee_id" string="ID Empleado"/>-->
+<!--					<field name="name" placeholder="Contract Reference"/>-->
+                 	<field name="department_id" class="oe_no_button" widget="selection" domain="[('company_id', '=', company_id)]"/>
+                 </xpath>
+                                  
+<!--
+ 				<xpath expr="//field[@name='name']"  position="replace">
+ 					<field name="name"/>
+				</xpath>
+-->
+			 
+			 <xpath expr="//group[@name='duration_group']"  position="replace">
+			 	<group name="duration_group" string="Duracion">
+
+                                <field name="date_signature"/>
+								<label for="test_days" string="Trial Period Duration"/>
+                                <div>
+									<field name="test_trial_units" class="oe_inline" />
+									<field name="test_trial_type"  class="oe_inline" />
+								</div>
+								<label for="date_start" string="Duracion del contrato"/>
+                                <div>
+									<field name="date_start" class="oe_inline" style="vertical-align: middle;"/> -
+									<field name="date_end" class="oe_inline" modifiers="{}" style="vertical-align: middle;"/>
+								</div>
+<!--								<label for="display_unliked" string="Desvinculacion"/>
+								<div>-->
+                                   <!-- <field name="unliked_id"  class="oe_no_button" widget="selection"/>-->
+									<!--<field name="display_unliked" />-->
+								<!--</div>-->
+								
+								<field name="working_hours"/>
+
+                </group>
+			 </xpath>
+
+                <xpath expr="//notebook/page[1]" position="after">
+				 	<page name="general" string="General">
+				 			<group>
+                                <label for="is_dist" string="A Distancia"/>
+                                    <div>
+                                        <field  name="is_dist" class="oe_inline" style="vertical-align: top;"/>
+                                        <field  name="is_dist_text" attrs="{'required':[('is_dist','=',True)],'invisible':[('is_dist','=',False)]}"/>
+                                    </div>
+                                    <label for="time_work" string="Jornada de trabajo"/>
+								    <div>
+                                        <field name="time_work" class="oe_inline" style="vertical-align: middle;"/> horas, prestadas
+									    <field name="jornada" widget="selection" class="oe_inline"/> de
+                                        <field name="of_days" widget="selection" class="oe_inline"/> a
+                                        <field name="to_days" widget="selection" class="oe_inline"/> siendo el coef.tp
+                                        <field name="coef_tp" class="oe_inline"/>%
+								    </div>
+   	            					<field name="distribution" />
+-									<field name="prg_emp"/>
+						</group>
+    	            		
+					    <notebook>
+	        			    <page string="Obra/Servicio">
+    	        				<group name="grp_obra" string="La realizacion de obra o servicio">
+    	        					<field name="obser" nolabel="1"/>
+    	        				</group>
+                			</page>
+
+	            			<page string="Circustancias">
+    	        				<group name="grp_circun" string="Atender las exigencias circunstanciales del mercado">
+    	        					<field name="circuns" nolabel="1"/>
+    	        				</group>
+                			</page>
+            			
+	            			<page string="Interinidad">
+    	        				<group name="grp_inter" string="Interinidad">
+                                    <field name="teiinter" widget="radio"/>
+    	        					<field name="teiinter_id" string="Empleado"/>
+    	        				</group>
+    	        				<group></group>
+                			</page>
+            			
+                			<page string="Clausula">
+    	        				<group name="grp_cla_per" string="Clausula adicional al contrato">
+    	        					<field name="cla_per" nolabel="1"/><!-- widget="html" -->
+    	        				</group>
+    	        				<group></group>
+                			</page>
+            			
+                			<page string="H. Complementarias">
+                				<group name="grp_anexo_a" string="Anexo al contrato de trabajo a tiempo parcial sobre de pacto horas complementarias">
+        	            			<div>
+    									<field name="anexo_h" class="oe_inline" nolabel="1"/> Horas complementarias
+    									<br/>El/la trabajador/a se compremete a realizar, a solicitud del empresario/a, hasta un maximo de <field name="por_hours"
+    												class="oe_inline" nolabel="1" style="vertical-align: middle;" />horas complementarias
+    									<br/>que soponen <field name="por_hours" class="oe_inline" nolabel="1" style="vertical-align: middle;" /> % respecto a las horas pactadas en el contrato
+    									<br/>
+    									<br/>El empresario/a preavisara con un minimo de <field name="pre_days" class="oe_inline" nolabel="1" style="vertical-align: middle;" />
+    									dias de antelacion a su realizacion
+    								</div>
+    							</group>
+                            </page>
+  					    </notebook>
+
+                        <group>
+
+  							<group name="grp_training" string="Formacion">
+								<field name="tbonvfor_id" attrs="{'required':True}" widget="selection"/>
+							</group>
+
+  							<group name="grp_otther" string="Otros">
+								<field name="terfircb_id" attrs="{'required':True}" widget="selection"/>
+								<field name="contract_write" class="oe_inline"/>
+								<field name="is_alta_d"/>
+							</group>
+
+                 			<group name="grp_legal" string="Datos Asistente legal empleado">
+								<field name="legal_name"/>
+								<field name="legal_id"/>
+								<field name="legal_type"/>
+							</group>
+						</group>													
+					</page>
+
+                 </xpath>
+
+				 <xpath expr="//notebook[1]/page[3]" position="replace">
+				 	<page name="Work Permit" string="Permiso de trabajo">
+						<field name="visa_ids" nolabel="1" context="{'contract_id': active_id}">
+							<tree>
+								<field name="date_start"/>
+								<field name="date_end"/>
+								<field name="visa_no"/>
+								<field name="permit_no"/>
+							</tree>
+						</field>
+					</page>
+                 </xpath>
+<!--
+                <xpath expr="//sheet" position="after">
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                </xpath>
+-->
+          </field>
+        </record>
+
+	<record id="hr_contract_view_tree" model="ir.ui.view">
+        <field name="name">hr.contract.tree.state</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_tree"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='employee_id']" position="replace">
+					<field name="employee_id" string="ID/Empleado"/>
+                </xpath>
+
+                <xpath expr="//field[@name='date_end']" position="after">
+                    <field name="state"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+
+	 <record id="hr_contract_view_search" model="ir.ui.view">
+            <field name="name">hr.contract.view.search</field>
+            <field name="model">hr.contract</field>
+		 	<field name="inherit_id" ref="hr_contract.hr_contract_view_search"/>
+            <field name="arch" type="xml">
+				<data>
+                	<xpath expr="//field[@name='name']" position="before">
+						<field name="employee_id" string="ID/Empleado"/>
+                	</xpath>
+				</data>
+            </field>
+        </record>
+
+
+	<!-- Menus Contratos
+	<menuitem id="hr_contract.hr_menu_contract"
+               name="Contratacion"
+               parent="hr.menu_hr_root"
+               sequence="4"
+               groups="base.group_hr_user"/>
+-->
+    <menuitem id="hr_contract.hr_menu_contract"
+              name="Contratos"
+              action="hr_contract.action_hr_contract"
+              parent="hr.menu_hr_root"
+              sequence="4"
+              groups="base.group_hr_user"/>
+
+
+</data>
+</openerp>

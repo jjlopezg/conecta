@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+
+<openerp>
+	<data>
+
+		<record id="view_res_mutua_form" model="ir.ui.view">
+		    <field name="name">res.mutua.form</field>
+		    <field name="model">res.mutua</field>
+	    	<field name="arch" type="xml">
+		        <form string="Mutua">
+	            	<sheet>
+	                    <label for="code" string="Code" class="oe_edit_only"/>
+	                    <h1>
+			            	<field name="code" default_focus="1"/>
+	                    </h1>
+	                    <group>
+			            	<field name="description"/>
+						</group>
+                	</sheet>
+				</form>
+	    	</field>
+		</record>
+
+		<record id="view_res_mutua_tree" model="ir.ui.view">
+		    <field name="name">res.mutua.tree</field>
+	    	<field name="model">res.mutua</field>
+	    	<field name="arch" type="xml">
+		        <tree string="Mutuas">
+		           	<field name="code"/>
+	           	 	<field name="description"/>
+	        	</tree>
+	    	</field>
+		</record>
+
+		<record id="view_res_mutua_search" model="ir.ui.view">
+		    <field name="name">res.mutua.search</field>
+		    <field name="model">res.mutua</field>
+	    	<field name="arch" type="xml">
+		        <search>
+	            	<field name="code"/>
+	            	<field name="description"/>
+	        	</search>
+	    	</field>
+		</record>
+
+		<record id="action_res_mutua_tree" model="ir.actions.act_window">
+		    <field name="name">Mutuas Accidentes</field>
+		    <field name="type">ir.actions.act_window</field>
+		    <field name="res_model">res.mutua</field>
+		    <field name="view_type">form</field>
+		    <field name="view_mode">tree,form</field>
+	    	<field name="view_id" ref="view_res_mutua_tree"/>
+	    	<field name="search_view_id" ref="view_res_mutua_search"/>
+			<field name="help" type="html">
+	              <p class="oe_view_nocontent_create">
+	                 Click to add a new.
+	              </p>
+    	    </field>
+		</record>
+	
+		<menuitem id="menu_localisation_res_mutua"
+    		name="Mutuas Accidentes"
+    		action="action_res_mutua_tree"
+    		parent="hr.menu_human_resources_configuration"
+	    	groups="base.user_root"/>
+
+	</data>
+</openerp>

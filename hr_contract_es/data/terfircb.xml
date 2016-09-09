@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record model="hr.contract.terfircb" id="terfircb_1">
+          <field name="code">1</field>
+          <field name="description">FIRMADAS POR LOS REPRESENTANTES LEGALES</field>
+        </record>
+
+        <record model="hr.contract.terfircb" id="terfircb_2">
+          <field name="code">2</field>
+          <field name="description">NO EXISTE REPRESENTACION LEGAL</field>
+        </record>
+
+        <record model="hr.contract.terfircb" id="terfircb_3">
+          <field name="code">3</field>
+          <field name="description">NO SE HA FACILITADO COPIA</field>
+        </record>
+
+        <record model="hr.contract.terfircb" id="terfircb_4">
+          <field name="code">4</field>
+          <field name="description">REHUSAN FIRMAR</field>
+        </record>
+
+    </data>
+</openerp>
+

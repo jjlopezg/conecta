@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="template_contracts_cb">
+
+   <div class="page">
+ <div class="row">
+        A EFECTOS DEL CUMPLIMIENTO DE LO PREVISTO EN LA R.D.L. 1/1995 (ART. 8.3a DEL E.T.), RD 2720/1998 Y R.D. 1424/2002.
+
+Copia básica de contrato del trabajo suscrito entre la empresa EMPRESA y EMPLEADO
+
+
+Estipulaciones
+- Duración del contrato: Desde el 03 de Noviembre del 2014 hasta el 31 de Diciembre del 2014
+- Fecha de formalización de contrato: 03 de Noviembre del 2014
+- Objeto del contrato: SERVICIO DE PODA Y MANTENIMIENTO DE JARDINES
+- Categoría Profesional: Peon jardinero
+- Salario: Según convenio colectivo de aplicación.
+- Jornada: 37.50 horas a la semana
+- Vacaciones: Según convenio colectivo de aplicación.
+- Normativa especifica de aplicación:CONVENIO COLECTIVO ESTATAL DE JARDINES
+
+FCC MEDIO AMBIENTE, S.A.
+Firma de la empresa
+Recibi
+Rpte. Legal trabajadores
+En JAEN, 30 de Octubre de 2014
+</div>
+   </div>
+
+</template>
+
+
+</data>
+</openerp>

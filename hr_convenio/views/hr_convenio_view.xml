@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+ <openerp>
+<data>
+
+	<record id="hr_convenio_view_form" model="ir.ui.view">
+    	<field name="name">hr.convenio.view.form</field>
+    	<field name="model">hr.convenio</field>
+    	<field name="priority" eval="1"/>
+    	<field name="arch" type="xml">
+	        <form string="Convenios Colectivos">
+				<header>
+					<button name="do_active" string="Vigente" type="object" states="draft" class="oe_highlight"/>
+					<button name="do_done" string="Finalizar" type="object" states="active" class="oe_highlight"/>
+					<button name="do_draft" string="Borrador" type="object" states="done" class="oe_highlight"/>
+					<field name="state" widget="statusbar" nolabel="1" statusbar_colors='{""draft":"red","active":"blue","done":"red"}'/>
+				</header>
+             	<sheet>
+
+	                <div class="oe_title">
+							<label for="description" class="oe_edit_only"/>
+		                    <h1>
+				            	<field name="description" default_focus="1"/>
+	        	            </h1>
+	                    </div>
+                 		<group>
+	                        <group>
+								<field name="code"/>
+                                <field name="company_id"/>
+                                <label for="date_start" string="Periodo validez"/>
+								<div>
+                            		<field name="date_start" class="oe_inline" style="vertical-align: middle;"/> -
+                            		<field name="date_end" class="oe_inline" modifiers="{}" style="vertical-align: middle;"/>
+                        		</div>
+							</group>
+    	                    <group>
+	                            <field name="user_create"/>
+	                            <field name="user_last"/>
+	                        </group>
+                        </group>
+
+                    <group>
+		        	    <group>
+    	                    	<field name="max_legal"/>
+                   				<!--<field name="holidays_id"/>-->
+                   				<!--<field name="days_ap"/>-->
+    		         	</group>
+                        <group>
+                            	<field name="hours_year"/>
+                            	<field name="hours_month"/>
+                                <field name="hours_week"/>
+                            	<field name="hours_day"/>
+                        </group>
+                    </group>
+		         	<notebook>
+	        			<page string="Categorias">
+        					<field name="catg_ids" context="{'convenio_id': active_id}" nolabel="1">
+	        			 		<tree >
+	            					<field name="categoria_id"/>
+	            					<field name="grp_id"/>
+                                    <!--<field name="cno_id"/>
+                                    <field name="cno_modif_id"/>-->
+		            			</tree>
+		            		</field>
+            			</page>
+  					</notebook>
+            	</sheet>          
+        	</form>
+    	</field>
+	</record>
+
+	<record id="hr_convenio_view_tree" model="ir.ui.view">
+	    <field name="name">hr.convenio.view.tree</field>
+	    <field name="model">hr.convenio</field>
+	    <field name="arch" type="xml">
+        	<tree string="Convenios" >
+                <field name="company_id"/>
+	            <field name="code"/>
+	           	<field name="name"/>
+	           	<field name="date_start"/> 
+	           	<field name="date_end"/>
+				<field name="state"/>
+      		</tree>
+    	</field>
+	</record>
+
+	<record id="hr_convenio_view_search" model="ir.ui.view">
+	    <field name="name">hr.convenio.view.search</field>
+    	<field name="model">hr.convenio</field>
+	   	<field name="arch" type="xml">
+       		<search>
+            	<field name="code"/>
+            	<field name="name"/>
+	           	<field name="date_start"/> 
+	           	<field name="date_end"/>
+        	</search>
+    	</field>
+	</record>
+
+	<record id="action_hr_convenio" model="ir.actions.act_window">
+    	<field name="name">Convenio Colectivo</field>
+    	<field name="type">ir.actions.act_window</field>
+    	<field name="res_model">hr.convenio</field>
+    	<field name="view_type">form</field>
+    	<field name="view_mode">tree,form</field>
+    	<field name="view_id" ref="hr_convenio_view_tree"/>
+    	<field name="search_view_id" ref="hr_convenio_view_search"/>
+	</record>
+
+    <menuitem id="menu_human_resources_configuration_convenio"
+        name="Convenios"
+        action="action_hr_convenio"
+        parent="hr.menu_human_resources_configuration"
+	    groups="base.group_hr_manager"
+        sequence="15"/>
+
+</data>
+</openerp>

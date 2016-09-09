@@ -1,0 +1,6 @@
+"id","code","description"
+"form_00","00","Ninguna informacion"
+"form_01","10","Contacto electrico, con fuego, temperaturas o sustancias peligrosas – sin especificar"
+"form_02","11","Contacto con un arco electrico o rayo (pasivo) (sin contacto material con el elemento)"
+"form_03","12","Contacto directo con la electricidad, recibir una descarga electrica"
+

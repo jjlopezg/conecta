@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <record id="paperformat_contracts" model="report.paperformat">
+            <field name="name">Modelo A4 Contratos</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+    <report id="hr_contract_type.report_contracts"
+            name="hr_contract_type.template_contracts"
+            string="Impresion de contratos"
+            report_type="qweb-pdf"
+            model="hr.contract.type.print"
+            menu="False"
+            paperformat="hr_contract_type.paperformat_contracts"/>
+
+
+<template id="template_contracts">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-foreach="o.contract_ids" t-as="contract">
+                <t t-set="type" t-value="contract.type_id"/>
+                <t t-set="employee" t-value="contract.employee_id"/>
+
+
+                <t t-if="type.sepe == '401'"><t t-call="hr_contract_type.contrato_tp_401_501"/></t>
+                <t t-if="type.sepe == '402'"><t t-call="hr_contract_type.contrato_tp_402_502"/></t>
+
+                <t t-if="type.sepe == '501'"><t t-call="hr_contract_type.contrato_tp_402_502"/></t>
+                <t t-if="type.sepe == '502'"><t t-call="hr_contract_type.contrato_tp_402_502"/></t>
+
+                <t t-if="o.is_cb == True"><t t-call="hr_contract_type.template_contracts_cb"/></t>
+
+                <t t-if="type.cl_ad != False">
+                    <div class="page">
+                        <div t-raw="type.cl_ad"/>
+                        <p>En <t t-esc="contract.company_id.state_id.name"/>, <t t-esc="time.strftime('%d de %B de %Y', time.strptime(contract.date_start, '%Y-%m-%d'))"/></p>
+                        <p>Fdo.:EL TRABAJADOR</p>
+                        <p><t t-esc="employee.name"/></p>
+                    </div>
+                </t>
+             </t>
+        </t>
+    </t>
+ </template>
+
+   <template id="contrato_tp_401_501">
+       <t t-call="hr_contract_type.template_contracts_tp_page1"/>
+       <t t-call="hr_contract_type.template_contracts_tp_page2"/>
+       <t t-call="hr_contract_type.template_contracts_tp_page3"/>
+       <t t-call="hr_contract_type.template_contracts_tp_page4"/>
+       <t t-call="hr_contract_type.template_contracts_tp_page22"/>
+    </template>
+
+    <template id="contrato_tp_402_502">
+       <t t-call="hr_contract_type.template_contracts_tp_page1"/>
+       <t t-call="hr_contract_type.template_contracts_tp_page2"/>
+       <t t-call="hr_contract_type.template_contracts_tp_page3"/>
+       <t t-call="hr_contract_type.template_contracts_tp_page5"/>
+       <t t-call="hr_contract_type.template_contracts_tp_page22"/>
+    </template>
+
+    <template id="contrato_tp_410_510">
+       <t t-call="hr_contract_type.template_contracts_tp_page1"/>
+       <t t-call="hr_contract_type.template_contracts_tp_page2"/>
+       <t t-call="hr_contract_type.template_contracts_tp_page3"/>
+       <t t-call="hr_contract_type.template_contracts_tp_page6"/>
+       <t t-call="hr_contract_type.template_contracts_tp_page22"/>
+    </template>
+
+
+
+</data>
+</openerp>

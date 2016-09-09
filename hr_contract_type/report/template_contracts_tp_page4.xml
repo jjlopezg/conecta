@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="template_contracts_tp_page4">
+
+   <div class="page">
+                    <div class="container">
+
+                        <div class="col-xs-12">
+                            <img style="float:left;" src="hr_contract_type/static/src/img/esp.png"/>
+                            <img style="float:right;" src="hr_contract_type/static/src/img/ue.png"/>
+                        </div>
+
+                        <div class="container" style="border: 1pt solid;">
+                            <div class="col-xs-12">
+                                <h4><input type="checkbox" value="" checked="checked"/> CLÁUSULAS ESPECIFICAS DE OBRA O SERVICIO DETERMINADO</h4>
+                            </div>
+
+                            La realización de obra o servicio...............................................................................................................................................................................
+...................................................................................................................................................................................................................................
+teniendo dicha obra autonomia y sustantividad propia dentro de la actividad de la empresa no pudiendo superar los 3 años ampliable a 12 meses
+por convenio colectivo. ( Art.15 del Estatuto de los Trabajadores, aprobado por Real decreto Legislativo 2/2015 de 23 de octubre ( BOE de 24
+de octubre)
+
+                            <h6><input type="checkbox" value="" checked="checked"/>
+                            Que el/la trabajador/a está admitido en el Programa de Activación para el Empleo y está en posesión del documento acreditativo o resolución del
+SEPE. ( R.D. Ley 16/2014 ).</h6>
+
+
+                        </div>
+
+                    </div>
+                </div>
+</template>
+
+
+</data>
+</openerp>

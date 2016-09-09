@@ -1,0 +1,6 @@
+"id","code","description"
+"ag_01","00000000","Ningún agente material o ninguna información"
+"ag_02","00010000","Ningún agente material"
+"ag_03","01000000","Edificios, superficies al mismo nivel (interior o exterior, fijas o móviles, temporales o no) - sin especificar"
+"ag_04","01010000","Elementos de edificios, de construcciones - puertas, paredes, tabiques, etc.y obstáculos por definición (ventanas, ventanales, etc.)"
+

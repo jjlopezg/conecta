@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+#-*- coding:utf-8 -*-
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+###########################################################################
+-->
+
+<openerp>
+	<data>
+
+		<record id="view_res_cnae_form" model="ir.ui.view">
+		    <field name="name">res.cnae.form</field>
+		    <field name="model">res.cnae</field>
+		    <field name="arch" type="xml">
+	        	<form string="CNAE">
+		            <sheet>
+	                    <label for="code" string="Code" class="oe_edit_only"/>
+	                    <h1>
+			            	<field name="code" default_focus="1"/>
+	                    </h1>
+	                   	<group>
+			            	<field name="description"/>
+			             	<field name="parent_id"/>
+	                   	</group>
+	                   	<group>
+	                   	</group>
+	                </sheet>
+	        	</form>
+	    	</field>
+		</record>
+
+		<record id="view_res_cnae_tree" model="ir.ui.view">
+		    <field name="name">res.cnae.tree</field>
+		    <field name="model">res.cnae</field>
+		    <field name="field_parent">child_ids</field>
+		    <field name="arch" type="xml">
+	        	<tree string="CNAE">
+		            <field name="code"/>
+	            	<field name="description"/>
+	        	</tree>
+	    	</field>
+		</record>
+
+		<record id="view_res_cnae_list" model="ir.ui.view">
+		    <field name="name">res.cnae.list</field>
+		    <field name="model">res.cnae</field>
+		    <field name="field_parent">child_ids</field>
+		    <field name="arch" type="xml">
+				<tree string="CNAE">
+	            	<field name="code"/>
+            		<field name="description"/>
+            		<field name="parent_id"/>
+		        </tree>
+	    	</field>
+		</record>
+
+		<record id="view_res_cnae_search" model="ir.ui.view">
+		    <field name="name">res.cnae.search</field>
+		    <field name="model">res.cnae</field>
+		    <field name="arch" type="xml">
+	        	<search>
+		            <field name="code"/>
+	            	<field name="description"/>
+	        	</search>
+	    	</field>
+		</record>
+
+
+		<record id="action_res_cnae_list" model="ir.actions.act_window">
+	    	<field name="name">CNAE</field>
+	    	<field name="type">ir.actions.act_window</field>
+	    	<field name="res_model">res.cnae</field>
+	    	<field name="view_type">tree</field>
+	    	<field name="view_mode">tree,form</field>
+		    <field name="domain">[('parent_id', '=', False)]</field>
+	    	<field name="view_id" ref="view_res_cnae_tree"/>
+	    	<field name="search_view_id" ref="view_res_cnae_search"/>
+		</record>
+
+		<record id="action_res_cnae_tree" model="ir.actions.act_window">
+	    	<field name="name">Codigo Nacional de Actividades Economicas</field>
+	    	<field name="type">ir.actions.act_window</field>
+	    	<field name="res_model">res.cnae</field>
+	    	<field name="view_type">form</field>
+	    	<field name="view_mode">tree,form</field>
+	    	<field name="view_id" ref="view_res_cnae_list"/>
+	    	<field name="search_view_id" ref="view_res_cnae_search"/>
+	    	<field name="help" type="html">
+	              <p class="oe_view_nocontent_create">
+	                 Click to add a new.
+    	          </p>
+	        </field>
+		</record>
+
+		<menuitem id="menu_localization_res_cnae"
+		    name="Codigos CNAE"
+		    parent="hr.menu_human_resources_configuration"
+		    action="action_res_cnae_tree"
+		    groups="base.user_root"/>
+
+		<menuitem id="menu_res_cnae_tree"
+		    name="Arbol CNAE"
+			parent="menu_localization_res_cnae"
+    		action="action_res_cnae_list"
+    		groups="base.user_root"/>
+
+	</data>
+</openerp>

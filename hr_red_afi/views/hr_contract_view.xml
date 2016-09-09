@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+
+<openerp>
+    <data>
+      
+        <record id="hr_red_afi_form_inherit" model="ir.ui.view">
+            <field name="name">hr.red.afi.form.inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook" position="inside">
+                    <page string="Menj. AFI">
+                        <field name="afi_ids" nolabel="1" context="{'company_id': company_id, 'contract_id': active_id, 'employee_id': employee_id}">
+                            <tree>
+                                <field name="state"/>
+                                <field name="date_start"/>
+                                <field name="move_id"/>
+                                <field name="position_id"/>
+                                <field name="error"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

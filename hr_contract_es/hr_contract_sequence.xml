@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+
+<openerp>
+    <data>
+
+        <record id="seq_id_contract" model="ir.sequence">
+            <field name="name">ID Contrato</field>
+            <field name="code">id.contract</field>
+         	<field name="number_next">1</field>
+        	<field name="number_increment">1</field>
+        </record>
+
+    </data>
+</openerp>

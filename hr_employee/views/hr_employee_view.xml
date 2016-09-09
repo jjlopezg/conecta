@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+
+<openerp>
+    <data>
+      
+        <record id="view_employee_es_form" model="ir.ui.view">
+            <field name="name">hr.employee.es.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="priority" eval="16"/>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <data>
+ 					<xpath expr="//form/sheet" position="before">
+                        <header>
+                            <field name="status" widget="statusbar"/>
+                        </header>
+                    </xpath>
+
+                    <div class="oe_title" position="replace">
+                        <div class="oe_title">
+                            <xpath expr="//field[@name='name']" position="replace">
+                            <h2>
+                                <field name="id_employee" placeholder="ID de empleado" attrs="{'readonly': True}"/>
+                                <div class="oe_edit_only">
+                                    <label for="name" string="Empleado"/>
+                                </div>
+                                <field name="name" placeholder="Apellidos, Nombre" default_focus="1"/>
+                                <!--<field name="name_id" string="ID de empleado" />-->
+                            </h2>
+                            </xpath>
+                        </div>
+                    </div>
+
+                    <xpath expr="//field[@name='country_id']" position="replace">
+                        <field name="country_id" options='{"no_open": True}' attrs="{'required': True}"/>
+                    </xpath>
+
+                     <xpath expr="//field[@name='company_id']" position="replace">
+                        <field name="company_id" options='{"no_open": True}' attrs="{'required': True}"/>
+                    </xpath>
+
+					<xpath expr="//field[@name='identification_id']" position="replace">
+                        <!--<field name="ssnid" attrs="{'required': True}"/>-->
+                    	<field name="identification" attrs="{'required': True}"	class="oe_no_button" widget="selection"/>
+                        <field name="identification_id"  attrs="{'required': True}"/>
+                            <label for="ssnid_p" string="Nº Seguridad Social"/>
+                            <div>
+                                <field name="ssnid_p" style="width: 10%;vertical-align: middle"/>
+                                <srong><label string="/" style="vertical-align: middle" class="oe_inline"/></srong>
+                                <field name="ssnid_n" style="width: 30%" />
+                                <srong><label string="/" style="vertical-align: middle" class="oe_inline"/></srong>
+                                <field name="ssnid_dc" style="width: 10%;vertical-align: middle" />
+                            </div>
+                    </xpath>
+
+
+                    <xpath expr="//field[@name='gender']" position="replace">
+                        <field name="gender" attrs="{'required': True}"/>
+                    </xpath>      
+
+                    <xpath expr="//field[@name='marital']" position="replace">
+                        <field name="marital" attrs="{'required': True}"/>
+                    </xpath>      
+
+
+                    <xpath expr="//field[@name='birthday']" position="replace">
+                        <field name="birthday" attrs="{'required': True}"/>
+                        <label for="age" string="Edad"/>
+                        <div>
+                        	<field name="age" class="oe_inline" style="vertical-align: middle;"/> Años
+                  		</div>
+                    </xpath>
+
+                    <xpath expr="//field[@name='address_home_id']" position="replace">
+                        <group>
+	                            		<label for="home_street_name" string="Direccion particular"/>
+	                            		<div>
+                                            <field name="home_street_name" class="oe_no_button" placeholder="Domicilio" style="width: 80%" />
+		                            	    <field name="home_street_number" placeholder="Numero" style="width: 20%"/>
+		                                	<div>
+		                                    	<field name="home_better_zip_id"
+			                                        options="{'create_name_field': 'city'}"
+		    	                                    colspan="4"
+		        	                                placeholder="City completion" />
+		            	                        <field name="home_zip" placeholder="Cod. postal" style="width: 30%"/>
+		    		    	                    <field name="home_city" placeholder="Municipio" style="width: 70%"/>
+		                    	            </div>
+		                        	        <field name="home_state_id" class="oe_no_button" placeholder="Provincia" on_change="onchange_state(home_state_id)" style="width: 50%" options="{&quot;no_open&quot;: True}"/>
+		                            	    <field name="home_country_id" placeholder="Pais" style="width: 50%" class="oe_no_button" options="{&quot;no_open&quot;: True}" />
+
+                                            <b><label for="home_phone" string="Telefonos:"/></b>
+                                            <div>
+                                                <field name="home_phone" class="oe_no_button" placeholder="Telefono1" style="width: 50%" />
+	    	                            	    <field name="home_mobile" placeholder="Telefono2" style="width: 50%"/>
+                                            </div>
+                                        </div>
+									</group>
+                    </xpath>
+
+                </data>
+            </field>
+        </record>
+        
+        <record id="view_employee_tree_es" model="ir.ui.view">
+            <field name="name">hr.employee.tree.inherit.es</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="name" position="replace">
+                     	<field name="id_employee" string="ID de empleado"/>
+                     	<field name="name" string="Empleado"/>
+                        <field name="identification_id"/>
+                     	<field name="ssnid"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record id="view_employee_filter" model="ir.ui.view">
+            <field name="name">Employees</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_filter"/>
+            <field name="arch" type="xml">
+                <field name="name" position="replace">
+                        <field name="id_employee"/>
+                        <field name="name"/>
+                        <field name="identification_id"/>
+                        <field name="ssnid"/>
+                </field>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="hr_kanban_view_employees">
+            <field name="name">HR - Employess Kanban</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+            <field name="arch" type="xml">
+                <field name="name" position="replace">
+                    <li><field name="id_employee"/></li>
+                    <li><field name="name"/></li>
+                </field>
+            </field>
+        </record>
+
+
+        <menuitem
+                id="menu_hr_root"
+                name="Empleados"
+                icon="fa-user"
+                web_icon="hr_employee,static/description/icon.png"
+                sequence="75"
+                groups="base.group_hr_manager,base.group_hr_user,base.group_user"/>
+
+    </data>
+</openerp>

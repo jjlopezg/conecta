@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+<openerp>
+    <data>
+        
+        <record id="hr_school_academy_form" model="ir.ui.view">
+            <field name="name">hr.school.academy.form</field>
+            <field name="model">hr.school.academy</field>
+            <field name="arch" type="xml">
+                <form string="Academicos">
+                	<sheet>
+                    	<label for="code" string="Code" class="oe_edit_only"/>
+                    	<h1>
+		                    <field name="code" default_focus="1"/>
+                    	</h1>
+                    	<group>
+		                    <field name="name" string="Descripcion"/>
+                    	</group>
+                	</sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id='hr_school_academy_tree' model='ir.ui.view' >
+			<field name='name'>hr.school.academy.tree.</field>
+	  		<field name='model'>hr.school.academy</field>
+	  		<field name='type'>tree</field>
+	  		<field name='arch' type='xml'>
+		    	<tree string="Academicos">
+                	<field name="code"/>		    	
+                	<field name="name"/>
+		    	</tree>
+			</field>
+		</record>
+		
+	<record id="hr_school_academy_search" model="ir.ui.view">
+	    <field name="name">hr.school.academy.tree.search</field>
+	    <field name="model">hr.school.academy</field>
+	    <field name="arch" type="xml">
+        	<search>
+	            <field name="code"/>
+            	<field name="name"/>
+        	</search>
+    	</field>
+	</record>		
+	
+	<record id="action_hr_school_academy" model="ir.actions.act_window">
+		<field name="name">Academicos</field>
+	  	<field name="res_model">hr.school.academy</field>
+	  	<field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    	<field name="view_id" ref="hr_school_academy_tree"/>
+    	<field name="search_view_id" ref="hr_school_academy_search"/>
+        <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                 Click to add a new.
+              </p>
+            </field>
+	</record>
+
+	<menuitem id="menu_human_resources_configuration_academy"
+    	action="action_hr_school_academy"
+    	parent="hr.menu_human_resources_configuration"
+    	name="Academicos"/>
+
+    </data>
+</openerp>

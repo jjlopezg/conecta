@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="template_contracts_tp_page3">
+                  <div class="page">
+                    <div class="container">
+
+                        <div class="row" style="display: inline;">
+                            <img style="float:left;" src="hr_contract_type/static/src/img/esp.png"/>
+                            <img style="float:right;" src="hr_contract_type/static/src/img/ue.png"/>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <br/>
+                            <p>Que el contrato temporal que se celebra (marque la casilla que corresponda), se realiza con las siguientes cláusulas específicas:</p>
+
+                             <input type="checkbox" value="" checked="checked"/> OBRA O SERVICIO DETERMINADO. ( pág.4 )<br/>
+
+                             <input type="checkbox" value="" checked="checked"/> EVENTUAL POR CIRCUNSTANCIAS DE LA PRODUCCIÓN. (pág.5 )<br/>
+
+                             <p><input type="checkbox" value="" checked="checked"/> INTERINIDAD. ( pág.6 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> PRIMER EMPLEO JOVEN. ( pág.7 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> DE TRABAJADORES EN SITUACIÓN DE EXCLUSIÓN SOCIAL, VÍCTIMAS DE VIOLENCIA DE GÉNERO, DOMÉSTICA ,
+                                VÍCTIMA DE TERRORISMO Y VÍCTIMA DE TRATA DE SERES HUMANOS . ( pág.8 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> DE TRABAJADORES EN SITUACIÓN DE EXCLUSIÓN SOCIAL POR EMPRESA DE INSERCIÓN. ( pág.9 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> DE TRABAJADORES MAYORES DE 52 AÑOS BENEFICIARIOS DE LOS SUBSIDIOS POR DESEMPLEO. ( pág.10 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> SITUACIÓN DE JUBILACIÓN PARCIAL. ( pág.11 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> RELEVO. ( pág.12 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> A TIEMPO PARCIAL CON VINCULACIÓN FORMATIVA. ( pág.13 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> DE TRABAJOS DE INTERÉS SOCIAL/FOMENTO DE EMPLEO AGRARIO. ( pág.14 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> DE TRABAJADORES DEL SERVICIO DEL HOGAR FAMILIAR. (pág.15 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> DE PERSONAS CON DISCAPACIDAD. (pág.16 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> DE PERSONAS CON DISCAPACIDAD EN CENTROS ESPECIALES DE EMPLEO. (pág.17 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> DE INVESTIGADORES. ( pág.18 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> DE TRABAJADOES/AS PENADOS EN INSTITUCIONES PENITENCIARIAS. (pág.19 )</p>
+                             <p><input type="checkbox" value="" checked="checked"/> DE MENORES Y JÓVENES EN CENTROS DE MENORES. ( SOMETIDOS A MEDIDADAS DE INTERNAMIENTO PREVISTAS EN LA LEY
+                                ORGÁNICA 5/2000 DE 21 DE ENERO ). ( pág.20 )</p>
+
+                             <p><input type="checkbox" value="" checked="checked"/> OTRAS SITUACIONES. ( pág.21 )</p>
+                             <br/><p>y cumple los requisitos establecidos en la norma reguladora.</p>
+                        </div>
+                    </div>
+                </div>
+
+ </template>
+
+
+</data>
+</openerp>

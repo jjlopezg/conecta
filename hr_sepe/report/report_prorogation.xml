@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <report id="report_FICHERO_PRORROGAS"
+            name="hr_sepe.template_prorogation"
+            string="Comunicacion Prorroga"
+            report_type="qweb-xml"
+            model="hr.sepe"/>
+
+
+    <template id="prorogation_header">
+        &lt;PRORROGAS xmlns:xsi="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.inem.es/CONTRATA/EsquemaContratos50.xsd"&gt;
+        <t t-raw="0"/>
+        &lt;/PRORROGAS&gt;
+    </template>
+
+    <template id="prorogation">
+        <PRORROGA_TIPO>
+            <t t-call="hr_sepe.template_prorogation_datos_empresa"/>
+            <t t-call="hr_sepe.template_prorogation_datos_contrato"/>
+            <t t-call="hr_sepe.template_prorogation_datos_generales_prorroga"/>
+            <t t-call="hr_sepe.template_prorogation_datos_adicionales_prorroga"/>
+            <t t-call="hr_sepe.template_prorogation_datos_usolibre_empresa"/>
+        </PRORROGA_TIPO>
+    </template>
+
+
+    <template id="template_prorogation">
+        <t t-call="hr_sepe.prorogation_header">
+            <t t-foreach="docs" t-as="sepe">
+                <t t-set="sid" t-value="str(sepe.id)"/>
+                <t t-set="workcenter" t-value="sepe.contract_id.workcenter_id"/>
+                <t t-set="employee" t-value="sepe.employee_id"/>
+                <t t-set="contract" t-value="sepe.contract_id"/>
+
+                <t t-call="hr_sepe.prorogation"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="template_prorogation_datos_empresa">
+        <DATOS_EMPRESA>
+            <CIF_NIF_EMPRESA>
+                <CIF_NIF t-esc="workcenter.vat"/>
+            </CIF_NIF_EMPRESA>
+            <CODIGO_CUENTA_COTIZACION t-esc="workcenter.regimen_id.code+workcenter.ccc"/>
+        </DATOS_EMPRESA>
+    </template>
+
+    <template id="template_prorogation_datos_contrato">
+        <DATOS_CONTRATO>
+            <CLAVE_CONTRATO t-esc="employee.gender"/>
+            <IDENTIFICADORPFISICA t-esc="employee.identification.code+employee.identification_id"/>
+            <FECHA_INICIO_CTO t-esc="employee.name"/>
+        </DATOS_CONTRATO>
+    </template>
+
+    <template id="template_prorogation_datos_generales_prorroga">
+        <DATOS_GENERALES_PRORROGA>
+            <FECHA_INICIO t-esc="time.strftime('%Y%m%d',time.strptime(contract.date_start,'%Y-%m-%d'))"/>
+            <t t-if="contract.date_end != False">
+                <FECHA_FIN t-esc="time.strftime('%Y%m%d',time.strptime(contract.date_end,'%Y-%m-%d'))"/>
+            </t>
+            <INDICADOR_CONV_COL t-esc="contract.tbonvfor_id.code"/>
+            <INDICADOR_DISCONTINUIDAD t-esc="employee.name"/>
+            <IND_EMPRESA_AAPP_UNIVERSIDAD t-esc="workcenter.country_id.code_numeric"/>
+            <IND_PERIODO_AUTORIZA_DURACION t-esc="workcenter.better_zip_id.code"/>
+        </DATOS_GENERALES_PRORROGA>
+    </template>
+
+    <template id="template_prorogation_datos_adicionales_prorroga">
+        <DATOS_ADICIONALES_PRORROGA>
+            <HORAS_FORMACION t-esc="contract.terfircb_id.code"/>
+            <IND_DURAC_INFERIOR t-esc="contract.terfircb_id.description"/>
+        </DATOS_ADICIONALES_PRORROGA>
+    </template>
+
+    <template id="template_prorogation_datos_usolibre_empresa">
+        <DATOS_USOLIBRE_EMPRESA>
+            <USOLIBRE_EMPRESA t-esc="sid+';'+str(contract.id)+';'+str(time.strftime('%Y%m%d', time.strptime(contract.date_start, '%Y-%m-%d')))"/>
+        </DATOS_USOLIBRE_EMPRESA>
+    </template>
+
+</data>
+</openerp>

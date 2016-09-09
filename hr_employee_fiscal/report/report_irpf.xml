@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <report id="report_compute_irpf"
+            name="hr_employee_fiscal.template_irpf"
+            string="Calculo del IRPF"
+            report_type="qweb-xml"
+            model="hr.employee.fiscal"/>
+
+
+    <template id="irpf_header">
+        &lt;AEATRetencionesEntrada2016&gt;
+        <t t-raw="0"/>
+        &lt;/AEATRetencionesEntrada2016&gt;
+    </template>
+
+    <template id="template_irpf">
+        <t t-call="hr_employee_fiscal.irpf_header">
+            <t t-foreach="docs" t-as="fiscal">
+                <t t-set="employee" t-value="fiscal.employee_id"/>
+
+                <t t-call="hr_employee_fiscal.IdDoc"/>
+                <t t-call="hr_employee_fiscal.Retenedor"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="IdDoc">
+        <IdDoc>
+            <CodModelo t-esc="'RET'"/>
+            <Ejercicio t-esc="2016"/>
+        </IdDoc>
+    </template>
+
+    <template id="Retenedor">
+        <Retenedor>
+            <Nif t-esc="employee.identification_id"/>
+            <ApellidosNombre t-esc="employee.name"/>
+            <t t-call="hr_employee_fiscal.Retenido"/>
+        </Retenedor>
+    </template>
+
+    <template id="Retenido">
+        <Retenido>
+            <Nif t-esc="employee.identification_id"/>
+            <ApellidosNombre t-esc="employee.name"/>
+            <AnoNacimiento>
+            <t t-esc="time.strftime('%Y',time.strptime(employee.birthday,'%Y-%m-%d'))"/>
+            </AnoNacimiento>
+
+            <ComunidadAutonoma t-esc="'01'"/>
+
+            <t t-call="hr_employee_fiscal.SituacionFamiliar"/>
+            <t t-call="hr_employee_fiscal.SituacionLaboral"/>
+            <t t-if="fiscal.minus != '0'"><t t-call="hr_employee_fiscal.Discapacidad"/></t>
+            <t t-if="fiscal.regular != '0'"><t t-call="hr_employee_fiscal.Regularizacion"/></t>
+
+            <RetribAnuales t-esc="fiscal.wage"/>
+            <Cotizaciones t-esc="fiscal.css"/>
+        </Retenido>
+    </template>
+
+    <template id="SituacionFamiliar">
+        <SituacionFamiliar>
+            <t t-if="fiscal.situation=='1'"><Situacion1 t-esc="''"/></t>
+            <t t-if="fiscal.situation=='2'"><Situacion2 t-esc="''"/></t>
+            <t t-if="fiscal.situation=='3'"><Situacion3 t-esc="''"/></t>
+        </SituacionFamiliar>
+    </template>
+
+    <template id="SituacionLaboral">
+        <SituacionLaboral>
+            <t t-call="hr_employee_fiscal.TrabajadorActivo"/>
+        </SituacionLaboral>
+    </template>
+
+    <template id="TrabajadorActivo">
+        <TrabajadorActivo>
+            <Contrato t-esc="1"/>
+        </TrabajadorActivo>
+    </template>
+
+    <template id="Discapacidad">
+        <Discapacidad>
+            <t t-if="fiscal.situation=='A'"><Grado1 t-esc="''"/></t>
+            <t t-if="fiscal.situation=='6'"><Grado2 t-esc="''"/></t>
+        </Discapacidad>
+    </template>
+
+    <template id="Reducciones">
+        <Reducciones>
+            <Irregularidad1 t-esc="fiscal.irreg18_2"/>
+            <Irregularidad2 t-esc="fiscal.irreg18_3"/>
+        </Reducciones>
+    </template>
+
+    <template id="Regularizacion">
+        <Regularizacion>
+            <Causa t-esc="fiscal.regular"/>
+            <RetribSatisfechas t-esc="fiscal.regular"/>
+            <RetencionPracticada t-esc="fiscal.regular"/>
+            <RetribAnualesIniciales t-esc="fiscal.regular"/>
+            <BaseRetencion t-esc="fiscal.regular"/>
+            <TipoRetencion t-esc="fiscal.regular"/>
+            <MinimoPersonalFamiliarInicial t-esc="fiscal.regular"/>
+        </Regularizacion>
+    </template>
+
+</data>
+</openerp>

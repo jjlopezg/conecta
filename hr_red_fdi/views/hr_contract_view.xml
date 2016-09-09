@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+
+<openerp>
+    <data>
+      
+        <record id="hr_red_fdi_form_inherit" model="ir.ui.view">
+            <field name="name">hr.red.fdi.form.inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr='//notebook' position='inside'>
+                    <page string='Menj. FDI'>
+                        <field name='fdi_ids' nolabel='1' context="{'contract_id': active_id}">
+                            <tree>
+                                <field name='date_start'/>
+                                <field name='action'/>
+                                <field name='type_id'/>
+                                <field name='date_from'/>
+                                <field name='date_to'/>
+                                <field name='date_part'/>
+                                <field name='part_number'/>
+                                <field name='state'/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+<openerp>
+    <data>
+
+        <record id="wizard_create_delta" model="ir.ui.view">
+            <field name="name">create.delta.form</field>
+            <field name="model">create.delta</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Delt@">
+                    <label string="Este proceso creará la comunicacion Delt@" colspan="4"/>
+                    <field name="state" invisible="1"/>
+                    <group attrs="{'invisible': [('state', '=', 'second')]}" colspan="4">
+
+                    </group>
+                    <group attrs="{'invisible': [('state', '=', 'first')]}" colspan="4">
+                        <field name="delta" filename="delta_fname"/>
+                        <field name="delta_fname" invisible="1"/>
+                        <field name="note" colspan="4" nolabel="1"/>
+                        <div>
+                            Realizar la comunicacion en <strong><a href="http://www.delta.mtin.es/Delta2Web/main/principal.jsp">Delt@</a></strong>
+                        </div>
+                    </group>
+                    <footer>
+                        <button icon="gtk-print"
+                                name="create_delta_file"
+                                string="Export"
+                                type="object"
+                                states="first"
+                                class="oe_highlight"/>
+                        or
+                        <button string="Close"
+                                class="oe_link"
+                                special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Comunicacion Delt@"
+                    res_model="create.delta"
+                    src_model="hr.delta"
+                    view_mode="form"
+                    target="new"
+                    id="wizard_create_delta_act_window"
+        />
+
+    </data>
+</openerp>

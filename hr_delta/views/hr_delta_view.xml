@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+<openerp>
+    <data>
+
+        <record id="hr_delta_view_form" model="ir.ui.view">
+            <field name="name">hr.delta.view.form</field>
+            <field name="model">hr.delta</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Accidente">
+                    <sheet string="Accidente">
+			            <group>
+                            <group>
+                                <field name="name" string="Accidente" attrs="{'readonly': True}"/>
+                                <field name="date" string="Fecha datos" attrs="{'readonly': True}"/>
+                                <field name="employee_id" string="Empleado"/>
+                                <field name="type" string="Tipo Accidente" widget="radio" options="{'horizontal': true}"/>
+                            </group>
+                            <group>
+                                <field name="user_create"/>
+                                <field name="user_last"/>
+                                <field name="state" widget="selection"/>
+                                <field name="currency_id" invisible="1"/>
+                                <!--<field name="data_fname" invisible="1"/>
+                                <label for="data" string="Fichero"/>
+                                <div>
+                                    <button name="export_file" states="draft" string="Exportar Delt@" class="oe_link oe_edit_only" type="object" attrs="{'invisible':[('state', '!=', 'draft')]}"/>
+                                    <field name="data" readonly="1" filename="data_fname" attrs="{'invisible':[('state', '!=', 'send')]}"/>
+                                </div>-->
+                            </group>
+           	            </group>
+                        <notebook>
+                            <page string="Accidente">
+                                <group>
+                                    <group>
+                                        <field name="date_start"/>
+                                        <field name="date_acc"/>
+                                        <field name="time_acc" widget="timepicker" options="{'step': '15', 'disableTextInput': True}"/>
+                                        <field name="time_trab" widget="selection"/>
+                                    </group>
+                                    <group>
+                                        <!--<field name="class_acc" widget="selection"/>-->
+                                        <field name="habt" widget="radio" options="{'horizontal': true}"/>
+                                        <field name="eval" widget="radio" options="{'horizontal': true}"/>
+                                        <field name="incident" widget="radio" options="{'horizontal': true}"/>
+                                    </group>
+                                </group>
+                                <group string="Descripcion del accidente">
+                                    <field name="description" placeholder="Descripcion del accidente..." nolabel="1"/>
+                                </group>
+                            </page>
+                            <page string="Ampliacion">
+                                <group>
+                                    <group>
+                                        <field name="type_id" widget="selection"/>
+                                        <field name="work_id" widget="selection"/>
+                                        <field name="actv_id" widget="selection"/>
+                                        <field name="agen1_id" widget="selection"/>
+                                        <field name="desv_id" widget="selection"/>
+                                        <field name="agen2_id" widget="selection"/>
+                                        <field name="form_id" widget="selection"/>
+                                        <field name="agen3_id" widget="selection"/>
+                                        <field name="multi" widget="radio" options="{'horizontal': true}"/>
+                                        <label for="testigo" string="Hubo testigo"/>
+                                        <div>
+                                            <field  name="testigo" widget="radio" options="{'horizontal': true}" class="oe_inline" style="vertical-align: top;width: 30%;"/>
+                                            <field  name="testigo_text" placeholder="Datos de los testigos...." attrs="{'required':[('testigo','=','1')],'invisible':[('testigo','=', '0')]}"/>
+                                        </div>
+                                        <label for="mode" string="Modo en el que se a lesionado"/>
+                                        <div>
+                                            <field  name="mode" placeholder="Descripcion modo...."/>
+                                        </div>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Lugar">
+                                <group>
+                                    <group>
+                                        <field name="class_acc" widget="selection"/>
+                                        <field name="traffic" widget="radio" options="{'horizontal': true}"/>
+
+                                        <label for="street" string="Direccion"/>
+	                            		<div>
+											<field name="street" placeholder="Direccion"/>
+                                            <field name="via_km" placeholder="Via/Kilometro"/>
+                                            <field name="other" placeholder="Otros"/>
+		                                	<div>
+		                                    	<field name="better_zip_id"
+			                                        options="{'create_name_field': 'city'}"
+		    	                                    colspan="4"
+		        	                                placeholder="City completion" />
+		            	                        <field name="zip" placeholder="Cod. postal" style="width: 30%"/>
+		    		    	                    <field name="city" placeholder="Municipio" style="width: 70%"/>
+		                    	            </div>
+		                        	        <field name="state_id" class="oe_no_button" placeholder="Provincia" on_change="onchange_state(state_id)" style="width: 50%" options="{&quot;no_open&quot;: True}"/>
+		                            	    <field name="country_id" placeholder="Pais" style="width: 50%" class="oe_no_button" options="{&quot;no_open&quot;: True}" />
+                                        </div>
+
+                                    </group>
+                                    <group string="Centro de trabajo">
+                                        <field name="center" widget="radio" options="{'horizontal': true}"/>
+                                        <field name="in_center" widget="radio" options="{'horizontal': true}"/>
+                                    </group>
+                                </group>
+<!--                                <group string="Empresa">
+                                        <field name="partner"/>
+                                        <field name="partner_street"/>
+                                        <field name="zip"/>
+                                        <field name="city"/>
+                                        <field name="state_id"/>
+                                        <field name="phone"/>
+                                        <field name="ccc"/>
+                                        <field name="cnae"/>
+                                </group>-->
+                            </page>
+                            <page string="Asistenciales">
+                                <group>
+                                    <group string="Lesion">
+                                        <field name="degree" widget="selection"/>
+                                        <field name="assistance" widget="selection"/>
+                                    </group>
+                                    <group></group>
+                                </group>
+                                <group string="Medico">
+                                        <field name="doctor"/>
+                                        <field name="doctor_street"/>
+                                        <field name="doctor_phone"/>
+                                </group>
+                                <group string="Hospital">
+                                    <label for="is_hospitalized" string="Hospitalizado" />
+                                    <div >
+                                        <field name="is_hospitalized" widget="radio" options="{'horizontal': true}" />
+                                        <field name="clinic" placeholder="Nombre centro...." attrs="{'required':[('is_hospitalized','=','1')],'invisible':[('is_hospitalized','=', '0')]}"/>
+                                    </div>
+                                </group>
+
+                            </page>
+                            <page string="Economicos">
+                                <group>
+                                    <group>
+                                        <field name="base_month"/>
+                                        <field name="days_month"/>
+                                        <field name="hours_ext"/>
+                                        <field name="day_hours_ext"/>
+                                        <field name="b2_other"/>
+                                        <field name="real_salary"/>
+                                        <field name="b_reg_day"/>
+                                    </group>
+                                    <group>
+                                        <field name="ba"/>
+                                        <field name="bb"/>
+                                        <field name="promedio_b"/>
+                                        <field name="b_reg"/>
+                                        <field name="subsidio_setenta_5"/>
+
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Adicionales">
+                                <group>
+                                    <group>
+                                        <field name="job"/>
+                                        <field name="a_contract" widget="radio" options="{'horizontal': true}"/>
+                                        <field name="workers"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Actores">
+                                <group>
+                                    <group>
+                                        <field name="name_send"/>
+                                        <field name="job_send"/>
+                                    </group>
+                                    <group>
+                                        <field name="state_send_id"/>
+                                    </group>
+                                </group>
+
+                            </page>
+                        </notebook>
+					</sheet>
+                </form>
+            </field>
+        </record>
+<!--
+        <record id="hr_delta_view_form_file" model="ir.ui.view">
+            <field name="name">hr.delta.view.form.file</field>
+            <field name="model">hr.delta</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Accidente">
+                    <sheet string="Fichero">
+
+					</sheet>
+                </form>
+            </field>
+        </record>
+-->
+
+	    <record id="hr_delta_view_search" model="ir.ui.view">
+	        <field name="name">hr.delta.view.tree.search</field>
+	        <field name="model">hr.delta</field>
+	        <field name="arch" type="xml">
+        	    <search>
+                    <field name="name"/>
+                    <field name="date_acc"/>
+                    <field name="date_start"/>
+        	    </search>
+    	    </field>
+	    </record>
+
+        <record id="hr_delta_view_tree" model="ir.ui.view">
+            <field name="name">hr.delta.view.tree</field>
+            <field name="model">hr.delta</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Delt@">
+                    <field name="name"/>
+                    <field name="date_acc"/>
+                    <field name="date_start"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+	    <record id="action_hr_delta_con" model="ir.actions.act_window">
+		    <field name="name">Acc. con Baja</field>
+	  	    <field name="res_model">hr.delta</field>
+	  	    <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+    	    <field name="view_id" ref="hr_delta_view_tree"/>
+    	    <field name="search_view_id" ref="hr_delta_view_search"/>
+            <field name="help" type="html">
+                  <p class="oe_view_nocontent_create">
+                     Click to add a new.
+                  </p>
+                </field>
+    	</record>
+
+
+        <menuitem id="hr_menu_delta"
+            name="Delt@"
+            parent="hr.hr_menu_relations"
+            sequence="4" groups="base.group_hr_user"/>
+
+        <menuitem id="hr_menu_delta_con"
+            name="Acc. con Baja"
+            action="action_hr_delta_con"
+            parent="hr_menu_delta"
+            sequence="4" groups="base.group_hr_user"/>
+<!--
+        <menuitem id="hr_contract.hr_menu_delta_sin"
+            name="Acc. sin Baja"
+            action="action_hr_delta_sin"
+            parent="hr_menu_delta"
+            sequence="4" groups="base.group_hr_user"/>
+-->
+
+    </data>
+</openerp>

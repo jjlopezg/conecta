@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+<openerp>
+<data>
+    
+     <record id="hr_contract_type_telcolbo_view_form" model="ir.ui.view">
+            <field name="name">hr.contract.type.telcolbo.view.form</field>
+            <field name="model">hr.contract.type.telcolbo</field>
+            <field name="arch" type="xml">
+                <form string="Colectivo" version="7.0">
+                	<sheet>
+                    	<label for="code" string="Code" class="oe_edit_only"/>
+                    	<h1>
+		                    <field name="code" style="width: 20%%"/>
+                    	</h1>
+                    	<label for="description" string="Descripcion" class="oe_edit_only"/>
+	                    <h2>
+	                    	<field name="description"/>
+                    	</h2>
+                    	<group>
+	                    	<group>
+	                    	<label for="date_start" string="Periodo validez"/>
+                         	<div>
+	                         	<field name="date_start" class="oe_inline" attrs="{'required': True}"/> - <field name="date_end" class="oe_inline" />
+                             	</div>
+	                    	</group>
+	                    	<group>	                    
+	                    	</group>
+                    	</group>
+                	</sheet>
+                </form>
+            </field>
+        </record>
+        
+	<record id="hr_contract_type_telcolbo_view_tree" model="ir.ui.view">
+    	<field name="name">hr.contract.type.telcolbo.view.tree</field>
+	    <field name="model">hr.contract.type.telcolbo</field>
+	    <field name="arch" type="xml">
+        	<tree string="Colectivos">
+	            <field name="code"/>
+        		<field name="description"/>            
+	            <field name="date_start"/>
+            	<field name="date_end"/>                        
+        	</tree>
+    	</field>
+	</record>        
+
+    <record id="action_hr_contract_type_telcolbo" model="ir.actions.act_window">
+	    <field name="name">Colectivos</field>
+	    <field name="type">ir.actions.act_window</field>
+	    <field name="res_model">hr.contract.type.telcolbo</field>
+	    <field name="view_type">form</field>
+	    <field name="view_mode">tree,form</field>
+ 	    <field name="view_id" ref="hr_contract_type_telcolbo_view_tree"/> 
+	</record>
+
+    <menuitem id="menu_hr_contract_type_telcolbo"
+	    name="Colectivos"
+	    parent="hr_contract.hr_menu_contract_type"
+	    action="action_hr_contract_type_telcolbo"
+        sequence="15"
+	    groups="base.group_hr_user"/>
+
+        
+</data>
+</openerp>

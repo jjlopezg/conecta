@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<template id="template_contracts_tp_page2">
+    <div class="page">
+                        <div class="container">
+                            <div class="row">
+                                <p><strong>QUINTA:</strong> La duración de las vacaciones anuales será de (13)........................................
+                                    ....................................................................................
+                                </p>
+                            </div>
+
+                            <div class="row">
+                                <p><strong>SEXTA:</strong> A la finalización del contrato de obra o servicio, eventual por circunstancias de la producción
+                                    y temporal de fomento de empleo para personas con discapacidad, el/la trabajador/a tendrá derecho a recibir una
+                                    indemnización de acuerdo con la D. Transitoria 13ª del Estatuto de los Trabajadores, o con la Disposición Adicional
+                                    primera de la ley 43/2006.
+                                </p>
+                            </div>
+
+                            <div class="row" style="font-style: normal; ">
+                                <p><strong>SÉPTIMA:</strong> El presente contrato se regulará por lo dispuesto en la legislación vigente que resulte
+                                de aplicación y particularmente,por el artículo 15 del Estatuto de los Trabajadores , aprobado por R.D. Legislativo
+                                2/2015, de 23 de octubre, (BOE de 24 de octubre). y Real Decreto 2.720/1998 de 18 de diciembre (BOE. de 8 de enero) y
+                                en su caso Disposición Adicional Primera y de la Ley 43/2006, y en su caso por el Convenio Colectivo de...............
+                                ......................................................................................................................
+                                </p>
+                            </div>
+
+                            <div class="row">
+                                <p><strong>OCTAVA:</strong> El contenido del presente contrato se comunicará al Servicio Público de Empleo de ........
+                                ............................................................. , en el plazo de los 10 días siguientes a su concertación.
+                                </p>
+                            </div>
+
+                            <div class="row">
+                                <p><strong>NOVENA:</strong> ESTE CONTRATO PODRÁ SER COFINANCIADO POR EL FONDO SOCIAL EUROPEO.
+                                </p>
+                            </div>
+
+                            <div class="row" style="font-style: normal; ">
+                                <p><strong>DÉCIMA:</strong> PROTECCIÓN DE DATOS : Los datos consignados en el presente modelo tendrán la protección
+                                derivada de la Ley Organica 15/1999 de 13 de dicembre ( B.O.E. de 14 de diciembre )
+                                </p>
+                            </div>
+
+                            <div class="row" style="position: absolute; left: 50px; top: 900px;font-size: 10px; font-style: normal;">
+                                <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+                                <p>(1) Director/a, Gerente, etc.</p>
+                                <p>(2) Padre, madre, tutor/a o persona o institución que le tenga a su cargo.</p>
+                                <p>(3) Indicar profesión.</p>
+                                <p>(4) Señalar el grupo profesional y la categoría o nivel profesional que corresponda, según el sistema de clasificación profesional vigente en la empresa.</p>
+                                <p>(5) Marque con una X lo que corresponda.</p>
+                                <p>(6) indique las horas, si es inferior a la de un trabajador a tiempo completo comparable a la del convenio colectivo o a la máxima legal.</p>
+                                <p>(7) Respetando lo establecido en el art. 14.1 del Texto refundido de la Ley del Estatuto de los Trabajadores, aprobado por R.D. Legislativo 2/2015, de 23 de octubre (BOE de 24 de octubre).</p>
+                                <p>(8) Diarios, semanales, o mensuales.</p>
+                                <p>(9) Salario base y complementos salariales.</p>
+                                <p>(10) Mínimo: 30 días naturales.</p>
+                                <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+                            </div>
+
+
+                        </div>
+                </div>
+
+
+
+
+ </template>
+
+
+</data>
+</openerp>

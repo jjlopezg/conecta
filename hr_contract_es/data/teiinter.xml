@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record model="hr.contract.teiinter" id="teiinter_a">
+          <field name="code">A</field>
+          <field name="description">Trabajadores/as con derecho a reserva de puesto de trabajo</field>
+          <field name="date_start">19800315</field>
+        </record>
+
+        <record model="hr.contract.teiinter" id="teiinter_b">
+          <field name="code">B</field>
+          <field name="description">Trabajadores/as por maternidad, sin bonificacion</field>
+          <field name="date_start">19800315</field>
+        </record>
+
+        <record model="hr.contract.teiinter" id="teiinter_c">
+          <field name="code">C</field>
+          <field name="description">Trabajadores/as excedentes por cuidados familiares</field>
+          <field name="date_start">19950501</field>
+          <field name="date_end">19991106</field>
+        </record>
+
+        <record model="hr.contract.teiinter" id="teiinter_d">
+          <field name="code">D</field>
+          <field name="description">Para cubrir temporalmente un puesto de trabajo durante seleccion o promocion</field>
+          <field name="date_start">19950501</field>
+          <field name="date_end">19970516</field>
+        </record>
+
+        <record model="hr.contract.teiinter" id="teiinter_e">
+          <field name="code">E</field>
+          <field name="description">Trabajadores/as en formacion por trabajadores/as beneficiarios/as</field>
+          <field name="date_start">19800315</field>
+        </record>
+<!--
+"F";"MATERNIDAD CON BONIFICACION DE CUOTAS";"19980906";"0"
+"G";"ADOPCION";"19980906";"0"
+"H";"ACOGIMIENTO";"19980906";"0"
+"I";"RIESGO DURANTE EMBARAZO";"19991107";"0"
+"J";"TRABAJ.EN FORMACION POR PERCEPTOR PRESTA";"20020526";"0"
+"K";"MINUSVALIDOS DESEMPLEADOS POR MINUSV.INCAP.TEMP";"20021214";"0"
+"L";"EXCEDENCIA CUIDADO FAMILIAR PERCEP.PREST";"19991107";"0"
+"M";"SUSTITUCIÓN VÍCTIMAS VIOLENCIA DE GÉNERO";"20050128";"0"
+"N";"PATERNIDAD";"20070324";"0"
+"O";"RIESGO DURANTE LA LACTANCIA NATURAL";"20070324";"0"
+-->
+    </data>
+</openerp>
+

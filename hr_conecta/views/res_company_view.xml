@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+<openerp>
+<data>
+
+	<record id="view_res_company_conecta_form_inherit" model="ir.ui.view">
+	    <field name="name">res.company.conecta.form.inherit</field>
+	    <field name="model">res.company</field>
+	    <field name="type">form</field>
+        <field name="priority">16</field>
+	    <field name="inherit_id" ref="base.view_company_form"/>
+	    <field name="arch" type="xml">
+        	<xpath expr="//notebook" position="inside">
+                <page name="conecta" string="Conecta">
+                    <group name="hr_settings">
+                        <group name="hra">
+                            <field name="emp_type"/>
+                            <field name="vat_type"/>
+                            <!--<field name="vat"/>-->
+                            <label for="ccc_prov" string="Cuenta de Cotizacion"/>
+                            <div>
+                                <field name="ccc_prov" style="width: 10%;vertical-align: middle"/>
+                                <srong><label string="/" style="vertical-align: middle" class="oe_inline"/></srong>
+                                <field name="ccc_cod" style="width: 30%" />
+                                <srong><label string="/" style="vertical-align: middle" class="oe_inline"/></srong>
+                                <field name="ccc_dc" style="width: 10%;vertical-align: middle" />
+                            </div>
+                            <field name="regimen_id"/>
+                            <field name="cnae_id"/>
+                            <field name="mutua_id"/>
+                            <field name="office"/>
+                            <field name="manager_id" /><!--domain="[('manager','=',True)]"/>-->
+                        </group>
+                        <group name="hrb">
+
+                        </group>
+                    </group>
+                    <group string="Cuentas">
+
+                    </group>
+                </page>
+			</xpath>
+		</field>
+	</record>
+        
+</data>
+</openerp>

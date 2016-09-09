@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <report id="report_delta"
+            name="hr_delta.template_delta"
+            string="Comunicacion Delt@"
+            report_type="qweb-xml"
+            menu="False"
+            model="hr.delta"/>
+
+    <template id="delta_header">
+        &lt;MultiPAT&gt;
+        <t t-raw="0"/>
+        &lt;/MultiPAT&gt;
+    </template>
+
+    <!-- PRINCIPAL -->
+    <template id="template_delta">
+        <t t-call="hr_delta.delta_header">
+                <PAT t-foreach="docs" t-as="delta">
+                    <t t-set="employee" t-value="delta.employee_id"/>
+                    <t t-set="contract" t-value="delta.employee_id.contract_id"/>
+                    <t t-set="workcenter" t-value="delta.employee_id.contract_id.workcenter_id"/>
+
+                    <numreferencia t-esc="delta.name"/>
+                    <tipo t-esc="delta.type"/>
+
+                    <trabajador>
+                        <apellido1 t-esc="employee.name"/>
+                        <apellido2 t-esc="employee.name"/>
+                        <nombre t-esc="employee.name"/>
+                        <naf t-esc="employee.ssnid"/>
+                        <!--FIXME: Obtener el ultimo contrato( y si tiene dos o mas contratos?)-->
+                        <fechaingreso t-esc="time.strftime('%d%m%Y',time.strptime(contract.date_start,'%Y-%m-%d'))"/>
+                        <t t-set="sexo" t-value="M" ></t>
+                        <t t-if="employee.gender=='male'"><t t-set="sexo" t-value="H"/></t>
+                        <sexo t-esc="sexo"/>
+                        <fechanacimiento t-esc="time.strftime('%d%m%Y',time.strptime(employee.birthday,'%Y-%m-%d'))"/>
+                        <nacion t-esc="employee.country_id.code_numeric"/>
+                        <ipf t-esc="employee.identification_id"/>
+                        <situacion t-esc="employee.gender"/>
+                        <con>
+                            <texto t-esc="employee.gender"/>
+                            <codigo t-esc="employee.gender"/>
+                        </con>
+                        <antiguedad>
+                            <meses t-esc="employee.gender"/>
+                            <dias t-esc="employee.gender"/>
+                        </antiguedad>
+                        <contrato t-esc="contract.type_id.sepe"/>
+                        <regimenss t-esc="employee.gender"/>
+                        <textoconv t-esc="employee.gender"/>
+                        <atep>
+                            <atepcnae t-esc="workcenter.cnae_id.code"/>
+                            <atepocupacion t-esc="employee.gender"/>
+                        </atep>
+                        <domicilio t-esc="employee.gender"/>
+                        <telefono t-esc="employee.gender"/>
+                        <provincia t-esc="employee.gender"/>
+                        <municipio t-esc="employee.gender"/>
+                        <codpostal t-esc="employee.gender"/>
+                    </trabajador>
+                    <empresa>
+                        <cifnif t-esc="workcenter.vat"/>
+                        <razon t-esc="workcenter.company_id.name"/>
+                        <ccc t-esc="workcenter.ccc"/>
+                        <cnae>
+                            <texto t-esc="workcenter.cnae_id.description"/>
+                            <codigo t-esc="workcenter.cnae_id.code"/>
+                        </cnae>
+                        <plantilla t-esc="delta.workers"/>
+                        <domicilio t-esc="workcenter.street"/>
+                        <provincia t-esc="workcenter.state_id.code"/>
+                        <municipio t-esc="workcenter.better_zip_id.code"/>
+                        <codpostal t-esc="workcenter.zip"/>
+                        <telefono t-esc="workcenter.phone"/>
+                        <contrata t-esc="delta.a_contract"/>
+                        <ett t-esc="employee.gender"/>
+                        <preventiva>
+                            <asunpersona t-esc="employee.gender"/>
+                            <servprevpro t-esc="employee.gender"/>
+                            <servprevaje t-esc="employee.gender"/>
+                            <trabdesigna t-esc="employee.gender"/>
+                            <servprevman t-esc="employee.gender"/>
+                            <ninguna t-esc="employee.gender"/>
+                        </preventiva>
+                    </empresa>
+                    <ccclugar>
+                        <lugar>
+                            <codigo t-esc="employee.gender"/>
+                            <trafico t-esc="delta.traffic"/>
+                            <pais t-esc="delta.country_id.code_numeric"/>
+                            <provincia t-esc="delta.state_id.code"/>
+                            <municipio t-esc="delta.better_zip_id.code"/>
+                            <direccion t-esc="delta.street"/>
+                            <viakm t-esc="delta.via_km"/>
+                            <otro t-esc="delta.other"/>
+                        </lugar>
+                        <centro>
+                            <empresaep2 t-esc="employee.gender"/>
+                            <centroep2 t-esc="employee.gender"/>
+                            <tipoempresa t-esc="employee.gender"/>
+                            <ciftipo t-esc="employee.gender"/>
+                        </centro>
+                        <datos>
+                            <razon t-esc="workcenter.company_id.name"/>
+                            <domicilio t-esc="workcenter.street"/>
+                            <provincia t-esc="workcenter.state_id.code"/>
+                            <municipio t-esc="workcenter.better_zip_id.code"/>
+                            <codpostal t-esc="workcenter.zip"/>
+                            <telefono t-esc="workcenter.phone"/>
+                            <plantilla t-esc="delta.workers"/>
+                            <ccc t-esc="workcenter.ccc"/>
+                            <cnae>
+                                <texto t-esc="workcenter.cnae_id.description"/>
+                                <codigo t-esc="workcenter.cnae_id.code"/>
+                            </cnae>
+                        </datos>
+                    </ccclugar>
+                    <accidente>
+                        <fechaaccidente t-esc="time.strftime('%d%m%Y',time.strptime(delta.date_acc,'%Y-%m-%d'))"/>
+                        <fechabaja t-esc="time.strftime('%d%m%Y',time.strptime(delta.date_start,'%Y-%m-%d'))"/>
+
+                        <diasemana t-esc="employee.gender"/>
+
+                        <hora t-esc="'%s' % (str(delta.time_acc).split('.')[0])" />
+                        <horatrabajo t-esc="delta.time_trab"/>
+                        <habitual t-esc="delta.habt"/>
+                        <evaluacion t-esc="delta.eval"/>
+                        <descripcion t-esc="delta.description"/>
+                        <ampliacion>
+                            <entorno>
+                                <lug t-esc="delta.type_id.description"/>
+                                <tipolugar t-esc="delta.type_id.code"/>
+                            </entorno>
+                            <proceso>
+                                <trabajo t-esc="delta.work_id.description"/>
+                                <tipotrabajo t-esc="delta.work_id.code"/>
+                            </proceso>
+                            <tarea>
+                                <actividad t-esc="delta.actv_id.description"/>
+                                <especifica t-esc="delta.actv_id.code"/>
+                                <agente t-esc="delta.agen1_id.code"/>
+                            </tarea>
+                            <desencadenante>
+                                <hech t-esc="delta.desv_id.description"/>
+                                <desv t-esc="delta.desv_id.code"/>
+                                <agen t-esc="delta.agen2_id.code"/>
+                            </desencadenante>
+                            <modo>
+                                <tipomodo t-esc="delta.form_id.description"/>
+                                <formalesion t-esc="delta.form_id.code"/>
+                                <textoagente t-esc="delta.agen3_id.description"/>
+                                <agente t-esc="delta.agen3_id.code"/>
+                            </modo>
+                            <multiples t-esc="delta.multi"/>
+                            <testigos t-esc="delta.testigo"/>
+                            <datostes t-esc="delta.testigo_text"/>
+                        </ampliacion>
+                    </accidente>
+                    <asistenciales>
+                        <lesion t-esc="employee.gender"/>
+                        <grado t-esc="employee.gender"/>
+                        <parte t-esc="employee.gender"/>
+                        <medico>
+                            <nombre t-esc="employee.gender"/>
+                            <domicilio t-esc="employee.gender"/>
+                            <telefono t-esc="employee.gender"/>
+                        </medico>
+                        <tipoasistenc t-esc="employee.gender"/>
+                        <hospital>
+                            <codigo t-esc="employee.gender"/>
+                            <nombre t-esc="employee.gender"/>
+                        </hospital>
+                    </asistenciales>
+                    <economicos>
+                        <mensual>
+                            <mesanterior t-esc="employee.gender"/>
+                            <dias t-esc="employee.gender"/>
+                            <base t-esc="employee.gender"/>
+                        </mensual>
+                        <anual>
+                            <b1 t-esc="employee.gender"/>
+                            <b2 t-esc="employee.gender"/>
+                            <total t-esc="employee.gender"/>
+                            <promedio t-esc="employee.gender"/>
+                        </anual>
+                        <subsidio>
+                            <promedioa t-esc="employee.gender"/>
+                            <promediob t-esc="employee.gender"/>
+                            <total t-esc="employee.gender"/>
+                            <indemnizac t-esc="employee.gender"/>
+                        </subsidio>
+                    </economicos>
+                    <actores>
+                        <fempresa>
+                            <nombreapellid t-esc="delta.name_send"/>
+                            <calidadde t-esc="delta.job_send"/>
+                            <provincia t-esc="delta.state_send_id.name"/>
+                            <fechapresenta t-esc="employee.gender"/>
+                        </fempresa>
+                        <egc>
+                            <codigo t-esc="employee.gender"/>
+                            <numexpediente t-esc="employee.gender"/>
+                            <fechaaceptacion t-esc="employee.gender"/>
+                        </egc>
+                        <alp>
+                            <motivorechazo t-esc="employee.gender"/>
+                        </alp>
+                    </actores>
+
+
+                </PAT>
+        </t>
+    </template>
+
+</data>
+</openerp>

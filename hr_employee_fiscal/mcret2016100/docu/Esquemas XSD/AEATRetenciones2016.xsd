@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.00">
+	<!--ABREVIATURAS: 
+			Rendimiento(s)		->	Rdto(s)
+			Retribuciones		->	Retrib
+			Contribuyente		-> 	Ctye
+			Numero				->	Num
+			Importe				->	Imp
+	-->
+	<!--DECLARACIONES GENERICAS-->
+	<!-- COMUNIDADES AUTÓNOMAS-->
+	<xs:simpleType name="tipo_CCAA">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="01"/>
+			<xs:enumeration value="02"/>
+			<xs:enumeration value="03"/>
+			<xs:enumeration value="04"/>
+			<xs:enumeration value="05"/>
+			<xs:enumeration value="06"/>
+			<xs:enumeration value="07"/>
+			<xs:enumeration value="08"/>
+			<xs:enumeration value="09"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="11"/>
+			<xs:enumeration value="12"/>
+			<xs:enumeration value="13"/>
+			<xs:enumeration value="16"/>
+			<xs:enumeration value="17"/>
+			<xs:enumeration value="18"/>
+			<xs:enumeration value="19"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Tipos de datos -->
+	<xs:simpleType name="tipo_ImpPositivo">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.01"/>
+			<xs:maxInclusive value="99999999999.99"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipo_Importe">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="-99999999999.99"/>
+			<xs:maxInclusive value="99999999999.99"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipo_ImpCeroPositivo">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.00"/>
+			<xs:maxInclusive value="99999999999.99"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipo_Alfabetico">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="([A-Z]|Ñ|Ç|\s|\.|\-|,|')+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipo_Alfanumerico">
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="([0-9]|[A-Z]|Ñ|Ç|\-|\s|\.|,|'|:|;|_|&amp;|/|´)+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipo_Nif">
+		<xs:restriction base="xs:string">
+			<xs:length value="9"/>
+			<xs:pattern value="([A-Z]|[0-9]){9}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipo_Sello">
+		<xs:restriction base="xs:string">
+			<xs:length value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--DECLARACIONES RETENCIONES -->
+	<xs:complexType name="tipo_Retenciones">
+		<xs:sequence>
+			<xs:element name="CodModelo" type="xs:string" fixed="RET"/>
+			<xs:element name="Ejercicio" type="xs:int" fixed="2016"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- CAUSAS DE REGULARIZACIÓN -->
+	<xs:simpleType name="tipo_Causa1a15">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipo_AñoNacimiento">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1905" fixed="false"/>
+			<xs:maxInclusive value="2016" fixed="false"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- TIPOS DE CONTRATO -->
+	<xs:simpleType name="tipo_Contrato">
+		<xs:restriction base="xs:int">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+			<xs:enumeration value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipo_Convivencia">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipo_ApellidosyNombre">
+		<xs:restriction base="tipo_Alfabetico">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipo_RazonSocial">
+		<xs:restriction base="tipo_Alfanumerico">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="tipo_Discapacidad">
+		<xs:choice>
+			<xs:element name="Grado1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="MovilidadReducida" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>MOVILPER o MOVILDES o MOVILAS</xs:documentation>
+							</xs:annotation>
+							<xs:complexType/>
+						</xs:element>
+						<!--
+							NECESITA AYUDA PARA DESPLAZARSE O TIENE
+							MOVILIDAD REDUCIDA
+						-->
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Grado2">
+				<xs:complexType/>
+			</xs:element>
+			<!--
+				INCAPACIDAD SUPERIOR O IGUAL AL 33% E INFERIOR AL 65%
+			-->
+			<!--
+				INCAPACIDAD SUPERIOR O IGUAL AL 65%
+			-->
+		</xs:choice>
+	</xs:complexType>
+	<xs:simpleType name="tipo_Retencion">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0.00"/>
+			<xs:maxInclusive value="45.00"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipo_NumDescendientes">
+		<xs:restriction base="xs:byte">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipo_NumAscendientes">
+		<xs:restriction base="xs:byte">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="tipo_ErrorGeneral">
+		<xs:sequence>
+			<xs:element name="Linea" type="xs:int"/>
+			<xs:element name="Posicion" type="xs:int"/>
+			<xs:element name="Descripcion" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tipo_Error">
+		<xs:sequence>
+			<xs:element name="Codigo" type="xs:string"/>
+			<xs:element name="Linea" type="xs:int" minOccurs="0"/>
+			<xs:element name="Posicion" type="xs:int" minOccurs="0"/>
+			<xs:element name="XPath" type="xs:string" minOccurs="0"/>
+			<xs:element name="Descripcion" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- TIPO DE COMPUTO PARA DESCENDIENTES Y ASCENDIENTES -->
+	<xs:simpleType name="tipo_Computo">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Por mitad"/>
+			<xs:enumeration value="Por entero"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="tipo_RetenedorEntrada2016">
+		<xs:sequence>
+			<xs:element name="Nif" type="tipo_Nif"/>
+			<xs:element name="ApellidosNombre" type="tipo_RazonSocial"/>
+			<xs:element name="Retenido" type="tipo_RetenidoEntrada2016" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tipo_RetenedorSalida2016">
+		<xs:sequence>
+			<xs:element name="Nif" type="tipo_Nif"/>
+			<xs:element name="ApellidosNombre" type="tipo_RazonSocial"/>
+			<xs:element name="Retenido" type="tipo_RetenidoSalida2016" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tipo_RetenedorError2016">
+		<xs:sequence>
+			<xs:element name="Nif" type="tipo_Nif"/>
+			<xs:element name="Orden" type="xs:int"/>
+			<xs:element name="Error" type="tipo_Error" minOccurs="0"/>
+			<xs:element name="Retenido" type="tipo_RetenidoError2016" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tipo_RetenidoEntrada2016">
+		<xs:sequence>
+			<xs:element name="Nif" type="tipo_Nif"/>
+			<xs:element name="ApellidosNombre" type="tipo_ApellidosyNombre"/>
+			<xs:element name="AñoNacimiento">
+				<xs:simpleType>
+					<xs:restriction base="tipo_AñoNacimiento">
+						<xs:maxInclusive value="2016"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="ComunidadAutonoma" type="tipo_CCAA" minOccurs="0"/>
+			<xs:element name="ResidenciaCeutaMelilla" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>RESICEME</xs:documentation>
+				</xs:annotation>
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="SituacionFamiliar">
+				<xs:annotation>
+					<xs:documentation>SITUFAM</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="Situacion1">
+							<xs:complexType/>
+						</xs:element>
+						<xs:element name="Situacion2">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="NifConyuge" type="tipo_Nif">
+										<xs:annotation>
+											<xs:documentation>NIFCON</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Situacion3">
+							<xs:complexType/>
+						</xs:element>
+						<!-- 
+							Soltero/a, viudo/a, divorciado/a o separado/a legalmente, con hijos solteros 
+							menores de 18 año o incapacitados judicialmente que convivan 
+							exclusivamente con el perceptor, sin convivir también con el otro progenitor, 
+							siempre que proceda consignar al menos un hijo o descendiente en el apartado
+							"Ascendientes y  Descendientes"
+						-->
+						<!--
+							Perceptor casado y no separado legalmente cuyo cónyuge no obtenga
+							rentas superiores a 1.500? anuales, excluidas las exentas.
+						-->
+						<!--
+							Perceptor cuya situación familiar es distinta de las dos anteriores (v. gr.: solteros sin hijos; casados cuyo cónyuge obtiene rentas superiores a 1.500? anuales, excluidas las exentas, etc.).
+							También cuando el perceptor no desee manifestar su situación familiar.
+						-->
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Discapacidad" type="tipo_Discapacidad" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>DISCAPER</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SituacionLaboral">
+				<xs:annotation>
+					<xs:documentation>SITUPER</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice>
+						<xs:element name="TrabajadorActivo">
+							<xs:annotation>
+								<xs:documentation>SITUPER = ACTIVO</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="Contrato" type="tipo_Contrato">
+										<xs:annotation>
+											<xs:documentation>CONTRATO</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="MovilidadGeografica" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>MOVIL</xs:documentation>
+										</xs:annotation>
+										<xs:complexType/>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="Pensionista">
+							<xs:annotation>
+								<xs:documentation>SITUPER = PENSIONISTA</xs:documentation>
+							</xs:annotation>
+							<xs:complexType/>
+						</xs:element>
+						<xs:element name="Desempleado">
+							<xs:annotation>
+								<xs:documentation>SITUPER = DESEMPLEADO</xs:documentation>
+							</xs:annotation>
+							<xs:complexType/>
+						</xs:element>
+						<xs:element name="OtraSituacion">
+							<xs:annotation>
+								<xs:documentation>SITUPER = OTRA SITUACION</xs:documentation>
+							</xs:annotation>
+							<xs:complexType/>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Descendiente" minOccurs="0" maxOccurs="15">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AñoNacimiento" type="tipo_AñoNacimiento">
+							<xs:annotation>
+								<xs:documentation>AÑODES</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="AñoAdopcion" type="tipo_AñoNacimiento" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>AÑOADOP</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ComputadoEntero" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>PORENTERO</xs:documentation>
+							</xs:annotation>
+							<xs:complexType/>
+						</xs:element>
+						<xs:element name="Discapacidad" type="tipo_Discapacidad" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>DISCADES</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Ascendiente" minOccurs="0" maxOccurs="6">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AñoNacimiento" type="tipo_AñoNacimiento">
+							<xs:annotation>
+								<xs:documentation>AÑOAS</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Convivencia" type="tipo_Convivencia">
+							<xs:annotation>
+								<xs:documentation>CONVIVENCIA</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Discapacidad" type="tipo_Discapacidad" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RetribAnuales" type="tipo_ImpPositivo">
+				<xs:annotation>
+					<xs:documentation>RETRIB</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Reducciones" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Irregularidad1" type="tipo_ImpPositivo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>IRREGULAR1</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Irregularidad2" type="tipo_ImpPositivo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>IRREGULAR2</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Cotizaciones" type="tipo_ImpPositivo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>COTIZACIONES</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PensionCompensatoria" type="tipo_ImpPositivo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>CONYUGE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AnualidadesHijos" type="tipo_ImpPositivo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ANUALIDADES</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RdtosObtenidosCeutaMelilla" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>RENCEME</xs:documentation>
+				</xs:annotation>
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="PagoPrestamosVivienda" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>PRESVIV</xs:documentation>
+				</xs:annotation>
+				<xs:complexType/>
+			</xs:element>
+			<xs:element name="Regularizacion" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Causa" maxOccurs="7">
+							<xs:annotation>
+								<xs:documentation>CAUSAi (i=1..11)</xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="tipo_Causa1a15">
+									<xs:maxInclusive value="11"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						<xs:element name="RetribSatisfechas" type="tipo_ImpPositivo">
+							<xs:annotation>
+								<xs:documentation>PERCIBIDO</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="RetencionPracticada" type="tipo_ImpPositivo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>RETENIDO</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="RetribAnualesIniciales" type="tipo_ImpPositivo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>RETRIBA</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="RetencionAnualInicial" type="tipo_ImpPositivo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>IMPORTEA</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="BaseRetencion" type="tipo_ImpCeroPositivo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>BASEA</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="TipoRetencion" type="tipo_Retencion">
+							<xs:annotation>
+								<xs:documentation>TIPOA</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="ResidenciaInicialCeutaMelilla" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>RENCEMEA</xs:documentation>
+							</xs:annotation>
+							<xs:complexType/>
+						</xs:element>
+						<xs:element name="MinimoPersonalFamiliarInicial" type="tipo_ImpPositivo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>MINPERFAA</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="MinoracionPrestamosVivienda" type="tipo_ImpPositivo" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>MINOPAGOA</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+				<xs:unique name="CausaSinRepetidos">
+					<xs:selector xpath="./Causa"/>
+					<xs:field xpath="."/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tipo_RetenidoSalida2016">
+		<xs:complexContent>
+			<xs:extension base="tipo_RetenidoEntrada2016">
+				<xs:sequence>
+					<xs:element name="Gastos">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="OtrosGastos">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="General" type="tipo_ImpPositivo">
+												<xs:annotation>
+													<xs:documentation>GASTOSGEN</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="MovilidadGeografica" type="tipo_ImpPositivo" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>INCREGASMOVIL</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="DiscapacidadTrabajadoresActivos" type="tipo_ImpPositivo" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>INCREGASDISTRA</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="Total" type="tipo_ImpCeroPositivo">
+												<xs:annotation>
+													<xs:documentation>OTROSGASTOS</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Total" type="tipo_ImpPositivo">
+									<xs:annotation>
+										<xs:documentation>GASTOS = COTIZACIONES + OTROSGASTOS</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="RdtoNeto" type="tipo_ImpPositivo" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>RNT</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RdtoNetoReducido" type="tipo_ImpPositivo" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>RNTREDU</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="MinoracionPrestamo" type="tipo_ImpPositivo" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>MINOPAGO</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="MinimoPersonalFamiliar">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="MinimoCtye">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="General" type="tipo_ImpPositivo">
+												<xs:annotation>
+													<xs:documentation>MINPER</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="Edad" type="tipo_ImpPositivo" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>65PER</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="Asistencia" type="tipo_ImpPositivo" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>75PER</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="Total" type="tipo_ImpPositivo">
+												<xs:annotation>
+													<xs:documentation>MINCON</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="MinimoDescendientes" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="General" type="tipo_ImpPositivo">
+												<xs:annotation>
+													<xs:documentation>MINDESG</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="CuidadoHijos" type="tipo_ImpPositivo" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>MINDES3</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="Total" type="tipo_ImpPositivo">
+												<xs:annotation>
+													<xs:documentation>MINDES</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="MinimoAscendientes" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Edad" type="tipo_ImpPositivo">
+												<xs:annotation>
+													<xs:documentation>65AS</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="Asistencia" type="tipo_ImpPositivo" minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>75AS</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element name="Total" type="tipo_ImpPositivo">
+												<xs:annotation>
+													<xs:documentation>MINAS</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="MinimoDiscapacidad" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="DiscapacidadCtye" minOccurs="0">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Discapacidad" type="tipo_ImpPositivo">
+															<xs:annotation>
+																<xs:documentation>DISPER</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Asistencia" type="tipo_ImpPositivo" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>ASISPER</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Total" type="tipo_ImpPositivo">
+															<xs:annotation>
+																<xs:documentation>MINDISC</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="DiscapacidadDescAsc" minOccurs="0">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="DiscapacidadDesc" type="tipo_ImpPositivo" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>DISDES</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="AsistenciaDesc" type="tipo_ImpPositivo" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>ASISDES</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="DiscapacidadAsc" type="tipo_ImpPositivo" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>DISAS</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="AsistenciaAsc" type="tipo_ImpPositivo" minOccurs="0">
+															<xs:annotation>
+																<xs:documentation>ASISAS</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+														<xs:element name="Total" type="tipo_ImpPositivo">
+															<xs:annotation>
+																<xs:documentation>MDISDEAS</xs:documentation>
+															</xs:annotation>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Total" type="tipo_ImpPositivo">
+												<xs:annotation>
+													<xs:documentation>MINDIS</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Total" type="tipo_ImpPositivo">
+									<xs:annotation>
+										<xs:documentation>MINPERFA</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Reduccion">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="RdtosTrabajo" type="tipo_ImpCeroPositivo">
+									<xs:annotation>
+										<xs:documentation>RED20</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="ReduccionMas2" type="tipo_ImpPositivo" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>HIJOS</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:choice>
+									<xs:element name="Pensionista" type="tipo_ImpPositivo" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>PENSION</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="Desempleado" type="tipo_ImpPositivo" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>DESEM</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:choice>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="BaseRetencion" type="tipo_ImpCeroPositivo">
+						<xs:annotation>
+							<xs:documentation>BASE</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ImpAnualRetencionesIngresosCuenta" type="tipo_ImpCeroPositivo">
+						<xs:annotation>
+							<xs:documentation>IMPORTE</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TipoRetencion" type="tipo_Retencion">
+						<xs:annotation>
+							<xs:documentation>TIPO</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Descendientes" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="ComputoDescendientes">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Hijo1" type="tipo_Computo"/>
+											<xs:element name="Hijo2" type="tipo_Computo" minOccurs="0"/>
+											<xs:element name="Hijo3" type="tipo_Computo" minOccurs="0"/>
+											<xs:element name="CuartoySucesivos" minOccurs="0">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Total" type="tipo_NumDescendientes"/>
+														<xs:element name="PorEntero" type="tipo_NumDescendientes" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Menores3Años" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Total" type="tipo_NumDescendientes"/>
+											<xs:element name="PorEntero" type="tipo_NumDescendientes" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Resto" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Total" type="tipo_NumDescendientes"/>
+											<xs:element name="PorEntero" type="tipo_NumDescendientes" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ConDiscapacidad" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="EnGrado1" minOccurs="0">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Total" type="tipo_NumDescendientes"/>
+														<xs:element name="PorEntero" type="tipo_NumDescendientes" minOccurs="0"/>
+														<xs:element name="ConMovilidadReducida" minOccurs="0">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="Total" type="tipo_NumDescendientes"/>
+																	<xs:element name="PorEntero" type="tipo_NumDescendientes" minOccurs="0"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="EnGrado2" minOccurs="0">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Total" type="tipo_NumDescendientes"/>
+														<xs:element name="PorEntero" type="tipo_NumDescendientes" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Ascendientes" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Menores75" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Total" type="tipo_NumAscendientes"/>
+											<xs:element name="PorEntero" type="tipo_NumAscendientes" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Mayores75" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Total" type="tipo_NumAscendientes"/>
+											<xs:element name="PorEntero" type="tipo_NumAscendientes" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="ConDiscapacidad" minOccurs="0">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="EnGrado1" minOccurs="0">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Total" type="tipo_NumAscendientes"/>
+														<xs:element name="PorEntero" type="tipo_NumAscendientes" minOccurs="0"/>
+														<xs:element name="ConMovilidadReducida" minOccurs="0">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="Total" type="tipo_NumAscendientes"/>
+																	<xs:element name="PorEntero" type="tipo_NumAscendientes" minOccurs="0"/>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="EnGrado2" minOccurs="0">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="Total" type="tipo_NumAscendientes"/>
+														<xs:element name="PorEntero" type="tipo_NumAscendientes" minOccurs="0"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tipo_RetenidoError2016">
+		<xs:sequence>
+			<xs:element name="Nif" type="tipo_Nif"/>
+			<xs:element name="Orden" type="xs:int"/>
+			<xs:element name="Error" type="tipo_Error" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Ascendiente" minOccurs="0" maxOccurs="15">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Orden" type="xs:int"/>
+						<xs:element name="Error" type="tipo_Error" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Descendiente" minOccurs="0" maxOccurs="6">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Orden" type="xs:int"/>
+						<xs:element name="Error" type="tipo_Error" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--ELEMENTOS GLOBALES-->
+	<xs:element name="AEATRetencionesEntrada2016">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="IdDoc" type="tipo_Retenciones"/>
+				<xs:element name="Retenedor" type="tipo_RetenedorEntrada2016" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AEATRetencionesSalida2016">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="IdDoc" type="tipo_Retenciones"/>
+				<xs:element name="Retenedor" type="tipo_RetenedorSalida2016" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="Sello" type="tipo_Sello" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AEATRetencionesError2016">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="IdDoc" type="tipo_Retenciones"/>
+				<xs:choice>
+					<xs:element name="ErrorGeneral" type="tipo_ErrorGeneral" maxOccurs="unbounded"/>
+					<xs:element name="Retenedor" type="tipo_RetenedorError2016" maxOccurs="unbounded"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
