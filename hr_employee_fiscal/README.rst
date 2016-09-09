@@ -5,18 +5,23 @@ Datos Fiscales
 ==============
 
 
-Instalación
+Installation
+============
+
+To install this module, you need to:
+
+ * Click on install button
+
+Usage
+=====
+
+
+Bug Tracker
 ===========
 
-Para instalar este modulo necesitas:
-
-* hr (Odoo addons)
-* hr_employee (Odoo addons)
-
-Contribuidores
---------------
-
+Credits
+=======
 * Juan Jose Lopez Garcia <correo74@gmail.com>
 
-
-please visit https://odoo-community.org.
+Contributors
+------------

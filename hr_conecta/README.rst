@@ -6,16 +6,23 @@ Proyecto Conecta
 
 
 
-Instalación
+Installation
+============
+
+To install this module, you need to:
+
+ * Click on install button
+
+Usage
+=====
+
+
+Bug Tracker
 ===========
 
+Credits
+=======
+* Juan Jose Lopez Garcia <correo74@gmail.com>
 
-
-
-Contribuidores
---------------
-
-* Juan Jose Lopez Garcia <jjlopezg74@gmail.com>
-
-
-please visit https://odoo-community.org.
+Contributors
+------------

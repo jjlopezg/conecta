@@ -9,14 +9,23 @@ Menus de acceso a las tablas se crean en: Empleados->Maestro->Configuracion
 Las tablas han sido obtenidas el la Web de `Delt@ <http://www.delta.mtin.es/Delta2Web/info/documentacion.html>`_
 
 
-Instalación
+Installation
+============
+
+To install this module, you need to:
+
+ * Click on install button
+
+Usage
+=====
+
+
+Bug Tracker
 ===========
 
-
-Contribuidores
---------------
-
+Credits
+=======
 * Juan Jose Lopez Garcia <correo74@gmail.com>
 
-
-please visit https://odoo-community.org.
+Contributors
+------------
