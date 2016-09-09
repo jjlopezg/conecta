@@ -6,7 +6,7 @@
 ================================
 
 
-  .. figure:: static/description/school.png
+  .. figure:: static/description/wage.png
      :scale: 50 %
 
 

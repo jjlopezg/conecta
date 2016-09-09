@@ -5,7 +5,7 @@ Datos Fiscales
 =====================
 
 
-  .. figure:: static/description/employee.png
+  .. figure:: static/description/fiscal.jpg
      :scale: 50 %
 
 

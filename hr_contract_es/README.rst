@@ -6,7 +6,7 @@
 ================================
 
 
-  .. figure:: static/description/school.png
+  .. figure:: static/description/contrato_jasper.png
      :scale: 50 %
 
 

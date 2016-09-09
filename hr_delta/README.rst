@@ -5,7 +5,7 @@ Declaración Electronica de Trabajadores Accidentados
 ====================================================
 
   .. figure:: static/description/delta.png
-     :scale: 50 %
+     :scale: 30 %
 
 
 Menus de acceso a las tablas se crean en: Empleados->Maestro->Configuracion

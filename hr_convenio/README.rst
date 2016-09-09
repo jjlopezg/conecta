@@ -6,7 +6,7 @@
 ================================
 
 
-  .. figure:: static/description/school.png
+  .. figure:: static/description/convenio.png
      :scale: 50 %
 
 

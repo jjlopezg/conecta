@@ -6,7 +6,7 @@
 ================================
 
 
-  .. figure:: static/description/school.png
+  .. figure:: static/description/tipo.png
      :scale: 50 %
 
 

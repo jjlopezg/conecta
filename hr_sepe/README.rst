@@ -6,7 +6,7 @@
 ================================
 
 
-  .. figure:: static/description/school.png
+  .. figure:: static/description/contrata.png
      :scale: 50 %
 
 
