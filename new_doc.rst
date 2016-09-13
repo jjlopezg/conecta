@@ -115,7 +115,7 @@ de cotización para el sistema RED. 19
 Introducción
 ============
 
-El **Proyecto Conecta**, es una apuesta personal para dotar a la
+**Proyecto Conecta**, es una apuesta personal para dotar a la
 localización española de minimo necesario para gestionar los Recursos
 Humanos con Odoo e intentando que sea lo menos intrusivo posible con los
 modulos existentes o nuevos desarrollos.
@@ -138,17 +138,13 @@ Dado que en mi actual puesto de trabajo mas del 90%, de la contratación
 se basa en los modelos indicados, espero que poco a poco ir incorporando
 otros con vuestro apoyo.
 
-Si estas interesado en otro modelo puedes mandarme un email a
-`*jjlopezg74@gmail.com* <mailto:jjlopezg74@gmail.com>`__, indicándome el
-modelo y las diferentes opciones. Lo estudiare y vere la mejor forma de
-incorpararlo.
 
 Contribuciones
 ==============
 
 El proyecto esta abierto a toda persona que desee colaborar, bien sea
-aportando ideas, mejoras en el código (que no esta nada pulido) o
-sugerencias.
+aportando ideas, mejoras en el código (que no esta nada pulido es feo,
+pero ya se mejorara) o sugerencias.
 
 Instalacion
 ===========
@@ -214,19 +210,15 @@ modulos:
 La mayoría de los modulos propuestos están mantenidos por OCA:
 
 -  **`*oerp _no_phoning_home* <https://github.com/bizzappdev/odoo_apps/tree/9.0/oerp_no_phoning_home>`__:**
-   Oculta opciones del menú de usuario situado a la derecha
-
+   
 -  **`*web_environment_ribbon* <https://github.com/OCA/web/tree/9.0/web_environment_ribbon>`__:**
-   Muestra la palabra TEST, encima del logo de la izquierda.
-
+   
 -  **`*web_searchbar_full_width* <https://github.com/OCA/web/tree/9.0/web_searchbar_full_width>`__:**
-   Amplia la barra de búsqueda.
-
+   
 -  **`*web_favicon* <https://github.com/OCA/web/tree/9.0/web_favicon>`__:**
 
 -  `***hr_employee_documents*** <https://github.com/onaoura/odoo-apps/tree/9.0/hr_employee_documents>`__:
-   Documentos del empleado.
-
+   
 |image11|\ Compañia 
 ====================
 
