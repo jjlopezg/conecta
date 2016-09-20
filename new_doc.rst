@@ -549,7 +549,7 @@ En caso de empleados extranjeros.
 
 -  **Id Sustituto:** En los casos de contratos que se realicen para
    sustituir a otros empleados por las causas especificadas en el campo
-   `***Causa de sustitución*** <sapevent:DOCU_LINK\DS:DE.PES_CAUSAS>`__
+   `***Causa de sustitución*** 
    se informa aquí el Número de Seguridad Social del empleado al cual se
    sustituye.
 
@@ -562,7 +562,7 @@ En caso de empleados extranjeros.
 
 -  **Causa sustitucion:** En los casos de contratos que se realicen para
    sustituir a otros empleados por las causas especificadas en el campo
-   `***Causa de sustitución*** <sapevent:DOCU_LINK\DS:DE.PES_CAUSAS>`__
+   `***Causa de sustitución*** 
    se informa aquí el Número de Seguridad Social del empleado al cual se
    sustituye.
 
