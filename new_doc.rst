@@ -637,12 +637,12 @@ En caso de empleados extranjeros.
    conocerse, el sistema propondrá un valor estándar según la provincia
    de residencia del empleado. Si completa este campo no debe indicar
    ningún Código de Identificación de Área Sanitaria en el campo
-   `***C.I.A.S.*** <sapevent:DOCU_LINK\DS:DE.PES_COIAS>`__
+   `***C.I.A.S.*** 
 
 -  **CIAS**: Clave alfanumérica que identifica el Área Sanitaria del
    profesional que que tramita el parte de alta o baja médica. Debe
    rellenarse obligatoriamente en caso de no existir el campo `***Número
-   de Colegiado*** <sapevent:DOCU_LINK\DS:DE.PES_NUMDR>`__.
+   de Colegiado*** .
 
 -  **Cumplimiento 365:** Campo calculado según la fecha de baja, cumplen
    los 365 días desde el proceso inicial.
