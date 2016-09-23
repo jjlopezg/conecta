@@ -4,27 +4,33 @@
 
 Recursos Humanos
 ==============================================
-Roadmap:
+Roadmap
+=======
 
-Empleados:
-	Relación bancaria: []:
-	Famila: pasar a fiscal []:
-	Impresos: [] Banco, []LOPD, [] Mod145
-	AFI: []pasarlo a empleados, situacion, dar alta urgente "muy comun" si hacer contrato
+Empleados
+=========
+	[] Relación bancaria
+	[] Famila pasar a fiscal
+	[] Impresos [] Banco  []LOPD  [] Mod145
+	[] AFI pasarlo a empleados, dar alta urgente "muy comun" si hacer contrato
 
-Contratos normales sin: []100[],[]200,[]401,[]402,[]410,[]501,[]502,[]510
-	Vistas odoo: [] campos necesarios
-	Clausulas: [] contrato y poder anexar mas en pdf
-	Modelos de impresión: [] cambiar pdf
-    Impresion: []100[],[]200,[]401,[]402,[]410,[]501,[]502,[]510
+Contratos
+=========
+	[] Normales sin bonificar [] 100 [] 200 [] 401 [] 402 [] 410 [] 501 [] 502 [] 510
+	[] Clausulas
+	[] Anexar mas en pdf
+	[] Modelos de impresión, cambiar pdf forms
+    	[] Impresion: [] 100 [] 200 [] 401 [] 402 [] 410 [] 501	[] 502 []510
 
-Contrat@ normales sin:
-	Envios: []100[],[]200,[]401,[]402,[]410,[]501,[]502,[]510
-	Evaluación: []100[],[]200,[]401,[]402,[]410,[]501,[]502,[]510
+Contrat@ normales sin bonificaciones
+=====================
+	[] Envios [] 100[] 200 [] 401 [] 402 [] 410 []501 []502	[]510
+	[] Evaluación [] 100 []200 []401 []402 []410 []501 []502 []510
 
-AFI:
-	Altas: []100[],[]200,[]401,[]402,[]410,[]501,[]502,[]510
-	Bajas: []100[],[]200,[]401,[]402,[]410,[]501,[]502,[]510
+AFI
+===
+	Altas: []100 []200 []401 []402 []410 []501 []502 []510
+	Bajas: []100 []200 []401 []402 []410 []501 []502 []510
 
 De momento estos son los objetivos.
 
