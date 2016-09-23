@@ -9,10 +9,10 @@ Roadmap
 
 Empleados
 =========
-	[] Relación bancaria
-	[] Famila pasar a fiscal
+	[] Relación bancaria.
+	[] Famila pasar a fiscal.
 	[] Impresos [] Banco  []LOPD  [] Mod145
-	[] AFI pasarlo a empleados, dar alta urgente "muy comun" si hacer contrato
+	[] AFI pasarlo a empleados, dar alta urgente "muy comun" si hacer contrato.
 
 Contratos
 =========
