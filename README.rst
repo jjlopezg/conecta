@@ -10,6 +10,7 @@ Empleados:
 	Relación bancaria: []:
 	Famila: pasar a fiscal []:
 	Impresos: [] Banco, []LOPD, [] Mod145
+	AFI: []pasarlo a empleados, situacion, dar alta urgente "muy comun" si hacer contrato
 
 Contratos normales sin: []100[],[]200,[]401,[]402,[]410,[]501,[]502,[]510
 	Vistas odoo: [] campos necesarios
