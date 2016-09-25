@@ -1,54 +1,42 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License: AGPL-3
+:alt: License: AGPL-3
 
+
+**Recursos Humanos**
 ================
-Recursos Humanos
-================
-Roadmap
-=======
 
 **Empleados**
 
-[x]  Relación bancaria.
-[x] Famila pasar a fiscal.
-    Impresos 
-    [] Banco  
-    []LOPD  
-    [] Mod145
-[x] Manual
+- Impresos 
+  - Banco
+  - LOPD
+  - Mod145
 
 **Contratos**
 
-Normales sin bonificar 
-[]. 100 
-[]. 200 
-[]. 401 [] 402 [] 410 [] 501 [] 502 [] 510.
-[] Clausulas.
-[] Anexar mas en pdf.
-[] Modelos de impresión, cambiar pdf forms.
-[] Impresion: [] 100 [] 200 [] 401 [] 402 [] 410 [] 501	[] 502 []510.
-[] Manual.
+- Contrat@ normales sin bonificaciones
+  - 100, 200, 300, 401, 402, 410, 501, 502, 510
+- Modelos de impresión
+  - 100, 200, 300, 401, 402, 410, 501, 502, 510
+- Envios
+  - 100, 200, 300, 401, 402, 410, 501, 502, 510
+- Evaluación
+  - 100, 200, 300, 401, 402, 410, 501, 502, 510
+- Anexar clausulas
 
-Contrat@ normales sin bonificaciones
-=====================
-[] Envios [] 100[] 200 [] 401 [] 402 [] 410 []501 []502	[]510.
-[] Evaluación [] 100 []200 []401 []402 []410 []501 []502 []510.
-[] Manual.
+**AFI**
 
-AFI
-===
-Altas.[]100 []200 []401 []402 []410 []501 []502 []510.
-Bajas.[]100 []200 []401 []402 []410 []501 []502 []510.
-[] Manual.
+- Altas: 
+  - 100, 200, 300, 401, 402, 410, 501, 502, 510
+- Bajas: 
+  - 100, 200, 300, 401, 402, 410, 501, 502, 510
 
-De momento estos son los objetivos.
-
-
+**De momento estos son los objetivos.**
 
 Contribuidores
 --------------
 
-* Juan Jose Lopez Garcia <correo74@gmail.com>
+- Juan Jose Lopez Garcia <correo74@gmail.com>
 
 
 please visit https://odoo-community.org.
