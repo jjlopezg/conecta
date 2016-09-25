@@ -1,2 +1,5 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_res_regimen_user,access_res_regimen,model_res_regimen,base.group_user,1,0,0,0
+access_res_mutua_user,access_res_mutua,model_res_mutua,base.group_user,1,0,0,0
+access_res_cnae_user,access_res_cnae,model_res_cnae,base.group_user,1,0,0,0
 

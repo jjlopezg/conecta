@@ -50,7 +50,7 @@
 		    <field name="model">res.cnae</field>
 		    <field name="field_parent">child_ids</field>
 		    <field name="arch" type="xml">
-				<tree string="CNAE">
+				<tree string="CNAE" style='.oe_list' colors="red:code=='A01'">
 	            	<field name="code"/>
             		<field name="description"/>
             		<field name="parent_id"/>
@@ -97,16 +97,16 @@
 		</record>
 
 		<menuitem id="menu_localization_res_cnae"
-		    name="Codigos CNAE"
+		    name="Tabla CNAE"
 		    parent="hr.menu_human_resources_configuration"
 		    action="action_res_cnae_tree"
-		    groups="base.user_root"/>
+		    groups="base.group_hr_manager"/>
 
 		<menuitem id="menu_res_cnae_tree"
 		    name="Arbol CNAE"
 			parent="menu_localization_res_cnae"
     		action="action_res_cnae_list"
-    		groups="base.user_root"/>
+    		groups="base.group_hr_manager"/>
 
 	</data>
 </openerp>

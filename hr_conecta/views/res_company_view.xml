@@ -39,7 +39,7 @@
                             <field name="manager_id" /><!--domain="[('manager','=',True)]"/>-->
                         </group>
                         <group name="hrb">
-
+                            <field name="cotiza_id"/>
                         </group>
                     </group>
                     <group string="Cuentas">

@@ -15,8 +15,11 @@
     'summary': '',
     'installable': True,
     'application': False,
-    'auto_install': False,
-    'description': """ """,
+
+    'description': """
+Proyecto Conecta
+================
+""",
     "depends" : [
         'base',
         'base_iso3166',
@@ -24,15 +27,18 @@
         'hr',
     ],
     "data" : [
+        "security/ir.model.access.csv",
+
         "data/res.cnae.csv",
         "data/res.mutua.csv",
         "data/res.regimen.csv",
 
-        "security/ir.model.access.csv",
-
+        'views/hr_conecta_view.xml',
         'views/res_company_view.xml',
         "views/res_cnae_view.xml",
         "views/res_mutua_view.xml",
         "views/res_regimen_view.xml",
+        'views/res_cotiza_view.xml',
     ],
+    'auto_install': False,
 }

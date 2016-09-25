@@ -36,7 +36,6 @@
 	        	<tree string="Regimenes">
 		            <field name="code"/>
 	            	<field name="description"/>
-					<field name="name"/>
 	        	</tree>
 	    	</field>
 		</record>
@@ -53,7 +52,7 @@
 		</record>
 
 		<record id="action_res_regimen_tree" model="ir.actions.act_window">
-	    	<field name="name">Regimenes</field>
+	    	<field name="name">Regimen Seg.Social</field>
 		    <field name="type">ir.actions.act_window</field>
 		    <field name="res_model">res.regimen</field>
 		    <field name="view_type">form</field>
@@ -68,10 +67,10 @@
 		</record>
 
 		<menuitem id="menu_res_regimen"
-		    name="Regimenes"
+		    name="Tabla Regimen"
 	    	action="action_res_regimen_tree"
 		    parent="hr.menu_human_resources_configuration"
-	    	groups="base.user_root"/>
+	    	groups="base.group_hr_manager"/>
 
 	</data>
 </openerp>

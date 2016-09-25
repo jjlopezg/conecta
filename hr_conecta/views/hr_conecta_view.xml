@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+#-*- coding:utf-8 -*-
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+###########################################################################
+-->
+
+<openerp>
+	<data>
+
+
+        <menuitem
+                id="hr_menu_models"
+                name="Modelos"
+                parent="hr.menu_hr_root"
+                sequence="15"
+                groups="base.group_hr_user"/>
+
+        <menuitem
+                id="hr_menu_relations"
+                name="Organismos Externos"
+                parent="hr.menu_hr_root"
+                sequence="20"
+                groups="base.group_hr_user"/>
+
+    <!-- EMPLEADOS CONFIG -->
+        <menuitem
+                id="menu_human_resources_configuration_employee"
+                name="Tablas Empleados"
+                parent="hr.menu_human_resources_configuration"
+                groups="base.group_hr_manager"
+                sequence="1"/>
+
+
+        <!-- SISTEMA RED -->
+        <menuitem
+                id="hr_menu_relations_red"
+                name="Sistema RED"
+                parent="hr_menu_relations"
+                sequence="30"
+                groups="base.group_hr_user"/>
+
+        <menuitem
+                id="menu_human_resources_configuration_red"
+                name="Sistema RED"
+                parent="hr.menu_human_resources_configuration"
+                groups="base.group_hr_manager"
+                sequence="30"/>
+
+    <!-- CONTRAT@ -->
+        <menuitem
+                id="hr_menu_relations_sepe"
+                name="Contrat@"
+                parent="hr_menu_relations"
+                sequence="10"
+                groups="base.group_hr_user"/>
+
+    <!-- DELT@ -->
+        <menuitem
+                id="hr_menu_relations_delta"
+                name="Delt#"
+                parent="hr_menu_relations"
+                sequence="20"
+                groups="base.group_hr_user"/>
+
+    </data>
+</openerp>

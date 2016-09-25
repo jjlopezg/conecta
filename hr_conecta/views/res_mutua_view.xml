@@ -67,10 +67,10 @@
 		</record>
 	
 		<menuitem id="menu_localisation_res_mutua"
-    		name="Mutuas Accidentes"
+    		name="Tabla Mutua Acc."
     		action="action_res_mutua_tree"
     		parent="hr.menu_human_resources_configuration"
-	    	groups="base.user_root"/>
+	    	groups="base.group_hr_manager"/>
 
 	</data>
 </openerp>

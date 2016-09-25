@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+# © 2016 Juan Jose Lopez Garcia <jjlopezg74@gmail.com>.
+#
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+###########################################################################
+-->
+
+<openerp>
+	<data>
+
+		<record id="res_cotiza_form" model="ir.ui.view">
+		    <field name="name">res.cotiza.form</field>
+		    <field name="model">res.cotiza</field>
+		    <field name="arch" type="xml">
+	        	<form string="Tipo Cotizacion">
+		            <sheet>
+
+                        <label for="description" string="Descripcion" class="oe_edit_only"/>
+	                   	<h1>
+			            	<field name="description" default_focus="1"/>
+	                    </h1>
+	                   	<group>
+			            	<field name="code"/>
+	                    </group>
+
+                        <group>
+
+                            <group string="Contingencias Empresa / Empleado" col="2">
+                                <group >
+                                    <group  col="2">
+                                        <field name="ecc_comun" colspan="2"/>
+                                        <field name="ecc_hextfue" colspan="2"/>
+                                        <field name="ecc_hextres" colspan="2"/>
+                                        <field name="ecc_mayor65" colspan="2"/>
+                                        <field name="ecc_mayor60" colspan="2"/>
+                                    </group>
+                                    <group  col="2">
+                                        <field name="tcc_ccomun"  nolabel="1" colspan="2"/>
+                                        <field name="tcc_hextfue" nolabel="1" colspan="2"/>
+                                        <field name="tcc_hextres" nolabel="1" colspan="2"/>
+                                        <field name="tcc_mayor65" nolabel="1" colspan="2"/>
+                                        <field name="tcc_mayor60" nolabel="1" colspan="2"/>
+                                    </group>
+                                </group>
+
+                                <group col="2">
+                                    <field name="smi" colspan="2"/>
+                                    <field name="iprem" colspan="2"/>
+                                    <label for="min_atep" string="Contingencias profesionales" />
+                                    <div>
+                                        <field name="min_atep" class="oe_inline"/><label for="min_atep" string="Minimo" />
+                                        <field name="max_atep" class="oe_inline"/><label for="min_atep" string="Maximo" />
+                                    </div>
+                                </group>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Desempleo Empresa / Empleado" col="2">
+                                <group >
+                                    <group col="2">
+                                        <field name="edesem_general" colspan="2"/>
+                                        <field name="edesem_tcompleto" colspan="2"/>
+                                        <field name="edesem_tparcial" colspan="2"/>
+                                    </group>
+                                    <group col="2">
+                                        <field name="tdesem_general" nolabel="1" colspan="2"/>
+                                        <field name="tdesem_tcompleto" nolabel="1" colspan="2"/>
+                                        <field name="tdesem_tparcial" nolabel="1" colspan="2"/>
+                                    </group>
+                                </group>
+
+                                <group>
+                                    <div></div>
+                                </group>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="Otros Concep.Cotizacion Empresa / Empleado" col="2">
+                                <group >
+                                    <group col="2">
+                                        <field name="eot_fogasa" colspan="2"/>
+                                        <field name="eot_forma" colspan="2"/>
+                                    </group>
+                                    <group col="2">
+                                        <field name="tot_fogasa" nolabel="1" colspan="2"/>
+                                        <field name="tot_forma" nolabel="1" colspan="2"/>
+                                    </group>
+                                </group>
+
+                                <group>
+                                    <div></div>
+                                </group>
+                            </group>
+                        </group>
+	                </sheet>
+	        	</form>
+	    	</field>
+		</record>
+
+		<record id="res_cotiza_tree" model="ir.ui.view">
+		    <field name="name">res.cotiza.tree</field>
+		    <field name="model">res.cotiza</field>
+		    <field name="arch" type="xml">
+	        	<tree string="Regimenes">
+                    <field name="code"/>
+	            	<field name="description"/>
+	        	</tree>
+	    	</field>
+		</record>
+
+		<record id="res_cotiza_search" model="ir.ui.view">
+		    <field name="name">res.cotiza.search</field>
+		    <field name="model">res.cotiza</field>
+		    <field name="arch" type="xml">
+	        	<search>
+		            <field name="code"/>
+	            	<field name="description"/>
+	        	</search>
+	    	</field>
+		</record>
+
+		<record id="action_res_cotiza_tree" model="ir.actions.act_window">
+	    	<field name="name">Tipo de Cotizacion</field>
+		    <field name="type">ir.actions.act_window</field>
+		    <field name="res_model">res.cotiza</field>
+		    <field name="view_type">form</field>
+		    <field name="view_mode">tree,form</field>
+	    	<field name="view_id" ref="res_cotiza_tree"/>
+    		<field name="search_view_id" ref="res_cotiza_search"/>
+			<field name="help" type="html">
+	              <p class="oe_view_nocontent_create">
+	                 Click to add a new.
+	              </p>
+	       </field>
+		</record>
+
+		<menuitem id="menu_res_cotiza"
+		    name="Tipos Cotizacion"
+	    	action="action_res_cotiza_tree"
+		    parent="hr.menu_human_resources_configuration"
+	    	groups="base.group_hr_manager"/>
+
+	</data>
+</openerp>
