@@ -26,7 +26,6 @@ class HrEmployeeName(models.Model):
     def _compute_tc2(self):
         self.tc2 = '%s%s%s' % (self.lastname[:2], self.lastname2[:2], self.firstname[:1])
 
-
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
 

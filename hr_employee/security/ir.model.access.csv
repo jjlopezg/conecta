@@ -1,4 +1,7 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
 
-"access_hr_identification_manager","hr.identification manager","model_hr_identification","base.group_hr_manager",1,1,1,1
-"access_hr_identification_user","hr.identification user","model_hr_identification","base.group_hr_user",1,0,0,0
+access_hr_employee_name_user,access_hr_employee_name,model_hr_employee_name,base.group_user,1,1,1,1
+access_hr_employee_bank_user,access_hr_employee_bank,model_hr_employee_bank,base.group_user,1,1,1,1
+access_hr_identification_user,hr.identification user,model_hr_identification,base.group_hr_user,1,0,0,0
+
+access_hr_identification_manager,hr.identification manager,model_hr_identification,base.group_hr_manager,1,1,1,1

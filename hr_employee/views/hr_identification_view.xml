@@ -74,7 +74,8 @@
                 id="menu_human_resources_configuration_identification"
                 name="Identificacion"
 			    action="action_hr_identification"
-    		    parent="hr.menu_human_resources_configuration"/>
+    		    parent="hr_conecta.menu_human_resources_configuration_employee"
+                groups="base.group_hr_manager"/>
 
 	</data>
 </openerp>

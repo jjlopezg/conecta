@@ -17,19 +17,22 @@
     'application': False,
     'auto_install': False,
     'description': """
+Empleados
+=========
     """,
-    'images': ['images/employee.jpeg'],
     "depends" : [
         'base',
         'hr'
     ],
     "data" : [
         "security/ir.model.access.csv",
+
         "data/hr.identification.csv",
-        "views/hr_view.xml",
+
         "views/hr_employee_view.xml",
         "views/hr_employee_bank_view.xml",
         "views/hr_identification_view.xml",
+
         'hr_employee_sequence.xml',
     ],
 }

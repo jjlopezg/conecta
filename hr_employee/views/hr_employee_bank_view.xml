@@ -18,14 +18,13 @@
             <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="arch" type="xml">
 
-                <xpath expr="//notebook" position="inside">
-                    <page string="Rel.Bancaria">
-                        <field name="account_ids" domain="[('employee_id', '=', active_id)]" />
-                    </page>
+                <xpath expr="//field[@name='bank_account_id']"  position="replace">
                 </xpath>
 
-                <xpath expr="//field[@name='bank_account_id']" position="replace">
-                     <field name="bank_account_id" widget="selection" domain="[('employee_id', '=', active_id)]" attrs="{'required': False, 'readonly': False}"/>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Rel.Bancaria" groups="base.group_hr_user">
+                        <field name="account_ids" domain="[('employee_id', '=', active_id)]" />
+                    </page>
                 </xpath>
 
             </field>
@@ -39,11 +38,12 @@
                 	<sheet>
                         <group>
                             <group>
-    	                        <label for="date_start" string="Fecha validez"/>
-    	                        <div>
-    	                            <field name="date_start" class="oe_inline" style="vertical-align: middle;" default_focus="1"/>
-    	                        </div>
                                 <field name="employee_id" widget="selection" attrs="{'readonly': True}"/>
+    	                        <label for="date_from" string="Fecha validez"/>
+    	                        <div>
+    	                            <field name="date_from" class="oe_inline" style="vertical-align: middle;" default_focus="1"/>
+    	                        </div>
+
     	                    </group>
     	                    <group>
     	                        <field name="user_create"/>
@@ -53,14 +53,14 @@
 
                         <group>
                     	    <group>
-                                <field name="acc_type"  attrs="{'readonly': False}"/>
                                 <field name="bank_id" />
                                 <field name="acc_number"/>
                                 <field name="acc_payment"/>
                         	</group>
                             <group>
-                                <field name="currency_id" groups="base.group_multi_currency" options="{'no_create': True}"/>
-                                <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                                <field name="company_id" options="{'no_create': True}"/>
+                                <field name="currency_id" options="{'no_create': True}"/>
+                                <field name="acc_type"  attrs="{'readonly': False}"/>
                             </group>
                         </group>
 
@@ -76,7 +76,7 @@
 	  		<field name='type'>tree</field>
 	  		<field name='arch' type='xml'>
 		    	<tree string="Cuenta bancaria">
-                    <field name="date_start"/>
+                    <field name="date_from"/>
                 	<field name="acc_number"/>
                     <field name="bank_id"/>
 		    	</tree>
@@ -91,7 +91,7 @@
 	        	<search>
 		            <field name="employee_id"/>
 					<field name="acc_number"/>
-                    <field name="date_start"/>
+                    <field name="date_from"/>
         		</search>
     		</field>
 		</record>
@@ -115,7 +115,8 @@
                 id="menu_hr_employee_bank"
                 name="Cuentas Bancarias"
                 action="action_hr_employee_bank"
-                parent="hr.menu_human_resources_configuration"/>
+                parent="hr_conecta.menu_human_resources_configuration_employee"
+                groups="base.group_hr_user"/>
 
 	</data>
 </openerp>

@@ -11,7 +11,7 @@ from datetime import datetime
 class HrEmployeeBank(models.Model):
     _name = 'hr.employee.bank'
     _inherit = "res.partner.bank"
-    _order = 'date_start desc'
+    _order = 'date_from desc'
 
     @api.one
     def _compute_create_user(self):
@@ -26,8 +26,8 @@ class HrEmployeeBank(models.Model):
     user_create = fields.Char(compute='_compute_create_user', string='Creado', readonly=True, size=256, store=False)
     user_last = fields.Char(compute='_compute_last_user', string='Modificado', readonly=True, size=256, store=False)
 
-    date_start = fields.Date('Inicio', required=True, readonly=False)
-    date_end = fields.Date('Termino', required=False, readonly=False)
+    date_from = fields.Date('Inicio', required=True, readonly=False)
+    date_to = fields.Date('Termino', required=False, readonly=False)
     employee_id = fields.Many2one('hr.employee', string='Empleado', default=lambda self: self.env.context.get('employee_id'), required=False, readonly=True)
 
     acc_payment = fields.Selection(string="Forma de pago",
@@ -52,7 +52,6 @@ class HrEmployeeBank(models.Model):
         ("code_unique", "unique(acc_number)", "Numero de cuenta duplicada"),
     ]
 
-
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
 
@@ -63,19 +62,5 @@ class HrEmployee(models.Model):
         self.bank_account_id = account_ids[-1:][0].id
         return self.bank_account_id
 
-    @api.one
-    def _compute_get_account(self):
-        self.bank_account_id = self._latest_account()[0].id
-
     account_ids = fields.One2many('hr.employee.bank', 'employee_id', string='Cuentas bancarias', required=True, copy=False)
-
-    bank_account_id = fields.Many2one(comodel_name='hr.employee.bank',
-                                      computed='_latest_account',
-                                      domain=[],
-                                      context={},
-                                      string="Nº Cuenta Bancaria",
-                                      required=False,
-                                      readonly=True,
-                                      help='Este campo es heredado',
-                                      copy=False)
 

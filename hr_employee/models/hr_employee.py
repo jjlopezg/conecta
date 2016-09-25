@@ -27,16 +27,16 @@ class HrEmployee(models.Model):
 
     @api.one
     def _compute_ssnid(self):
-        self.ssnid = '%s/%s/%s' % (self.ssnid_p, self.ssnid_n, self.ssnid_dc)
+        self.ssnidf = '%s/%s/%s' % (self.ssnid[0:2], self.ssnid[3:10], self.ssnid[11:12])
+
 
     company_id = fields.Many2one('res.company', string="Compañia", select=True, required=True, readonly=False)
     employee = fields.Boolean(string='Es Empleado', default=True) # FIXME: ODOO MOBILE
-    id_employee = fields.Char(string='Id.Empleado', default='/')
+    id_employee = fields.Char(string='Id.Empleado', default=lambda self: self.env['ir.sequence'].next_by_code('id.employee'))
 
-    ssnid = fields.Char(compute='_compute_ssnid', string='Nº Seguridad Social', size=12)
-    ssnid_p = fields.Char(string='Prov.NASS', size=2, required=True)
-    ssnid_n = fields.Char(string='Nº NASS', size=8, required=True)
-    ssnid_dc = fields.Char(compute='_numss', string='Dc.NASS', size=2, required=True)
+    ssnid = fields.Char(string='Nº Seguridad Social', size=12, required=True)
+    ssnid_dc = fields.Char(compute='_numss', string='Dc.NASS', size=2, required=False)
+    ssnidf = fields.Char(compute='_compute_ssnid', string='Nº Seguridad Social')
 
     identification_id = fields.Char(string='Identification No', size=14, required=False)
     identification = fields.Many2one('hr.identification', string='Tipo Identificacion')
@@ -51,7 +51,6 @@ class HrEmployee(models.Model):
                             required = True)
 
     home_street = fields.Char(compute='_get_street', string='Domicilio', store=True)
-
     home_street_name = fields.Char('Street name', required=True)
     home_street_number = fields.Char('Street number', required=True)
     home_zip = fields.Char('C.P', change_default=True, size=5, required=True)
@@ -66,13 +65,11 @@ class HrEmployee(models.Model):
     status = fields.Selection([
                             ('draft', 'Candidato'),
                             ('active', 'Activo'),
-                            ('inactive', 'Baja'),
+                            ('inactive', 'Inactivo'),
                             ],
-                            'Status',
+                            string='Estado',
                             default='draft',
                             readonly=True)
-
-
 
     _sql_constraints = [
         ('id_employee_uniq', 'unique(id_employee)', 'Numero de empleado debe de ser unico.'),
@@ -83,14 +80,16 @@ class HrEmployee(models.Model):
     @api.model
     def create(self, vals):
         print "CREATE---------------------------------------------------"
-        vals['id_employee'] = self.env['ir.sequence'].next_by_code('id.employee')  or '/'
-        vals['name'] = vals['name'].upper()
+        #if vals.get('id_employee', 'New') == 'New':
+#            vals['id_employee'] = self.env['ir.sequence'].next_by_code('id.employee')  or '/'
+        if 'name' in vals:
+            vals['name'] = vals['name'].upper()
+
         return super(HrEmployee, self).create(vals)
 
     @api.multi
     def write(self, vals):
         print "WRITE---------------------------------------------------"
-
         return super(HrEmployee, self).write(vals)
 
     @api.multi
@@ -119,7 +118,6 @@ class HrEmployee(models.Model):
             self.home_state_id = self.home_better_zip_id.state_id
             self.home_country_id = self.home_better_zip_id.country_id
 
-
     @api.multi
     def onchange_state(self, state_id):
         if state_id:
@@ -127,28 +125,77 @@ class HrEmployee(models.Model):
             return {'value': {'country_id': state.country_id.id}}
         return {}
 
+    @api.model
+    def get_contracts(self, date_from, date_to, limit=999):
+        clause_1 = ['&',
+            ('date_end', '<=', date_to),
+            ('date_end', '>=', date_from)
+        ]
+
+        clause_2 = ['&',
+            ('date_start', '<=', date_to),
+            ('date_start', '>=', date_from)
+        ]
+
+        clause_3 = ['&',
+            ('date_start', '<=', date_from),
+            '|',
+            ('date_end', '=', False),
+            ('date_end', '>=', date_to)
+        ]
+
+        clause_final = [
+            ('employee_id', '=', self.id), '|', '|'
+        ] + clause_1 + clause_2 + clause_3
+
+        return self.env['hr.contract'].search(clause_final, order='date_start', limit=limit)
+
+    # FIMEX: cambiar a un record
     @api.one
-    @api.onchange('ssnid_p', 'ssnid_n')
+    @api.onchange('ssnid')
     def _numss(self):
-        if self.ssnid_p and self.ssnid_n:
-            NumSS = self.ssnid_p + self.ssnid_n
-            print NumSS
+        # FIXME: si el numero enpieza por 0, no lo hace correctamente, ej 230012345678
+        if self.ssnid:
+            NumSS = self.ssnid
             dc = '--'
             if NumSS:
                 if len(NumSS) == 9 or len(NumSS) == 10:
-                    print NumSS[2:3]
-                    print "p1"
                     if NumSS[2:3] == '0':
-                        print "p2"
                         NumSS = NumSS[0:2] + NumSS[2:len(NumSS)-3]
                     dc = int(NumSS) % 97
-                    print "dc", dc
                     if dc <= 9:
                         dc = '0' + str(dc)
                     if dc > 9:
                         self.ssnid_dc = str(dc)
-                # TODO: Descomentar en produccion, con las tablas limpias
-                #else:
+                #else: # TODO: Descomentar en produccion, con las tablas limpias
                      #raise exceptions.ValidationError("Longuitud incorrecta");
             self.ssnid_dc = str(dc)
+    """
+    function CalculaDC(){
+        NumSS=document.formcalculadora.NC.value;
 
+        if (NumSS=="") {
+            alert("Por favor, introduzca todos los datos.");
+            return ('');
+        }
+
+        if ((NumSS.length == 9) || (NumSS.length == 10)){
+            if (NumSS.substr(2,1) == 0) {
+                NumSS = NumSS.substr(0,2)+NumSS.substr(3, NumSS.length-3)
+            }
+            dc = parseInt(NumSS) % 97;
+            if (dc <= 9) {
+                document.formcalculadora.DC.value="0"+ dc
+            }
+            if (dc > 9) {
+                document.formcalculadora.DC.value=dc
+            }
+        }
+        else {
+            alert("Por favor, introduzca 9 o 10 dígitos.");
+        }
+
+        #result=result*10+iTemp;
+        #return(result);
+    }
+    """

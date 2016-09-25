@@ -1,5 +1,6 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License: AGPL-3
+:target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
 
 Empleados
 =========
@@ -21,7 +22,7 @@ Bug Tracker
 
 Credits
 =======
-* Juan Jose Lopez Garcia <correo74@gmail.com>
+* Juan Jose Lopez Garcia <jjlopezg74@gmail.com>
 
 Contributors
 ------------
