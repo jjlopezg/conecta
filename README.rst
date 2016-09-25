@@ -9,10 +9,10 @@ Roadmap
 
 Empleados
 =========
-[] Relación bancaria.
-[] Famila pasar a fiscal.
+[X] Relación bancaria.
+[X] Famila pasar a fiscal.
 [] Impresos [] Banco  []LOPD  [] Mod145
-[] Manual
+[X] Manual
 
 Contratos
 =========
