@@ -9,17 +9,20 @@ Roadmap
 
 **Empleados**
 
-1. click *Confirm* Relación bancaria.
-2. Famila pasar a fiscal.
-3. Impresos [] Banco  []LOPD  [] Mod145
-4. Manual
+[x]  Relación bancaria.
+[x] Famila pasar a fiscal.
+    Impresos 
+    [] Banco  
+    []LOPD  
+    [] Mod145
+[x] Manual
 
 **Contratos**
 
 Normales sin bonificar 
-1. 100 
-2. 200 
-3. 401 [] 402 [] 410 [] 501 [] 502 [] 510.
+[]. 100 
+[]. 200 
+[]. 401 [] 402 [] 410 [] 501 [] 502 [] 510.
 [] Clausulas.
 [] Anexar mas en pdf.
 [] Modelos de impresión, cambiar pdf forms.
