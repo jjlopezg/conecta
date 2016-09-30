@@ -177,5 +177,7 @@
                 sequence="75"
                 groups="base.group_hr_manager,base.group_hr_user,base.group_user"/>
 
+
+
     </data>
 </openerp>
