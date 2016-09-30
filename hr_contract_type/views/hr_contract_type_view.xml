@@ -21,16 +21,27 @@
 				<xpath expr="//form" position="replace">
 					<form string="Contract Type">
 						<sheet string="Contract Type">
-
-	                    	<label for="code" class="oe_edit_only"/>
-                    		<h1>
-		                        <field name="code"  style="width: 20%%"/>
-                    		</h1>
-                    		<label for="description"  string="Descripcion" class="oe_edit_only"/>
-                    		<h2>
-		                        <field name="description" />
-                    		</h2>
-							<notebook>
+                            <div class="oe_title">
+                                <label for="description" class="oe_edit_only"/>
+                                <h1>
+                                    <field name="description" default_focus="1"/>
+                                </h1>
+                            </div>
+                            <group>
+                                <group>
+                                    <field name="code"/>
+                                    <label for="date_from" string="Periodo validez"/>
+                                    <div>
+                                        <field name="date_from" class="oe_inline" style="vertical-align: middle;"/> -
+                                        <field name="date_to" class="oe_inline" modifiers="{}" style="vertical-align: middle;"/>
+                                    </div>
+                                </group>
+                                <group>
+                                    <field name="user_create"/>
+                                    <field name="user_last"/>
+                                </group>
+                            </group>
+                            <notebook>
                         		<page name="general" string="General">
                         			<group>
 	                    	 			<group>
@@ -40,10 +51,6 @@
 	                    	 				</div>
                                 		</group>
                                 		<group>
-                                			<label for="date_start" string="Periodo validez"/>
-                                    		<div>
-                                        		<field name="date_start" class="oe_inline" attrs="{'required': True}"/> - <field name="date_end" class="oe_inline" />
-                                    		</div>
 										</group>
 									</group>
 
@@ -54,17 +61,16 @@
                                         		<field name="bonificado" class="oe_inline" attrs="{'required': True}" widget="selection"/> - <field name="cargo" class="oe_inline" attrs="{'required': True}" widget="selection"/>
                                     		</div>
                                 			<field name="bonificado_id" attrs="{'required': [('bonificado','in',['B','R'])]}" widget="selection"/>
+                                            <field name="mujer_sub" widget="radio" options="{'horizontal': true}"/>
                             			</group>
 
-                            			<group name="otther" string="Otros">
-											<!--<field name="trial"/>
-                                			<field name="duracion"/>
-                                			<field name="min_minus"/>
-                                			<field name="max_prog"/>
-		                                	<field name="gender" />-->
-
-                                            <!--<field name="schema"/>-->
-                            			</group>
+                                        <group name="otther" string="Otros">
+                                            <!--<field name="trial"/>
+                                            <field name="duracion"/>
+                                            <field name="min_minus"/>
+                                            <field name="max_prog"/>
+                                            <field name="gender" />-->
+                                        </group>
 
                             			<group name="Normativa" string="Normativa">
                                 			<field colspan="2" name="ley_id" widget="selection"/>
@@ -75,18 +81,17 @@
                                 			<field colspan="2" name="partner_alert" attrs="{'required': True}"/>
                                 			<field colspan="2" name="employee_alert" attrs="{'required': True}"/>
                             			</group>
-
-
-
 									</group>
-                                        <group>
-                                            <field name="note"/>
+                                    <group name="template" >
+                                        <field name="template"/>
+                                        <!--<field name="schema"/>-->
+                                    </group>
+
+                                        <group name="note" string="Anotaciones">
+                                            <field name="note" placeholer="Anotaciones"/>
                                         </group>
 
 	                            </page>
-                        		<page string="Clausula adicional">
-	                            	<field colspan="4" name="cl_ad" nolabel="1" widget="html"/>
-								</page>
 
                         		<page string="Reglas">
 	                            	<field colspan="4" name="rule_ids" nolabel="1" >
@@ -114,8 +119,8 @@
 	          		<field name="code"/>
                    	<field name="sepe"/>
                    	<field name="description"/>
-                   	<field name="date_start"/>
-                   	<field name="date_end"/>
+                   	<field name="date_from"/>
+                   	<field name="date_to"/>
                	</xpath>
             </field>
         </record>
@@ -131,45 +136,41 @@
     	<field name="type">form</field>
     	<field name="arch" type="xml">
 			<data>
-					<form string="Rules">
-						<sheet string="Rules">
+                <form string="Rules">
+                    <sheet string="Rules">
 
-	                    	<label for="code" class="oe_edit_only"/>
-                    		<h1>
-		                        <field name="code"  style="width: 20%%"/>
-                    		</h1>
-                    		<label for="name"  string="Descripcion" class="oe_edit_only"/>
-                    		<h2>
-		                        <field name="name" />
-                    		</h2>
+                        <label for="code" class="oe_edit_only"/>
+                        <h1>
+                            <field name="code"  style="width: 20%%"/>
+                        </h1>
+                        <label for="name"  string="Descripcion" class="oe_edit_only"/>
+                        <h2>
+                            <field name="name" />
+                        </h2>
+                        <group>
+                            <group name="Condiciones" string="Condiciones">
+                                <field name="model_names"/>
+                                <field name="field_names"/>
+                                <field name="value"/>
+                            </group>
+                            <group string="alert">
+                                <field name="alert"/>
+                            </group>
 
-									<group>
-                            			<group name="Condiciones" string="Condiciones">
-                                    		<field name="model_names"/>
-											<field name="field_names"/>
-											<field name="value"/>
-                            			</group>
-                            			<group string="alert">
-                                			<field name="alert"/>
-                            			</group>
-
-									</group>
-						</sheet>
-	                </form>
-
+                        </group>
+                    </sheet>
+                </form>
 			</data>
         </field>
 	</record>
 
-
-
-    <!--<menuitem action="action_hr_contract" id="hr_menu_contract" parent="hr.menu_hr_root" name="Contracts" sequence="4" groups="base.group_hr_manager"/>-->
-    <menuitem id="hr_contract.hr_menu_contract_type"
-              name="Tipos de Contratos"
-              action="hr_contract.action_hr_contract_type"
-              parent="hr.menu_human_resources_configuration"
-              sequence="3"
-              groups="base.group_hr_user"/>
+    <menuitem
+            id="hr_contract.hr_menu_contract_type"
+            name="Tipos de Contratos"
+            action="hr_contract.action_hr_contract_type"
+            parent="hr.menu_human_resources_configuration"
+            sequence="3"
+            groups="base.group_hr_manager"/>
 
 </data>
 </openerp>

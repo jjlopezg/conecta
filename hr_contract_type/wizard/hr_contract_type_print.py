@@ -8,7 +8,7 @@
 
 from openerp import models, fields, api, _
 from StringIO import StringIO
-from PyPDF2 import PdfFileMerger, PdfFileReader
+#from PyPDF2 import PdfFileMerger, PdfFileReader
 
 from datetime import date, datetime
 import logging
@@ -45,7 +45,6 @@ class HrContractTypePrint(models.TransientModel):
     file = fields.Binary("file", readonly=True)
     file_name = fields.Char('file name', size=64)
     note = fields.Text('Log', default='Resumen\n')
-    is_cb = fields.Boolean(string="Incluye Cop.Basica", default=True)
     contract_ids = fields.Many2many(comodel_name='hr.contract',
                                       relation='hr_contract_printing_rel',
                                       columm1='printing_id',
@@ -75,11 +74,6 @@ class HrContractTypePrint(models.TransientModel):
                             default='draft',
                             readonly=False)
 
-
-    @api.multi
-    def do_process_sin_cb(self):
-        self.is_cb = False
-        return self.do_process()
 
     @api.multi
     def do_process(self):

@@ -18,10 +18,8 @@
 		        <form string="Impresion">
                     <header>
                         <div>
-                            <button name="do_process" string="Generar con Cop.Basica" type="object" states="draft" class="oe_highlight"/>
-
-                            <button name="do_process_sin_cb" string="Generar sin Cop.Basica" type="object" states="draft" />
-
+                            <button name="do_process" string="Ejecuta" type="object" states="draft" class="oe_highlight"/>
+                            o
                             <button name="do_back" string="Volver" type="object" states="done,fail"/>
 
                             <button string="Cerrar" special="cancel" type="object"  class="oe_highlight"/>
@@ -73,14 +71,14 @@
 	    <field name="view_id" ref="wizard_hr_contract_type_print_form"/>
         <field name="target">new</field>
 	</record>
-
-
-    <menuitem id="menu_hr_contract_type_print"
-              name="Impresion"
-              action="action_hr_contract_type_print"
-              parent="hr_contract.hr_menu_contract"
-              groups="base.group_hr_user"/>
-
+<!--
+    <menuitem
+            id="menu_hr_contract_type_print"
+            name="Contratos"
+            action="action_hr_contract_type_print"
+            parent="hr_conecta.hr_menu_models"
+            groups="base.group_hr_user"/>
+-->
 
   </data>
 </openerp>
