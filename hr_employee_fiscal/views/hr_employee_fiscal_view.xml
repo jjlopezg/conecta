@@ -25,81 +25,37 @@
 	                        </h3>
 	                        <label for="date_start" string="Periodo validez"/>
 	                        <div>
-	                            <field name="date_start" class="oe_inline" style="vertical-align: middle;" default_focus="1"/> -
-	                            <field name="date_end" class="oe_inline" modifiers="{}" style="vertical-align: middle;"/>
+	                            <field name="date_from" class="oe_inline" style="vertical-align: middle;" default_focus="1"/> -
+	                            <field name="date_to" class="oe_inline" modifiers="{}" style="vertical-align: middle;"/>
 	                        </div>
 	                    </group>
 
 	                    <group>
 	                        <field name="user_create"/>
 	                        <field name="user_last"/>
-                            <field name="currency_id" invisible="1"/>
 	                    </group>
 				   </group>
-
-					<group>
-						<group string="Basicos:">
-							<field name="identification_id"/>
-							<field name="country_id" options="{'no_open': True,'no_create': True}"/>
-							<!--<field name="home_state_id"/>-->
-							<field name="modif_id" widget="selection"/>
-							<field name="key_id" widget="selection"/>
-							<field name="marital"/>
-							<field name="situation" widget="selection"/>
-							<field name="minus" widget="selection"/>
-							<field name="geo_move" widget="radio" options="{'horizontal': true}"/>
-							<field name="loan" widget="radio" options="{'horizontal': true}"/>
-						</group>
-						<group string="Retribuciones:">
-                            <field name="wage" colspan="2" widget="monetary"/>
-                            <field name="variables_var" colspan="2" widget="monetary"/>
-                            <field name="pago_esp" colspan="2" widget="monetary"/>
-                            <field name="irreg18_2" colspan="2" widget="monetary"/>
-                            <field name="irreg18_3" colspan="2" widget="monetary"/>
-                            <field name="css" colspan="2" widget="monetary"/>
-                            <field name="otther" colspan="2" widget="monetary"/>
-                            <field name="pension" colspan="2" widget="monetary"/>
-                            <field name="alimen" colspan="2" widget="monetary"/>
-                            <field name="base_liquid" colspan="2" widget="monetary"/>
-                            <field name="fam_qty_des"/>
-                            <field name="java"/>
-                            <!--<field name="fam_qty_asc"/>
-                            <field name="fam_qty"/>-->
-
-
-                            <separator colspan="2" string="Ocultos" />
-                            <field name="wage_total" colspan="2" widget="monetary"/>
-                            <field name="min_per" colspan="2" widget="monetary"/>
-                            <field name="min_fam" colspan="2" widget="monetary"/>
-                            <field name="minus_trab_act" colspan="2" widget="monetary"/>
-                            <field name="minus_trab_no_act" colspan="2" widget="monetary"/>
-                            <field name="min_per_fam" colspan="2" widget="monetary"/>
-
-                            <!-- widget="percentpie"-->
-						</group>
-					</group>
-
-					<group>
-						<group string="Retencion IRPF:">
-							<field name="calculado" />
-							<field name="aplicado"/>
-							<field name="paysheet"/>
-
-                            <button icon="gtk-print"
-                                name="compute_irpf"
-                                string="Calcula IRPF"
-                                type="object"
-                                class="oe_read_only oe_highlight"
-                                />
-						</group>
-						<group string="Regularizacion:">
-                            <field name="previo"/>
-                            <field name="wage_retn"/>
-                            <field name="wage_bruto"/>
-                            <field name="regular"/>
-                            <field name="state"/>
-						</group>
-					</group>
+                    <notebook>
+                        <page name="general" string="General">
+					        <group>
+        						<group name="a">
+        							<field name="country_id" options="{'no_open': True,'no_create': True}"/>
+        							<field name="modif_id" widget="selection"/>
+        							<field name="key_id" widget="selection"/>
+        							<field name="marital"/>
+        							<field name="situation" widget="selection"/>
+                                    <field name="conyuge_nif" attrs="{'required':[('situation','=','2')],'invisible':[('situation','!=','2')]}"/>
+        							<field name="minus" widget="selection"/>
+                                    <field name="geo_move" widget="radio" options="{'horizontal': true}"/>
+                                    <field name="geo_date" attrs="{'required':[('geo_move','=', 'S')],'invisible':[('geo_move','=', 'N')]}"/>
+        							<field name="loan" widget="radio" options="{'horizontal': true}"/>
+        						</group>
+                                <group name="b"></group>
+        					</group>
+                            <group name="family">
+                            </group>
+                        </page>
+                    </notebook>
 				</sheet>
 			</form>
         </field>
@@ -110,9 +66,8 @@
 	    <field name="model">hr.employee.fiscal</field>
 	    <field name="arch" type="xml">
         	<tree string="Datos Fiscales">
-        		<field name="date_start"/>
-           		<field name="date_end"/>
-	            <field name="state"/>
+        		<field name="date_from"/>
+                <field name="date_to"/>
 	        </tree>
 	    </field>
 	</record>
@@ -126,116 +81,12 @@
 	    <field name="view_id" ref="hr_employee_fiscal_view_form"/>
 	</record>
 
-         
-	<!-- Modif
-		
-	<record id="hr_afi_move_view_form" model="ir.ui.view">
-            <field name="name">hr.afi.move.view.form</field>
-            <field name="model">hr.afi.move</field>
-            <field name="arch" type="xml">
-                <form string="Movimientos">
-                	<sheet>
-                    	<label for="code" string="Code" class="oe_edit_only"/>
-                    	<h1>
-		                    <field name="code" style="width: 20%%"/>
-                    	</h1>
-                    	<label for="description" string="Descripcion" class="oe_edit_only"/>
-	                    <h2>
-	                    	<field name="description"/>
-                    	</h2>
-                	</sheet>
-                </form>
-            </field>
-        </record>		
-
-	<record id="hr_afi_move_view_tree" model="ir.ui.view">
-	    <field name="name">hr.afi.move.view.tree</field>
-	    <field name="model">hr.afi.move</field>
-	    <field name="arch" type="xml">
-        	<tree string="Movimientos">
-	            <field name="code"/>
-        		<field name="description"/>            
-	        </tree>
-	    </field>
-	</record>         
-         
-	<record id="action_hr_afi_move_tree" model="ir.actions.act_window">
-	    <field name="name">Movimientos</field>
-	    <field name="type">ir.actions.act_window</field>
-	    <field name="res_model">hr.afi.move</field>
-	    <field name="view_type">form</field>	    
-	    <field name="view_mode">tree,form</field>
-	    <field name="view_id" ref="hr_afi_move_view_tree"/>
-	</record>    
--->
-	<!-- Key
-
-	<record id="hr_afi_position_view_form" model="ir.ui.view">
-            <field name="name">hr.afi.position.view.form</field>
-            <field name="model">hr.afi.position</field>
-            <field name="arch" type="xml">
-                <form string="Situaciones">
-                	<sheet>
-                    	<label for="code" string="Code" class="oe_edit_only"/>
-                    	<h1>
-		                    <field name="code" style="width: 20%%"/>
-                    	</h1>
-                    	<label for="description" string="Descripcion" class="oe_edit_only"/>
-	                    <h2>
-	                    	<field name="description"/>
-                    	</h2>
-                	</sheet>
-                </form>
-            </field>
-        </record>
-
-	<record id="hr_afi_position_view_tree" model="ir.ui.view">
-	    <field name="name">hr.afi.position.tree</field>
-	    <field name="model">hr.afi.position</field>
-	    <field name="arch" type="xml">
-        	<tree string="Situaciones">
-	            <field name="code"/>
-        		<field name="description"/>
-	        </tree>
-	    </field>
-	</record>
-
-	<record id="action_hr_afi_position_tree" model="ir.actions.act_window">
-	    <field name="name">Situaciones</field>
-	    <field name="type">ir.actions.act_window</field>
-	    <field name="res_model">hr.afi.position</field>
-	    <field name="view_type">form</field>
-	    <field name="view_mode">tree,form</field>
-	    <field name="view_id" ref="hr_afi_position_view_tree"/>
-	</record>
-	-->
-
-	<!-- Menus -->
-
 	<menuitem id="menu_human_resources_configuration_red"
 	    	name="fiscal"
             action="action_hr_employee_fiscal"
 	    	parent="hr.menu_human_resources_configuration"
 			groups="base.group_hr_manager"
 		    sequence="15"/>
-    <!--
-	<menuitem id="menu_human_resources_configuration_red_afi"
-	    	name="AFI"
-			action="action_hr_afi_tree"
-		    parent="menu_human_resources_configuration_red"
-			groups="base.group_hr_manager"/>/>
 
-		<menuitem id="menu_human_resources_configuration_red_afi_move"
-		    name="Movimientos"
-			action="action_hr_afi_move_tree"
-	    	parent="menu_human_resources_configuration_red_afi"
-	    	groups="base.group_hr_manager"/>
-
-		<menuitem id="menu_human_resources_configuration_red_afi_position"
-		    name="Situaciones"
-			action="action_hr_afi_position_tree"
-	    	parent="menu_human_resources_configuration_red_afi"
-	    	groups="base.group_hr_manager"/>
--->
 </data>
 </openerp>

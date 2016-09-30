@@ -7,7 +7,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 ###########################################################################
 -->
-
 <openerp>
     <data>
       
@@ -19,13 +18,31 @@
             <field name="arch" type="xml">
 
                 <xpath expr="//notebook" position="inside">
-                         <page string="Datos Fiscales">
+                         <page string="Fiscal">
                             <field name="fiscal_ids" nolabel="1" context="{'employee_id': active_id}"/>
                          </page>
                     </xpath>
 
             </field>
         </record>
+
+        <record id="action_download_employee" model="ir.actions.server">
+            <field name="name">Model 145</field>
+            <field name="condition">True</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="hr_employee.model_hr_employee" />
+            <field name="code">action = self.printer(cr, uid, context.get('active_ids'), dict(context or {}))</field>
+        </record>
+
+        <record id="hr_employee_web_ir_values" model="ir.values">
+            <field name="model_id" ref="hr_employee.model_hr_employee"/>
+            <field name="name">Model 145</field>
+            <field name="key2">client_print_multi</field>
+            <field name="value" eval="'ir.actions.server,' + str(ref('action_download_employee'))"/>
+            <field name="key">action</field>
+            <field name="model">hr.employee</field>
+        </record>
+
 
     </data>
 </openerp>

@@ -7,3 +7,5 @@
 ###########################################################################
 import hr_employee
 import hr_employee_fiscal
+import hr_family
+
