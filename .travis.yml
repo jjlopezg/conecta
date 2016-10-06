@@ -15,7 +15,7 @@ install:
   
 
 script:
-  
+  - travis_run_tests
 
 after_success:
   coveralls
